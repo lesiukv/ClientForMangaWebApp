@@ -1,14 +1,15 @@
 import React from 'react';
-import Home from './components/Home/Home.js';
+import Main from './components/Main.js';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from './theme.js';
 
 
 const App = () => {
     return (
+        
         <ThemeProvider theme={theme}>
             <div>
-                <Home/>
+                <Main/>
             </div>
         </ThemeProvider>
     )

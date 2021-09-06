@@ -13,7 +13,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -105,8 +105,9 @@ const Header = () => {
     return (
         <ThemeProvider theme={theme}>
             <AppBar position="static">
+           
                 <ToolBar className={classes.navigation}>
-                    <Typography color="inherit" variant="h6">Nothing</Typography>
+                     <Typography color="inherit" variant="h6"><Link to='/home'>Nothing</Link></Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
                             <SearchIcon color="secondary" />
@@ -120,7 +121,7 @@ const Header = () => {
                         />
                     </div>
                     <div className={classes.desktopMenu}>
-                        <Button color="inherit" className={classes.button}>Artist </Button>
+                        <Button color="inherit" className={classes.button}><Link to='/topic'>Artist</Link></Button> 
                         <Button color="inherit" className={classes.button}>Characters </Button>
                         <Button color="inherit" className={classes.button}>Groups</Button>
                         <Button color="inherit" className={classes.button}>Random</Button>
@@ -142,6 +143,7 @@ const Header = () => {
                     </IconButton>
                     </div>
                 </ToolBar>
+                
             </AppBar>
             {renderMobileMenu}
             {renderCategoryMenu}     

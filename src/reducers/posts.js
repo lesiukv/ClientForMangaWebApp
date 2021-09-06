@@ -6,6 +6,8 @@ const posts = (posts = [], action) => {
             return action.payload;
         case ActionTypes.CREATE:
             return [...posts, action.payload ];
+        case ActionTypes.GET_POSTDETAILS:
+            return action.payload;
         default:
             return posts;
     }

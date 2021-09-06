@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useStyles from './styles.js';
-import Header from '../Header/Header.js';
+
 import theme from '../../theme.js';
 import { ThemeProvider }  from '@material-ui/core/styles';
 import { Container, Button, Modal, Backdrop, Fade } from '@material-ui/core';
@@ -54,7 +54,7 @@ const Home = () => {
     return (
         <>
             <ThemeProvider theme={theme}>
-                <Header/>
+
                 <Container>
                     <Container className={classes.add} type='button'>
                         <Button className={classes.button} aria-haspopup="true" onClick={handleFormOpen} aria-controls={formId}><AddIcon color="secondary" fontSize="large" className={classes.addIcon}/></Button>
