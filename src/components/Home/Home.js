@@ -44,7 +44,7 @@ const Home = () => {
             timeout: 500,
             }}>
             <Fade in={open}>
-                <Form/>
+                <Form formFor='Post'/>
             </Fade>
         </Modal>
             
@@ -56,9 +56,7 @@ const Home = () => {
             <ThemeProvider theme={theme}>
 
                 <Container>
-                    <Container className={classes.add} type='button'>
-                        <Button className={classes.button} aria-haspopup="true" onClick={handleFormOpen} aria-controls={formId}><AddIcon color="secondary" fontSize="large" className={classes.addIcon}/></Button>
-                    </Container>
+                    <Button className={classes.button} aria-haspopup="true" onClick={handleFormOpen} aria-controls={formId}><AddIcon color="secondary" fontSize="large" className={classes.addIcon}/></Button>
                     {renderForm}
                     <Posts/>
                 </Container>   
