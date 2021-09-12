@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import useStyles from './styles.js';
-import { ThemeProvider }  from '@material-ui/core/styles';
+
 import theme from '../../theme.js';
 import { Paper, Typography, TextField, Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
@@ -23,6 +23,7 @@ const Form = (formFor, id, post) => {
         group: '',
         language: '',
         category: '',
+        characters: [],
         titleImage: '',
         pages: [],
     });
@@ -36,9 +37,10 @@ const Form = (formFor, id, post) => {
             group: '',
             language: '',
             category: '',
+            characters: '',
             titleImage: '',
             pages: ''
-        });
+        })
     }
 
     
@@ -48,7 +50,7 @@ const Form = (formFor, id, post) => {
 
     const onDrop = useCallback(acceptedFiles => {
         setPostData({...postData, pages: acceptedFiles});
-    });
+    })
 
     const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
@@ -64,7 +66,7 @@ const Form = (formFor, id, post) => {
     }
 
     return (
-        <ThemeProvider theme={theme}>
+   
             <Paper className={classes.paper}>
                 <form 
                 autoComplete="off" id="form" noValidate className={`${classes.root} ${classes.form}`}
@@ -101,7 +103,7 @@ const Form = (formFor, id, post) => {
                         label="Tags"
                         variant="outlined" 
                         value={postData.tags}
-                        onChange={e => setPostData({ ...postData, tags: e.target.value.split(',') })}
+                        onChange={e => setPostData({ ...postData, tags: e.target.value.split(', ') })}
                         fullWidth
                         color="secondary"
                     />
@@ -112,7 +114,7 @@ const Form = (formFor, id, post) => {
                         label="Artists"
                         variant="outlined" 
                         value={postData.artists}
-                        onChange={e => setPostData({ ...postData, artists: e.target.value.split(',') })}
+                        onChange={e => setPostData({ ...postData, artists: e.target.value.split(', ') })}
                         fullWidth
                         color="secondary"
                     />
@@ -150,6 +152,17 @@ const Form = (formFor, id, post) => {
                         color="secondary"
                     />
 
+                    <TextField
+                        className={classes.formElement}
+                        name="characters"
+                        label="Characters"
+                        variant="outlined" 
+                        value={postData.characters}
+                        onChange={e => setPostData({ ...postData, characters: e.target.value.split(', ') })}
+                        fullWidth
+                        color="secondary"
+                    />
+
                     <div className={classes.fileInput}>
                         Page title&nbsp;
                         <FileBase
@@ -170,7 +183,7 @@ const Form = (formFor, id, post) => {
                     <Button variant="contained" color="secondary" size="small" onClick={clear} fullWidth>Clear</Button>
                 </form>
             </Paper>
-        </ThemeProvider>
+  
     )
 }
 

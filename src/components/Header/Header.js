@@ -8,7 +8,6 @@ import useStyles from './styles.js';
 import theme from '../../theme.js';
 import ToolBar from '@material-ui/core/ToolBar';
 import Button from '@material-ui/core/Button';
-import { ThemeProvider }  from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
@@ -27,25 +26,25 @@ const Header = () => {
   
     const handleCategoryMenuOpen = (event) => {
       setAnchorEl(event.currentTarget);
-    };
+    }
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
-    };
+    }
   
     const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
-    };
+    }
 
     const handleMobileMenuClose = () => {
       setMobileMoreAnchorEl(null);
-    };
+    }
   
     const menuId = 'primary-search-account-menu';
 
     const renderCategoryMenu = (
-        <ThemeProvider theme={theme}>
+ 
             <Menu
             anchorEl={anchorEl}
             anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -69,41 +68,39 @@ const Header = () => {
                     Random
                 </MenuItem>
             </Menu>
-        </ThemeProvider>
-    );
+     
+    )
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
 
     const renderMobileMenu = (
-        <ThemeProvider theme={theme}>
-            <Menu
-                anchorEl={mobileMoreAnchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                keepMounted
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMobileMenuOpen}
-                id={mobileMenuId}
-                onClose={handleMobileMenuClose}
-            >
-                <MenuItem onClick={handleCategoryMenuOpen} aria-controls="primary-search-account-menu">
-                    Categories
-                </MenuItem>
-                <MenuItem>
-                    <FavoriteIcon color="secondary"/>
-                    Favorite
-                </MenuItem>
-                <MenuItem>
-                    Sign in
-                </MenuItem>
-                <MenuItem>
-                    Register
-                </MenuItem>
-            </Menu>
-        </ThemeProvider>
-    );
+        <Menu
+            anchorEl={mobileMoreAnchorEl}
+            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+            open={isMobileMenuOpen}
+            id={mobileMenuId}
+            onClose={handleMobileMenuClose}
+        >
+            <MenuItem onClick={handleCategoryMenuOpen} aria-controls="primary-search-account-menu">
+                Categories
+            </MenuItem>
+            <MenuItem>
+                <FavoriteIcon color="secondary"/>
+                Favorite
+            </MenuItem>
+            <MenuItem>
+                Sign in
+            </MenuItem>
+            <MenuItem>
+                Register
+            </MenuItem>
+        </Menu>
+    )
     
     return (
-        <ThemeProvider theme={theme}>
+        <>
             <AppBar position="static">
            
                 <ToolBar className={classes.navigation}>
@@ -147,8 +144,8 @@ const Header = () => {
             </AppBar>
             {renderMobileMenu}
             {renderCategoryMenu}     
-        </ThemeProvider>
-    );
-};
+        </>
+    )
+}
 
 export default Header;

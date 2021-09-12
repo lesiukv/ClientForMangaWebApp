@@ -15,4 +15,4 @@ export default createTheme({
         contrastText: '#d9d9d9',
       }
     },
-  }); 
+  })

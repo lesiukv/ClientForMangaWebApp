@@ -27,4 +27,4 @@ export default makeStyles((theme) => ({
     formElement: {
       margin: theme.spacing(1),
     }
-  }));
+  }))

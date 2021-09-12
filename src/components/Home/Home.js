@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import useStyles from './styles.js';
 
 import theme from '../../theme.js';
-import { ThemeProvider }  from '@material-ui/core/styles';
 import { Container, Button, Modal, Backdrop, Fade } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Form from '../Form/Form.js';
@@ -26,11 +25,11 @@ const Home = () => {
 
     const handleFormOpen = () => {
         setOpen(true);
-    };
+    }
 
     const handleFormClose = () => {
         setOpen(false);
-    };
+    }
 
     const renderForm = (
         <>
@@ -49,20 +48,15 @@ const Home = () => {
         </Modal>
             
         </>
-    );
+    )
 
     return (
-        <>
-            <ThemeProvider theme={theme}>
-
-                <Container>
-                    <Button className={classes.button} aria-haspopup="true" onClick={handleFormOpen} aria-controls={formId}><AddIcon color="secondary" fontSize="large" className={classes.addIcon}/></Button>
-                    {renderForm}
-                    <Posts/>
-                </Container>   
-            </ThemeProvider>
-        </>
-    );
-};
+        <Container>
+            <Button className={classes.button} aria-haspopup="true" onClick={handleFormOpen} aria-controls={formId}><AddIcon color="secondary" fontSize="large" className={classes.addIcon}/></Button>
+            {renderForm}
+            <Posts/>
+        </Container>   
+    )
+}
 
 export default Home;

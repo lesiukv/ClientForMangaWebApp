@@ -19,4 +19,4 @@ export default makeStyles({
         padding: 0,
         color: '#d9d9d9',
     },
-});
+})

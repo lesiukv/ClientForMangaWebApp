@@ -55,7 +55,7 @@ export const PostDetails = (post) => {
 
     const updateForm = (
         <Form formFor='Update' id={post.post._id}/>
-    );
+    )
 
     return  (
         <>

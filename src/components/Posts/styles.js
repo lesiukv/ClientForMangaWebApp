@@ -6,4 +6,4 @@ export default makeStyles({
         backgroundColor: '#1f1f1f',
         borderRadius: '9px !important',
     }
-});
+})

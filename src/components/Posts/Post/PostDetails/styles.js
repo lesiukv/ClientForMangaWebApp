@@ -55,4 +55,4 @@ export default makeStyles({
     delete: {
         color: '#ed2553'   
     }
-}); 
+})
