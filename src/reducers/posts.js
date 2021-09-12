@@ -8,6 +8,10 @@ const posts = (posts = [], action) => {
       return [...posts, action.payload];
     case ActionTypes.GET_POSTDETAILS:
       return action.payload;
+    case ActionTypes.DELETE:
+      return posts.filter((post) => post._id !== action.payload);
+    case ActionTypes.UPDATE:
+      return posts.map((post) => post._id === action.payload._id ? action.payload : post);
     default:
       return posts;
   }

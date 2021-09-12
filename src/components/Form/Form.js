@@ -3,7 +3,6 @@ import useStyles from "./styles.js";
 
 import theme from "../../theme.js";
 import {
-  Container,
   Paper,
   Typography,
   TextField,
@@ -57,7 +56,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
 
   const onDrop = useCallback((acceptedFiles) => {
     setPostData({ ...postData, pages: acceptedFiles });
-  });
+  }, [postData]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -66,7 +65,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     if (id) {
       dispatch(updatePost(id, postData));
     } else {
-      console.log(postData);
       dispatch(createPost(postData));
     }
     clear();
