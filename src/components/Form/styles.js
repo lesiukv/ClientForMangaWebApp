@@ -26,5 +26,11 @@ export default makeStyles((theme) => ({
     },
     formElement: {
       margin: theme.spacing(1),
+    },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor:'#1f1f1f',
     }
   }))

@@ -23,39 +23,17 @@ const Home = () => {
         dispatch(getPosts());
     }, [dispatch])
 
-    const handleFormOpen = () => {
-        setOpen(true);
-    }
-
-    const handleFormClose = () => {
-        setOpen(false);
-    }
-
-    const renderForm = (
-        <>
-        <Modal 
-            open={open}
-            onClose={handleFormClose}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            className={classes.modal}
-            BackdropProps={{
-            timeout: 500,
-            }}>
-            <Fade in={open}>
-                <Form formFor='Post'/>
-            </Fade>
-        </Modal>
-            
-        </>
-    )
-
+    const handleFormOpen = () => setOpen(true);
+    
     return (
+        <>
         <Container>
             <Button className={classes.button} aria-haspopup="true" onClick={handleFormOpen} aria-controls={formId}><AddIcon color="secondary" fontSize="large" className={classes.addIcon}/></Button>
-            {renderForm}
             <Posts/>
+            <Form formFor='Post' open={open} setOpen={setOpen}/>
         </Container>   
+        
+        </>
     )
 }
 

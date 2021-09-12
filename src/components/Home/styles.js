@@ -11,10 +11,5 @@ export default makeStyles ((theme) => ({
         backgroundColor: '#1f1f1f',
         padding: '0px !mportant',
     },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor:'#1f1f1f',
-    }
+    
 }))
