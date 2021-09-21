@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
-import { createPost, updatePost } from "../../actions/posts.js";
+import { createPost, updatePost, uploadPages } from "../../actions/posts.js";
 import { useDropzone } from "react-dropzone";
 
 const Form = ({ formFor, open, setOpen, id, post }) => {
@@ -65,7 +65,9 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     if (id) {
       dispatch(updatePost(id, postData));
     } else {
+      console.log(postData);
       dispatch(createPost(postData));
+      dispatch(uploadPages(postData.pages));
     }
     clear();
   };

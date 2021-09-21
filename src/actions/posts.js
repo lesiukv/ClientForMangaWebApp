@@ -1,14 +1,6 @@
 import * as api from "../api";
 import * as actionTypes from "../actions/actionTypes.js";
-
-export const getPostDetails = (id) => async (dispatch) => {
-  try {
-    const { data } = await api.fetchPostDetails(id);
-    dispatch({ type: actionTypes.GET_POSTDETAILS, payload: data });
-  } catch (error) {
-    console.log(error);
-  }
-};
+import axios from "axios";
 
 export const getPosts = () => async (dispatch) => {
   try {
@@ -23,6 +15,27 @@ export const createPost = (post) => async (dispatch) => {
   try {
     const { data } = await api.createPost(post);
     dispatch({ type: actionTypes.CREATE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const uploadPages = (pages) => async (dispatch) => {
+  try {
+    const formData = new FormData();
+    pages.forEach(page => {
+      formData.append("page", page)
+    });
+    axios({
+      method: "POST",
+      url: "http://localhost:5000/posts/uploads",
+      data: formData,
+      header: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+    dispatch({ type: actionTypes.UPLOAD_PAGES, payload: pages });
+    
   } catch (error) {
     console.log(error);
   }
