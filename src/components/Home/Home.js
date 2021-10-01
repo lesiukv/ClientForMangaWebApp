@@ -1,26 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import useStyles from "./styles.js";
-
-import theme from "../../theme.js";
 import { Container, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Form from "../Form/Form.js";
 import Posts from "../Posts/Posts.js";
-import { useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
 
 const Home = () => {
-  const classes = useStyles(theme);
-
-  const [open, setOpen] = React.useState(null);
+  const classes = useStyles();
+  const [open, setOpen] = useState(null);
   const formId = "form-menu";
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [dispatch]);
-
   const handleFormOpen = () => setOpen(true);
 
   return (

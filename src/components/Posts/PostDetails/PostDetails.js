@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import {
   CardMedia,
@@ -12,18 +12,23 @@ import {
 } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { useDispatch } from "react-redux";
-import { deletePost } from "../../../../actions/posts";
-import Form from "../../../Form/Form.js";
-import { useHistory } from "react-router-dom";
+import { deletePost } from "../../../actions/posts";
+import { getPage } from "../../../actions/pages";
+import Form from "../../Form/Form.js";
+import { useHistory, useParams } from "react-router-dom";
+import moment from "moment";
+import { useSelector } from "react-redux";
 
-export const PostDetails = ({ post }) => {
+const PostDetails = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
-
-  let history = useHistory();
+  const { postId } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
+  const post = useSelector((state) => state.posts.find(element => element._id === postId));
+  const menuId = "menu-post-manipulation";
 
   if (!post) {
     return (
@@ -32,17 +37,14 @@ export const PostDetails = ({ post }) => {
       </Container>
     );
   }
-
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
   const handleFormOpen = () => setOpen(true);
 
   function handleDelete() {
-    dispatch(deletePost(post._id));
+    dispatch(deletePost(postId));
     history.push("/home");
   }
-
-  const menuId = "menu-post-manipulation";
 
   const renderMenu = (
     <Menu
@@ -65,8 +67,9 @@ export const PostDetails = ({ post }) => {
     <>
       <Container className={classes.container}>
         <Grid
-          key={post._id}
+          key={postId}
           className={classes.detailsContainer}
+          container
           alignItems="stretch"
         >
           <Grid className={classes.details} item xs={12} sm={4}>
@@ -94,27 +97,31 @@ export const PostDetails = ({ post }) => {
             </div>
             <div className={classes.subDetails}>
               <Typography>Tags:</Typography>&nbsp;
-              {post.tags.map((tag) => (
-                <>
+              {post.tags.map((tag, index) => (
+                <div key={index}>
                   &nbsp;<span className={classes.span}>{tag}</span>
-                </>
+                </div>
               ))}
             </div>
             <div className={classes.subDetails}>
               <Typography>Artists:&nbsp;</Typography>
-              {post.artists.map((artist) => (
-                <>
+              {post.artists.map((artist, index) => (
+                <div key={index}>
                   &nbsp;<span className={classes.span}>{artist}</span>
-                </>
+                </div>
               ))}
             </div>
             <div className={classes.subDetails}>
               <Typography>Characters:&nbsp;</Typography>
-              {post.characters.map((character) => (
-                <>
+              {post.characters.map((character, index) => (
+                <div key={index}>
                   &nbsp;<span className={classes.span}>{character}</span>
-                </>
+                </div>
               ))}
+            </div>
+            <div className={classes.subDetails}>
+              <Typography>Uploaded:</Typography>&nbsp;
+              {moment(post.createdAt).startOf("day").fromNow()}
             </div>
           </Grid>
 
@@ -131,7 +138,7 @@ export const PostDetails = ({ post }) => {
       {renderMenu}
       <Form
         formFor="Update"
-        id={post._id}
+        id={postId}
         post={post}
         open={open}
         setOpen={setOpen}
@@ -139,3 +146,5 @@ export const PostDetails = ({ post }) => {
     </>
   );
 };
+
+export default PostDetails;

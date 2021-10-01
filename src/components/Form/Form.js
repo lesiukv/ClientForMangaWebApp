@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useStyles from "./styles.js";
-
-import theme from "../../theme.js";
 import {
   Paper,
   Typography,
@@ -13,11 +11,12 @@ import {
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
-import { createPost, updatePost, uploadPages } from "../../actions/posts.js";
+import { createPost, updatePost } from "../../actions/posts.js";
+import { uploadPages } from "../../actions/pages.js";
 import { useDropzone } from "react-dropzone";
 
 const Form = ({ formFor, open, setOpen, id, post }) => {
-  const classes = useStyles(theme);
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [postData, setPostData] = useState({
@@ -54,9 +53,12 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     if (post) setPostData(post);
   }, [post]);
 
-  const onDrop = useCallback((acceptedFiles) => {
-    setPostData({ ...postData, pages: acceptedFiles });
-  }, [postData]);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      setPostData({ ...postData, pages: acceptedFiles });
+    },
+    [postData]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -65,9 +67,12 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     if (id) {
       dispatch(updatePost(id, postData));
     } else {
-      console.log(postData);
+      postData.pages.forEach((page) => {
+        const fileExtension = (page.name.match(/\.+[\S]+$/) || [])[0];
+        page.dest = `page${Date.now()}${fileExtension}`;
+      });
       dispatch(createPost(postData));
-      dispatch(uploadPages(postData.pages));
+      dispatch(uploadPages(postData.pages));    
     }
     clear();
   };

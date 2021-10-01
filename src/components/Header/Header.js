@@ -5,7 +5,6 @@ import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@material-ui/icons/Search";
 import AppBar from "@material-ui/core/AppBar";
 import useStyles from "./styles.js";
-import theme from "../../theme.js";
 import ToolBar from "@material-ui/core/ToolBar";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
@@ -15,7 +14,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const classes = useStyles(theme);
+  const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
