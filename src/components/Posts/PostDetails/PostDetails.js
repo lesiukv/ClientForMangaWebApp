@@ -13,7 +13,6 @@ import {
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../../actions/posts";
-import { getPage } from "../../../actions/pages";
 import Form from "../../Form/Form.js";
 import { useHistory, useParams } from "react-router-dom";
 import moment from "moment";
@@ -27,7 +26,9 @@ const PostDetails = () => {
   const { postId } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  const post = useSelector((state) => state.posts.find(element => element._id === postId));
+  const post = useSelector((state) =>
+    state.posts.find((element) => element._id === postId)
+  );
   const menuId = "menu-post-manipulation";
 
   if (!post) {
@@ -133,6 +134,24 @@ const PostDetails = () => {
           >
             <MoreIcon className={classes.moreIcon} />
           </IconButton>
+        </Grid>
+      </Container>
+      <Container>
+        <Grid
+          container
+          alignItems="streatch"
+          className={classes.detailsContainer}
+        >
+          {post.pages.map((page, index) => (
+            <img
+              key={index}
+              item
+              xs={12}
+              sm={4}
+              alt={page.name}
+              src={`http://localhost:5000/uploads/${page.dest}`}
+            />
+          ))}
         </Grid>
       </Container>
       {renderMenu}
