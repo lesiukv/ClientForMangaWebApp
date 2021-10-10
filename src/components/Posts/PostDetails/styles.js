@@ -29,6 +29,7 @@ export default makeStyles({
     justifyContent: "space-between",
     flexWrap: "wrap",
     alignItems: "start",
+    margin: "20px"
   },
   details: {
     margin: "20px 0 !important",
@@ -55,4 +56,20 @@ export default makeStyles({
   delete: {
     color: "#ed2553",
   },
+  page: {
+    maxWidth: '100%',
+    borderRadius: '6px'
+  },
+  pagesContainer: {
+    display: "flex",
+    justifyContent: "space-evenly", 
+    flexWrap: "wrap",
+    alignItems: "center",
+    padding: '20px'
+  },
+  pageBox: {
+    display: 'flex',
+    alignItems: 'center',
+    width: '19%'
+  }
 });
