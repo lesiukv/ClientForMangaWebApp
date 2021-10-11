@@ -2,10 +2,9 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles({
   media: {
-    height: 0,
-    paddingTop: "100%",
     backgroundColor: "#4b4b4b",
     backgroundBlendMode: "normal",
+    maxHeight: ""
   },
   card: {
     display: "flex",
@@ -14,6 +13,7 @@ export default makeStyles({
     position: "relative",
     backgroundColor: "#4b4b4b",
     borderRadius: "9px !important",
+
   },
   title: {
     padding: 0,

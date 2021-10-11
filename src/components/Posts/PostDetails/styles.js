@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles({
+export default makeStyles((theme) => ({
   title: {
     color: "#d9d9d9",
     marginBottom: "30px",
@@ -10,10 +10,10 @@ export default makeStyles({
     borderRadius: "9px",
   },
   titleImage: {
-    height: 0,
-    paddingTop: "100%",
     backgroundBlendMode: "normal",
     borderRadius: "9px",
+    maxHeight: "500px",
+    margin: "20px"
   },
   loading: {
     color: "#d9d9d9",
@@ -51,7 +51,7 @@ export default makeStyles({
     padding: "20px 0",
   },
   iconButton: {
-    padding: "10px 0",
+    padding: "0px 10px",
   },
   delete: {
     color: "#ed2553",
@@ -65,11 +65,17 @@ export default makeStyles({
     justifyContent: "space-evenly", 
     flexWrap: "wrap",
     alignItems: "center",
-    padding: '20px'
+    padding: '20px',
+    [theme.breakpoints.down('xs')]: {
+      padding: '5px'
+    },
   },
   pageBox: {
     display: 'flex',
     alignItems: 'center',
-    width: '19%'
-  }
-});
+    width: '19%',
+    [theme.breakpoints.down('sm')]: {
+      width: '49%',
+    },
+  } 
+}))

@@ -10,7 +10,6 @@ import {
   Backdrop,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import FileBase from "react-file-base64";
 import { createPost, updatePost } from "../../actions/posts.js";
 import { uploadPages } from "../../actions/pages.js";
 import { useDropzone } from "react-dropzone";
@@ -28,7 +27,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     language: "",
     category: "",
     characters: [],
-    titleImage: "",
     pages: [],
   });
 
@@ -42,7 +40,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
       language: "",
       category: "",
       characters: "",
-      titleImage: "",
       pages: "",
     });
   };
@@ -209,17 +206,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
-            <div className={classes.fileInput}>
-              Page title&nbsp;
-              <FileBase
-                type="file"
-                multiple={false}
-                onDone={({ base64 }) =>
-                  setPostData({ ...postData, titleImage: base64 })
-                }
-              />
-            </div>
             <div {...getRootProps()} className={classes.fileInput}>
               <input {...getInputProps()} />
               {isDragActive ? (

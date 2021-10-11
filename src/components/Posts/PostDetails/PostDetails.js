@@ -87,12 +87,13 @@ const PostDetails = () => {
             container
             alignItems="stretch"
           >
-            <Grid className={classes.details} item xs={12} sm={4}>
-              <CardMedia
+            <Box className={classes.pageBox} item xs={12} sm={4}>
+              <img
                 className={classes.titleImage}
-                image={post.titleImage}
+                alt={post?.pages[0]?.name}
+                src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}
               />
-            </Grid>
+            </Box>
             <Grid className={classes.details} item xs={12} sm={3} md={5}>
               <Typography className={classes.title} variant="h4">
                 {post.title}

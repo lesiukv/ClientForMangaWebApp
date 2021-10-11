@@ -14,7 +14,7 @@ const Main = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
-
+  
   return (
     <>
       <Header />

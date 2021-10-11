@@ -8,11 +8,7 @@ const Post = ({ post }) => {
   return (
     <>
       <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          image={post.titleImage ? post.titleImage : post.selectedFile}
-          title={post.title}
-        />
+        <img className={classes.media} alt="title" src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}/>
         <CardContent>
           <Typography className={classes.title}>{post.title}</Typography>
         </CardContent>
