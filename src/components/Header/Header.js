@@ -115,13 +115,13 @@ const Header = () => {
           </div>
           <div className={classes.desktopMenu}>
             <Button color="inherit" className={classes.button}>
-              <Link to="/topic">Artist</Link>
+              <Link to="/topic/artists">Artist</Link>
             </Button>
             <Button color="inherit" className={classes.button}>
-              Characters{" "}
+              <Link to="/topic/characters">Characters</Link>
             </Button>
             <Button color="inherit" className={classes.button}>
-              Groups
+              <Link to="/topic/group">Groups</Link>
             </Button>
             <Button color="inherit" className={classes.button}>
               Random

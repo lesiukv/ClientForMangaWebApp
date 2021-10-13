@@ -1,8 +1,8 @@
-import * as ActionTypes from "../actions/actionTypes.js";
+import * as actionTypes from "../actions/actionTypes.js";
 
 const pages = (pages = [], action) => {
   switch (action.type) {
-    case ActionTypes.UPLOAD_PAGES:
+    case actionTypes.UPLOAD_PAGES:
       return [...pages];
     default:
       return pages;

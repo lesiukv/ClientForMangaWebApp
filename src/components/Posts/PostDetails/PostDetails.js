@@ -27,6 +27,7 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import Page from "./Page/Page";
 
+
 const PostDetails = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -137,6 +138,9 @@ const PostDetails = () => {
                     &nbsp;<span className={classes.span}>{character}</span>
                   </div>
                 ))}
+              </div>
+              <div className={classes.subDetails}>
+                <Typography>Pages: &nbsp;{post.pages.length}</Typography>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Uploaded:</Typography>&nbsp;

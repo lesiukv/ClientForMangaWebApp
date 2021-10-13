@@ -19,7 +19,7 @@ const Main = () => {
     <>
       <Header />
       <Switch>
-        <Route path="/topic">
+        <Route path="/topic/:topicName">
           <Topic />
         </Route>
         <Route path="/home">
