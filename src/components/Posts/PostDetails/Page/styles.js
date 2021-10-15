@@ -10,7 +10,7 @@ export default makeStyles({
         flexDirection: 'column'
     },
     pageImage: {
-        maxWidth: "99%"
+        maxWidth: "90%"
     },
     pageControl: {
         display: "flex",

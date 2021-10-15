@@ -130,7 +130,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               variant="outlined"
               value={postData.tags}
               onChange={(e) =>
-                setPostData({ ...postData, tags: e.target.value.split(", ") })
+                setPostData({ ...postData, tags: e.target.value.split(",") })
               }
               fullWidth
               color="secondary"
@@ -145,7 +145,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({
                   ...postData,
-                  artists: e.target.value.split(", "),
+                  artists: e.target.value.split(","),
                 })
               }
               fullWidth
@@ -200,7 +200,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({
                   ...postData,
-                  characters: e.target.value.split(", "),
+                  characters: e.target.value.split(","),
                 })
               }
               fullWidth
