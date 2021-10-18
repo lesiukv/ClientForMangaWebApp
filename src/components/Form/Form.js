@@ -8,6 +8,8 @@ import {
   Modal,
   Fade,
   Backdrop,
+  LinearProgress,
+  Box
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
@@ -44,6 +46,10 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     });
   };
 
+  const [progress, setProgress] = useState();
+
+  console.log(progress);
+
   const handleFormClose = () => setOpen(false);
 
   useEffect(() => {
@@ -69,7 +75,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
         page.dest = `page${Date.now()}${fileExtension}`;
       });
       dispatch(createPost(postData));
-      dispatch(uploadPages(postData.pages));    
+      dispatch(uploadPages(postData.pages, setProgress));
     }
     clear();
   };
@@ -233,6 +239,9 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
             >
               Clear
             </Button>
+            <Box sx={{ width: "100%" }}>
+              <LinearProgress value={progress} />
+            </Box>
           </form>
         </Paper>
       </Fade>

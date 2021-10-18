@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Typography, Container, Box } from "@material-ui/core";
 import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
-import { getTopics } from "../../actions/topics";
+import { getTopics, getTopicsNumber } from "../../actions/topics";
 import { useParams } from "react-router-dom";
 
 const Topic = () => {
@@ -11,12 +11,11 @@ const Topic = () => {
   const { topicName } = useParams();
 
   useEffect(() => {
-    dispatch(getTopics());
-  }, [dispatch]);
+    dispatch(getTopics(topicName));
+    dispatch(getTopicsNumber(topic));
+  }, [dispatch, topic, topicName]);
 
-  const topic = useSelector((state) => state.topics[topicName]);
-
-  console.log(topic);
+  var topic = useSelector((state) => state.topics[topicName]);
 
   return (
     <Container className={classes.container}>

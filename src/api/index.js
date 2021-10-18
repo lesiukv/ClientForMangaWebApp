@@ -2,18 +2,24 @@ import axios from "axios";
 
 const url = "http://localhost:5000/posts";
 
-export const getTopics = () => axios.get(`${url}/topics`);
+export const getTopics = (topic) => axios.get(`${url}/topics/${topic}`);
+export const getTopicsNumber = (topic) => axios.patch(`${url}/topics/amount`, topic);
+
 export const fetchPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, post) => axios.patch(`${url}/${id}`, post);
 export const deletePost = (id) => axios.delete(`${url}/${id}`);
-export const uploadPages = (pages) => {
+
+export const uploadPages = (pages, setProgress) => {
   axios({
     method: "POST",
-    url: url + "/uploads",
+    url: `${url}/uploads`,
     data: pages,
     header: {
       "Content-Type": "multipart/form-data",
+    },
+    onUploadProgress: data => {
+      setProgress(Math.round((100 * data.loaded) / data.total))
     },
   });
 };

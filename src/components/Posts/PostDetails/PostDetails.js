@@ -27,7 +27,6 @@ import moment from "moment";
 import { useSelector } from "react-redux";
 import Page from "./Page/Page";
 
-
 const PostDetails = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -88,13 +87,11 @@ const PostDetails = () => {
             container
             alignItems="stretch"
           >
-            <Box className={classes.pageBox} item xs={12} sm={4}>
-              <img
-                className={classes.titleImage}
-                alt={post?.pages[0]?.name}
-                src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}
-              />
-            </Box>
+            <img
+              className={classes.titleImage}
+              alt={post?.pages[0]?.name}
+              src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}
+            />
             <Grid className={classes.details} item xs={12} sm={3} md={5}>
               <Typography className={classes.title} variant="h4">
                 {post.title}
@@ -140,14 +137,14 @@ const PostDetails = () => {
                 ))}
               </div>
               <div className={classes.subDetails}>
-                <Typography>Pages: &nbsp;{post.pages.length}</Typography>
+                <Typography>Pages:</Typography>&nbsp;
+                <span className={classes.span}>{post.pages.length}</span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Uploaded:</Typography>&nbsp;
                 {moment(post.createdAt).startOf("day").fromNow()}
               </div>
             </Grid>
-
             <IconButton
               className={classes.iconButton}
               onClick={handleMenuOpen}

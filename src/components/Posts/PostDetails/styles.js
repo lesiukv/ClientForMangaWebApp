@@ -12,8 +12,13 @@ export default makeStyles((theme) => ({
   titleImage: {
     backgroundBlendMode: "normal",
     borderRadius: "9px",
-    maxHeight: "500px",
-    margin: "20px"
+    maxWidth: "30%",
+    margin: "20px",
+    [theme.breakpoints.down('xs')]: {
+      maxWidth: '100%',
+      margin: "20px 0px"
+    },
+    alignSelf: "center"
   },
   loading: {
     color: "#d9d9d9",
@@ -29,7 +34,7 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     flexWrap: "wrap",
     alignItems: "start",
-    margin: "20px"
+    margin: "20px 0px"
   },
   details: {
     margin: "20px 0 !important",

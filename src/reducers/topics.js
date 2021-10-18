@@ -1,12 +1,14 @@
 import * as ActionTypes from "../actions/actionTypes";
 
-const topics = (topics = [], action) => {
+const topic = (topic = [], action) => {
   switch (action.type) {
     case ActionTypes.GET_TOPICS:
       return action.payload;
+    case ActionTypes.GET_TOPICS_NUMBER:
+      return action.payload;
     default:
-      return topics;
+      return topic;
   }
 };
 
-export default topics;
+export default topic;
