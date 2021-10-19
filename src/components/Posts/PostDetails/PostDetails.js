@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import {
   CardMedia,
@@ -12,7 +12,7 @@ import {
   Box,
 } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePost } from "../../../actions/posts";
 import Form from "../../Form/Form.js";
 import {
@@ -23,11 +23,12 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom";
+import { getPostDetailsTopics } from "../../../actions/topics";
 import moment from "moment";
-import { useSelector } from "react-redux";
 import Page from "./Page/Page";
 
 const PostDetails = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -35,11 +36,18 @@ const PostDetails = () => {
   const { postId } = useParams();
   const history = useHistory();
   let match = useRouteMatch();
-  const dispatch = useDispatch();
+  const menuId = "menu-post-manipulation";
   const post = useSelector((state) =>
     state.posts.find((element) => element._id === postId)
   );
-  const menuId = "menu-post-manipulation";
+
+  useEffect(() => {
+    dispatch(getPostDetailsTopics(post));
+  }, [dispatch, post]);
+
+  const topicsNumber = useSelector((state) => state.topic);
+
+  console.log(topicsNumber);
 
   if (!post) {
     return (
@@ -48,6 +56,15 @@ const PostDetails = () => {
       </Container>
     );
   }
+  
+  if (!topicsNumber) {
+    return (
+      <Container className={classes.loadingContainer}>
+        <CircularProgress className={classes.loading} />
+      </Container>
+    );
+  }
+
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
   const handleFormOpen = () => setOpen(true);
@@ -98,25 +115,46 @@ const PostDetails = () => {
               </Typography>
               <div className={classes.subDetails}>
                 <Typography>Parodie:</Typography>&nbsp;
-                <span className={classes.span}>{post.parodie}</span>
+                <span className={classes.span}>
+                  <span>{post.parodie}</span>
+                  &nbsp;
+                  <span className={classes.number}>{topicsNumber["parodie"]}</span>
+                </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Language:</Typography>&nbsp;
-                <span className={classes.span}>{post.language}</span>
+                <span className={classes.span}>
+                  <span>{post.language}</span>
+                  &nbsp;
+                  <span className={classes.number}>{topicsNumber["language"]}</span>
+                </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Group:</Typography>&nbsp;
-                <span className={classes.span}>{post.group}</span>
+                <span className={classes.span}>
+                  <span>{post.group}</span>
+                  &nbsp;
+                  <span className={classes.number}>{topicsNumber["group"]}</span>
+                </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Category:</Typography>&nbsp;
-                <span className={classes.span}>{post.category}</span>
+                <span className={classes.span}>
+                  <span>{post.category}</span>
+                  &nbsp;
+                  <span className={classes.number}>{topicsNumber["category"]}</span>
+                </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Tags:</Typography>&nbsp;
                 {post.tags.map((tag, index) => (
                   <div key={index}>
-                    &nbsp;<span className={classes.span}>{tag}</span>
+                    &nbsp;
+                    <span className={classes.span}>
+                      <span>{tag}</span>
+                      &nbsp;
+                      <span className={classes.number}>{topicsNumber["tags"][index]}</span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -124,7 +162,12 @@ const PostDetails = () => {
                 <Typography>Artists:&nbsp;</Typography>
                 {post.artists.map((artist, index) => (
                   <div key={index}>
-                    &nbsp;<span className={classes.span}>{artist}</span>
+                    &nbsp;
+                    <span className={classes.span}>
+                      <span>{artist}</span>
+                      &nbsp;
+                      <span className={classes.number}>{topicsNumber["artists"][index]}</span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -132,7 +175,12 @@ const PostDetails = () => {
                 <Typography>Characters:&nbsp;</Typography>
                 {post.characters.map((character, index) => (
                   <div key={index}>
-                    &nbsp;<span className={classes.span}>{character}</span>
+                    &nbsp;
+                    <span className={classes.span}>
+                      <span>{character}</span>
+                      &nbsp;
+                      <span className={classes.number}>{topicsNumber["characters"][index]}</span>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -158,7 +206,7 @@ const PostDetails = () => {
         <Container className={classes.container}>
           <Grid
             container
-            alignItems="streatch"
+            alignItems="stretch"
             className={classes.pagesContainer}
           >
             {post.pages.map((page, index) => (

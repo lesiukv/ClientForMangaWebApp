@@ -15,12 +15,18 @@ const Topic = () => {
   }, [dispatch, topicName]);
 
   const topic = useSelector((state) => state.topic);
+
+  if (!topic || !topicName) return "Loading";
+
   const [topicValues, topicAmount] = topic;
 
-  console.log(topic);
-  console.log(topicName)
-
-  if (!topicValues.hasOwnProperty(topicName) || !topicAmount.hasOwnProperty(topicName)) return "Loading";
+  if (
+    !topicValues ||
+    !topicAmount ||
+    !topicValues.hasOwnProperty(topicName) ||
+    !topicAmount.hasOwnProperty(topicName)
+  )
+    return "Loading";
 
   const renderTopics = (topicValues, topicAmount) => {
     let topicList = [];
@@ -41,7 +47,9 @@ const Topic = () => {
       <Typography className={classes.text} variant="h3" color="primary">
         {topicName.charAt(0).toUpperCase() + topicName.slice(1)}
       </Typography>
-      <Box className={classes.topicContainer}>{renderTopics(topicValues, topicAmount)}</Box>
+      <Box className={classes.topicContainer}>
+        {renderTopics(topicValues, topicAmount)}
+      </Box>
     </Container>
   );
 };

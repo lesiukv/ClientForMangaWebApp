@@ -52,13 +52,13 @@ const Header = () => {
       color="secondary"
     >
       <MenuItem color="secondary" onClick={handleMenuClose}>
-        Artist
+        <Link to="/topic/artists">Artist</Link>
       </MenuItem>
       <MenuItem color="secondary" onClick={handleMenuClose}>
-        Characters
+        <Link to="/topic/characters">Characters</Link>
       </MenuItem>
       <MenuItem color="secondary" onClick={handleMenuClose}>
-        Groups
+        <Link to="/topic/group">Groups</Link>
       </MenuItem>
       <MenuItem color="secondary" onClick={handleMenuClose}>
         Random

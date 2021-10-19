@@ -49,7 +49,7 @@ export default makeStyles((theme) => ({
   span: {
     backgroundColor: "#4b4b4b",
     borderRadius: "6px",
-    padding: "2px",
+    padding: "4px",
   },
   moreIcon: {
     color: "#d9d9d9",
@@ -82,5 +82,8 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '49%',
     },
-  } 
+  },
+  number: {
+    color: "#ed2553",
+  },
 }))

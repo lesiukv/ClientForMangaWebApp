@@ -32,5 +32,8 @@ export default makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#1f1f1f",
+    [theme.breakpoints.down('xs')]: {
+      overflowY:'scroll'
+    }
   },
 }));
