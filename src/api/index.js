@@ -2,8 +2,8 @@ import axios from "axios";
 
 const url = "http://localhost:5000/posts";
 
-export const getTopics = (topic) => axios.get(`${url}/topics/${topic}`);
-export const getTopicsNumber = (topic) => axios.patch(`${url}/topics/amount`, topic);
+export const getTopic = (topic) => axios.get(`${url}/topics/${topic}`);
+export const getPostDetailsTopics = (topic) => axios.patch(`${url}/topics/postDetails`, topic);
 
 export const fetchPosts = () => axios.get(url);
 export const createPost = (newPost) => axios.post(url, newPost);
