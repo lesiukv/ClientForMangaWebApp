@@ -3,9 +3,10 @@ import axios from "axios";
 const url = "http://localhost:5000/posts";
 
 export const getTopic = (topic) => axios.get(`${url}/topics/${topic}`);
-export const getPostDetailsTopics = (topic) => axios.patch(`${url}/topics/postDetails`, topic);
+// export const getPostDetailsTopics = (topic) => axios.patch(`${url}/topics/postDetails`, topic);
 
 export const fetchPosts = () => axios.get(url);
+export const getPostDetails = (id) => axios.get(`${url}/${id}`);
 export const createPost = (newPost) => axios.post(url, newPost);
 export const updatePost = (id, post) => axios.patch(`${url}/${id}`, post);
 export const deletePost = (id) => axios.delete(`${url}/${id}`);

@@ -28,27 +28,21 @@ const Topic = () => {
   )
     return "Loading";
 
-  const renderTopics = (topicValues, topicAmount) => {
-    let topicList = [];
-    for (let i = 0; i < topicValues[topicName].length; i++) {
-      topicList.push(
-        <span key={i} className={classes.span}>
-          <span>{topicValues[topicName][i]}</span>
-          &nbsp;
-          <span className={classes.number}>{topicAmount[topicName][i]}</span>
-        </span>
-      );
-    }
-    return topicList;
-  };
-
   return (
     <Container className={classes.container}>
       <Typography className={classes.text} variant="h3" color="primary">
         {topicName.charAt(0).toUpperCase() + topicName.slice(1)}
       </Typography>
       <Box className={classes.topicContainer}>
-        {renderTopics(topicValues, topicAmount)}
+        {topicValues[topicName].map((value, index) => (
+          <span key={index} className={classes.span}>
+            <span>{value}</span>
+            &nbsp;
+            <span className={classes.number}>
+              {topicAmount[topicName][index]}
+            </span>
+          </span>
+        ))}
       </Box>
     </Container>
   );

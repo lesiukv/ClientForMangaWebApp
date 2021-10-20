@@ -23,7 +23,7 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom";
-import { getPostDetailsTopics } from "../../../actions/topics";
+import { getPostDetails } from "../../../actions/posts";
 import moment from "moment";
 import Page from "./Page/Page";
 
@@ -37,19 +37,16 @@ const PostDetails = () => {
   const history = useHistory();
   let match = useRouteMatch();
   const menuId = "menu-post-manipulation";
-  const post = useSelector((state) =>
-    state.posts.find((element) => element._id === postId)
-  );
 
   useEffect(() => {
-    dispatch(getPostDetailsTopics(post));
-  }, [dispatch, post]);
+    dispatch(getPostDetails(postId))
+  }, [dispatch, postId]);
 
-  const topicsNumber = useSelector((state) => state.topic);
+  const data = useSelector((state) => state.postdetails);
+  const [details, amount] = data;
 
-  console.log(topicsNumber);
 
-  if (!post) {
+  if (!details) {
     return (
       <Container className={classes.loadingContainer}>
         <CircularProgress className={classes.loading} />
@@ -57,7 +54,7 @@ const PostDetails = () => {
     );
   }
   
-  if (!topicsNumber) {
+  if (!amount) {
     return (
       <Container className={classes.loadingContainer}>
         <CircularProgress className={classes.loading} />
@@ -94,7 +91,7 @@ const PostDetails = () => {
   return (
     <Switch>
       <Route path={`${match.path}/:pageId`}>
-        <Page post={post} />
+        <Page post={details} />
       </Route>
       <Route path={match.path}>
         <Container className={classes.container}>
@@ -106,91 +103,91 @@ const PostDetails = () => {
           >
             <img
               className={classes.titleImage}
-              alt={post?.pages[0]?.name}
-              src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}
+              alt={details?.pages[0]?.name}
+              src={`http://localhost:5000/uploads/${details?.pages[0]?.dest}`}
             />
             <Grid className={classes.details} item xs={12} sm={3} md={5}>
               <Typography className={classes.title} variant="h4">
-                {post.title}
+                {details.title}
               </Typography>
               <div className={classes.subDetails}>
                 <Typography>Parodie:</Typography>&nbsp;
                 <span className={classes.span}>
-                  <span>{post.parodie}</span>
+                  <span>{details.parodie}</span>
                   &nbsp;
-                  <span className={classes.number}>{topicsNumber["parodie"]}</span>
+                  <span className={classes.number}>{amount["parodie"]}</span>
                 </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Language:</Typography>&nbsp;
                 <span className={classes.span}>
-                  <span>{post.language}</span>
+                  <span>{details.language}</span>
                   &nbsp;
-                  <span className={classes.number}>{topicsNumber["language"]}</span>
+                  <span className={classes.number}>{amount["language"]}</span>
                 </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Group:</Typography>&nbsp;
                 <span className={classes.span}>
-                  <span>{post.group}</span>
+                  <span>{details.group}</span>
                   &nbsp;
-                  <span className={classes.number}>{topicsNumber["group"]}</span>
+                  <span className={classes.number}>{amount["group"]}</span>
                 </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Category:</Typography>&nbsp;
                 <span className={classes.span}>
-                  <span>{post.category}</span>
+                  <span>{details.category}</span>
                   &nbsp;
-                  <span className={classes.number}>{topicsNumber["category"]}</span>
+                  <span className={classes.number}>{amount["category"]}</span>
                 </span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Tags:</Typography>&nbsp;
-                {post.tags.map((tag, index) => (
+                {details.tags.map((tag, index) => (
                   <div key={index}>
                     &nbsp;
                     <span className={classes.span}>
                       <span>{tag}</span>
                       &nbsp;
-                      <span className={classes.number}>{topicsNumber["tags"][index]}</span>
+                      <span className={classes.number}>{amount["tags"][index]}</span>
                     </span>
                   </div>
                 ))}
               </div>
               <div className={classes.subDetails}>
                 <Typography>Artists:&nbsp;</Typography>
-                {post.artists.map((artist, index) => (
+                {details.artists.map((artist, index) => (
                   <div key={index}>
                     &nbsp;
                     <span className={classes.span}>
                       <span>{artist}</span>
                       &nbsp;
-                      <span className={classes.number}>{topicsNumber["artists"][index]}</span>
+                      <span className={classes.number}>{amount["artists"][index]}</span>
                     </span>
                   </div>
                 ))}
               </div>
               <div className={classes.subDetails}>
                 <Typography>Characters:&nbsp;</Typography>
-                {post.characters.map((character, index) => (
+                {details.characters.map((character, index) => (
                   <div key={index}>
                     &nbsp;
                     <span className={classes.span}>
                       <span>{character}</span>
                       &nbsp;
-                      <span className={classes.number}>{topicsNumber["characters"][index]}</span>
+                      <span className={classes.number}>{amount["characters"][index]}</span>
                     </span>
                   </div>
                 ))}
               </div>
               <div className={classes.subDetails}>
                 <Typography>Pages:</Typography>&nbsp;
-                <span className={classes.span}>{post.pages.length}</span>
+                <span className={classes.span}>{details.pages.length}</span>
               </div>
               <div className={classes.subDetails}>
                 <Typography>Uploaded:</Typography>&nbsp;
-                {moment(post.createdAt).startOf("day").fromNow()}
+                {moment(details.createdAt).startOf("day").fromNow()}
               </div>
             </Grid>
             <IconButton
@@ -209,7 +206,7 @@ const PostDetails = () => {
             alignItems="stretch"
             className={classes.pagesContainer}
           >
-            {post.pages.map((page, index) => (
+            {details.pages.map((page, index) => (
               <Box className={classes.pageBox} item xs={12} sm={4} key={index}>
                 <Link to={`${match.url}/${index}`}>
                   <img
@@ -226,7 +223,7 @@ const PostDetails = () => {
         <Form
           formFor="Update"
           id={postId}
-          post={post}
+          post={details}
           open={open}
           setOpen={setOpen}
         />
