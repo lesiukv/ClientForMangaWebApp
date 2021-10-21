@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useStyles from "./styles.js";
+import CloseIcon from "@material-ui/icons/Close";
 import {
   Paper,
   Typography,
@@ -9,7 +10,8 @@ import {
   Fade,
   Backdrop,
   LinearProgress,
-  Box
+  Box,
+  IconButton
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
@@ -100,8 +102,14 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
             className={`${classes.root} ${classes.form}`}
             onSubmit={handleSubmit}
           >
+            <IconButton
+              onClick={handleFormClose}
+              className={classes.closeButton}
+            >
+              <CloseIcon color="secondary"/>
+            </IconButton>
             <Typography variant="h6" className={classes.formElement}>
-              {formFor} manga
+              {formFor} Manga
             </Typography>
             <TextField
               className={classes.formElement}

@@ -33,7 +33,11 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
     backgroundColor: "#1f1f1f",
     [theme.breakpoints.down('xs')]: {
-      overflowY:'scroll'
+      overflowY:'scroll',
+      alignItems: "start",
     }
   },
+  closeButton: {
+    marginRight: "auto"
+  }
 }));

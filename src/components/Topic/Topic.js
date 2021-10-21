@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { Typography, Container, Box } from "@material-ui/core";
+import {
+  CircularProgress,
+  Typography,
+  Container,
+  Box,
+} from "@material-ui/core";
 import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { getTopic } from "../../actions/topics";
@@ -16,7 +21,12 @@ const Topic = () => {
 
   const topic = useSelector((state) => state.topic);
 
-  if (!topic || !topicName) return "Loading";
+  if (!topic || !topicName)
+    return (
+      <Container className={classes.loadingContainer}>
+        <CircularProgress className={classes.loading} />
+      </Container>
+    );
 
   const [topicValues, topicAmount] = topic;
 
@@ -26,7 +36,11 @@ const Topic = () => {
     !topicValues.hasOwnProperty(topicName) ||
     !topicAmount.hasOwnProperty(topicName)
   )
-    return "Loading";
+    return (
+      <Container className={classes.loadingContainer}>
+        <CircularProgress className={classes.loading} />
+      </Container>
+    );
 
   return (
     <Container className={classes.container}>

@@ -46,7 +46,7 @@ const PostDetails = () => {
   const [details, amount] = data;
 
 
-  if (!details) {
+  if (!details || !amount) {
     return (
       <Container className={classes.loadingContainer}>
         <CircularProgress className={classes.loading} />
@@ -54,14 +54,6 @@ const PostDetails = () => {
     );
   }
   
-  if (!amount) {
-    return (
-      <Container className={classes.loadingContainer}>
-        <CircularProgress className={classes.loading} />
-      </Container>
-    );
-  }
-
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
   const handleFormOpen = () => setOpen(true);

@@ -22,6 +22,7 @@ export default makeStyles({
     color: "#ed2553",
   },
   topicContainer: {
-    display: "flex"
+    display: "flex",
+    flexWrap: "wrap"
   }
 });
