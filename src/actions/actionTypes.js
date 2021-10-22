@@ -7,4 +7,8 @@ export const DELETE = "DELETE";
 export const UPLOAD_PAGES = "UPLOAD_PAGES";
 
 export const GET_TOPIC = "GET_TOPIC";
-// export const GET_POST_DETAILS_TOPIC = "GET_POST_DETAILS_TOPIC";
+
+export const FETCH_COMMENTS = "FETCH_COMMENTS";
+export const ADD_COMMENT = "ADD_COMMENT";
+export const UPDATE_COMMENT = "UPDATE_COMMENT";
+export const DELETE_COMMENT = "DELETE_COMMENT";

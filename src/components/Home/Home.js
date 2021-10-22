@@ -12,24 +12,22 @@ const Home = () => {
   const handleFormOpen = () => setOpen(true);
 
   return (
-    <>
-      <Container>
-        <Button
-          className={classes.button}
-          aria-haspopup="true"
-          onClick={handleFormOpen}
-          aria-controls={formId}
-        >
-          <AddIcon
-            color="secondary"
-            fontSize="large"
-            className={classes.addIcon}
-          />
-        </Button>
-        <Posts />
-        <Form formFor="Post" open={open} setOpen={setOpen} />
-      </Container>
-    </>
+    <Container>
+      <Button
+        className={classes.button}
+        aria-haspopup="true"
+        onClick={handleFormOpen}
+        aria-controls={formId}
+      >
+        <AddIcon
+          color="secondary"
+          fontSize="large"
+          className={classes.addIcon}
+        />
+      </Button>
+      <Posts />
+      <Form formFor="Post" open={open} setOpen={setOpen} />
+    </Container>
   );
 };
 

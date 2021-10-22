@@ -9,7 +9,9 @@ const posts = (posts = [], action) => {
     case actionTypes.DELETE:
       return posts.filter((post) => post._id !== action.payload);
     case actionTypes.UPDATE:
-      return posts.map((post) => post._id === action.payload._id ? action.payload : post);
+      return posts.map((post) =>
+        post._id === action.payload._id ? action.payload : post
+      );
     default:
       return posts;
   }

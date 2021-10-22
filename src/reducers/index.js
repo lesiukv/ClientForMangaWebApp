@@ -3,10 +3,12 @@ import posts from "./posts.js";
 import pages from "./pages.js";
 import topic from "./topics.js";
 import postdetails from "./postdetails";
+import comments from "./comments";
 
 export default combineReducers({
   posts,
   pages,
   topic,
-  postdetails
+  postdetails,
+  comments
 });

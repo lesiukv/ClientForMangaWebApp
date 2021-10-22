@@ -1,5 +1,5 @@
 import * as api from "../api";
-import * as actionTypes from "../actions/actionTypes.js";
+import * as actionTypes from "./actionTypes.js";
 
 export const getPosts = () => async (dispatch) => {
   try {

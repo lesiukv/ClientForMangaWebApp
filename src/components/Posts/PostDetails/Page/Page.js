@@ -1,11 +1,10 @@
 import React from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 import CloseIcon from "@material-ui/icons/Close";
 import Settings from "@material-ui/icons/Settings";
-import { Typography, Box, Button, IconButton } from "@material-ui/core";
+import { Button, IconButton } from "@material-ui/core";
 import useStyles from "./styles.js";
 
 const Page = ({ post }) => {

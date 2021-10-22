@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import {
-  CardMedia,
   Container,
   Grid,
   CircularProgress,

@@ -10,22 +10,20 @@ const Posts = () => {
   const classes = useStyless();
 
   return (
-    <>
-      <Container className={classes.container}>
-        <Grid container alignItems="stretch" spacing={1}>
-          {posts
-            .slice(0)
-            .reverse()
-            .map((post) => (
-              <Grid key={post._id} item xs={12} sm={6} md={3}>
-                <Link to={`post/${post._id}`}>
-                  <Post post={post} />
-                </Link>
-              </Grid>
-            ))}
-        </Grid>
-      </Container>
-    </>
+    <Container className={classes.container}>
+      <Grid container alignItems="stretch" spacing={1}>
+        {posts
+          .slice(0)
+          .reverse()
+          .map((post) => (
+            <Grid key={post._id} item xs={12} sm={6} md={3}>
+              <Link to={`post/${post._id}`}>
+                <Post post={post} />
+              </Link>
+            </Grid>
+          ))}
+      </Grid>
+    </Container>
   );
 };
 

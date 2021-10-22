@@ -4,7 +4,6 @@ const postdetails = (postdetails = [], action) => {
   switch (action.type) {
     case actionTypes.GET_POST_DETAILS:
       return action.payload;
-
     default:
       return postdetails;
   }
