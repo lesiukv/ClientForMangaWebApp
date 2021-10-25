@@ -1,10 +1,10 @@
 import * as api from "../api";
-import * as ActionTypes from "./actionTypes";
+import * as actionTypes from "./actionTypes";
 
 export const getComments = (postId) => async (dispatch) => {
   try {
     const { data } = await api.getComments(postId);
-    dispatch({ type: ActionTypes.FETCH_COMMENTS, payload: data });
+    dispatch({ type: actionTypes.FETCH_COMMENTS, payload: data });
   } catch (error) {
     console.log(error);
   }
@@ -18,8 +18,29 @@ export const updateComment =
         commentId,
         updatedComment
       );
-      dispatch({ type: ActionTypes.UPDATE_COMMENT, payload: data });
+      dispatch({ type: actionTypes.UPDATE_COMMENT, payload: data });
     } catch (error) {
       console.log(error);
     }
   };
+
+export const deleteComment = (postId, commentId) => async (dispatch) => {
+  try {
+    await api.deleteComment(postId, commentId);
+    dispatch({
+      type: actionTypes.DELETE_COMMENT,
+      payload: [postId, commentId],
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createComment = (postId, comment) => async (dispatch) => {
+  try {
+    const { data } = await api.createComment(postId, comment);
+    dispatch({ type: actionTypes.CREATE_COMMENT, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
