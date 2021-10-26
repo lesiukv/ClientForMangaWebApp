@@ -10,7 +10,7 @@ export const getComments = (postId) => async (dispatch) => {
   }
 };
 
-export const updateComment =
+export const updateComment = 
   (postId, commentId, updatedComment) => async (dispatch) => {
     try {
       const { data } = await api.updateComment(
@@ -29,7 +29,7 @@ export const deleteComment = (postId, commentId) => async (dispatch) => {
     await api.deleteComment(postId, commentId);
     dispatch({
       type: actionTypes.DELETE_COMMENT,
-      payload: [postId, commentId],
+      payload: commentId,
     });
   } catch (error) {
     console.log(error);

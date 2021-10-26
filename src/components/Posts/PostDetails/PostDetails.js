@@ -25,6 +25,7 @@ import {
 import { getPostDetails } from "../../../actions/posts";
 import moment from "moment";
 import Page from "./Page/Page";
+import Comments from "../../Comments/Comments";
 
 const PostDetails = () => {
   const dispatch = useDispatch();
@@ -38,12 +39,11 @@ const PostDetails = () => {
   const menuId = "menu-post-manipulation";
 
   useEffect(() => {
-    dispatch(getPostDetails(postId))
+    dispatch(getPostDetails(postId));
   }, [dispatch, postId]);
 
   const data = useSelector((state) => state.postdetails);
   const [details, amount] = data;
-
 
   if (!details || !amount) {
     return (
@@ -52,7 +52,7 @@ const PostDetails = () => {
       </Container>
     );
   }
-  
+
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(null);
   const handleFormOpen = () => setOpen(true);
@@ -141,7 +141,9 @@ const PostDetails = () => {
                     <span className={classes.span}>
                       <span>{tag}</span>
                       &nbsp;
-                      <span className={classes.number}>{amount["tags"][index]}</span>
+                      <span className={classes.number}>
+                        {amount["tags"][index]}
+                      </span>
                     </span>
                   </div>
                 ))}
@@ -154,7 +156,9 @@ const PostDetails = () => {
                     <span className={classes.span}>
                       <span>{artist}</span>
                       &nbsp;
-                      <span className={classes.number}>{amount["artists"][index]}</span>
+                      <span className={classes.number}>
+                        {amount["artists"][index]}
+                      </span>
                     </span>
                   </div>
                 ))}
@@ -167,7 +171,9 @@ const PostDetails = () => {
                     <span className={classes.span}>
                       <span>{character}</span>
                       &nbsp;
-                      <span className={classes.number}>{amount["characters"][index]}</span>
+                      <span className={classes.number}>
+                        {amount["characters"][index]}
+                      </span>
                     </span>
                   </div>
                 ))}
@@ -209,6 +215,12 @@ const PostDetails = () => {
               </Box>
             ))}
           </Grid>
+        </Container>
+        <Container sx={{marginTop: '50px !important', justifyContetn: 'space-between'}} className={classes.container}>
+       
+          <Typography className={classes.title}>Post Comment</Typography>
+          <Comments postId={postId} />
+
         </Container>
         {renderMenu}
         <Form

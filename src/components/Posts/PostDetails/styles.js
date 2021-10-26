@@ -74,6 +74,7 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       padding: '5px'
     },
+    marginBottom: "20px"
   },
   pageBox: {
     display: 'flex',

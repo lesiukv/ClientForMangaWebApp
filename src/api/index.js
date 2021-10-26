@@ -11,13 +11,13 @@ export const updatePost = (postId, post) =>
   axios.patch(`${url}posts/${postId}`, post);
 export const deletePost = (postId) => axios.delete(`${url}posts/${postId}`);
 
-export const getCommments = (postId) => axios.get(`${url}/comments/${postId}`);
+export const getComments = (postId) => axios.get(`${url}comments/${postId}`);
 export const createComment = (postId, comment) =>
-  axios.post(`${url}/comments/${postId}`, comment);
+  axios.post(`${url}comments/${postId}`, comment);
 export const deleteComment = (postId, commentId) =>
-  axios.delete(`${url}/comments/${postId}/${commentId}`);
+  axios.delete(`${url}comments/${postId}/${commentId}`);
 export const updateComment = (postId, commentId, updatedComment) =>
-  axios.patch(`${url}/comments/${postId}/${commentId}`, updatedComment);
+  axios.patch(`${url}comments/${postId}/${commentId}`, updatedComment);
 
 export const uploadPages = (pages, setProgress) => {
   axios({
