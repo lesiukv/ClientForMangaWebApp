@@ -11,7 +11,7 @@ const comments = (comments = [], action) => {
         comment._id === action.payload._id ? action.payload : comment
       );
     case actionTypes.CREATE_COMMENT:
-        return [...comments, action.payload];
+        return [action.payload, ...comments ];
     default:
         return comments;
   }

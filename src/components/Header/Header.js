@@ -15,8 +15,8 @@ import { Link } from "react-router-dom";
 
 const Header = () => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = React.useState(false);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -30,12 +30,12 @@ const Header = () => {
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(false);
     handleMobileMenuClose();
   };
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+    setMobileMoreAnchorEl(false);
   };
 
   const menuId = "primary-search-account-menu";

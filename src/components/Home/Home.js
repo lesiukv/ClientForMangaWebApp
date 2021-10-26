@@ -7,7 +7,7 @@ import Posts from "../Posts/Posts.js";
 
 const Home = () => {
   const classes = useStyles();
-  const [open, setOpen] = useState(null);
+  const [open, setOpen] = useState(false);
   const formId = "form-menu";
   const handleFormOpen = () => setOpen(true);
 

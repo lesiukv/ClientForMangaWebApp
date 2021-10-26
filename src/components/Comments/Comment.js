@@ -5,7 +5,6 @@ import {
   Avatar,
   IconButton,
   Typography,
-  Paper,
   Box,
 } from "@material-ui/core";
 import useStyles from "./styles";
@@ -15,14 +14,14 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import moment from "moment";
 
 const Comment = ({ postId, comment, setUpdatedComment }) => {
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const classes = useStyles();
   const dispatch = useDispatch();
   const menuId = "menu-post-manipulation";
 
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
-  const handleMenuClose = () => setAnchorEl(null);
+  const handleMenuClose = () => setAnchorEl(false);
   const handleDelete = () => dispatch(deleteComment(postId, comment._id));
   const handleUpdate = () => setUpdatedComment(comment);
 
@@ -84,22 +83,22 @@ const Comment = ({ postId, comment, setUpdatedComment }) => {
             <div className={classes.head}>
               <Typography className={classes.text}>{comment.author}</Typography>
               &nbsp;
-              <Typography variant="secondary" className={classes.text}>
+              <Typography variant="body2" className={classes.text}>
                 {moment(comment.createdAt).startOf("day").fromNow()}
               </Typography>
             </div>
-            
+
             <Typography className={classes.text}>{comment.comment}</Typography>
           </div>
         </div>
 
-        <IconButton className={classes.text}>
-          <MoreIcon
-            className={classes.iconButton}
-            onClick={handleMenuOpen}
-            aria-controls={menuId}
-            aria-haspopup="true"
-          />
+        <IconButton
+          className={classes.text}
+          onClick={handleMenuOpen}
+          aria-controls={menuId}
+          aria-haspopup="true"
+        >
+          <MoreIcon className={classes.iconButton} />
         </IconButton>
       </Box>
       {renderMenu}

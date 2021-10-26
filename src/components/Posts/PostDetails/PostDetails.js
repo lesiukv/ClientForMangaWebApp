@@ -30,7 +30,7 @@ import Comments from "../../Comments/Comments";
 const PostDetails = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(false);
   const [open, setOpen] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const { postId } = useParams();
@@ -54,7 +54,7 @@ const PostDetails = () => {
   }
 
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
-  const handleMenuClose = () => setAnchorEl(null);
+  const handleMenuClose = () => setAnchorEl(false);
   const handleFormOpen = () => setOpen(true);
 
   function handleDelete() {
@@ -217,10 +217,7 @@ const PostDetails = () => {
           </Grid>
         </Container>
         <Container sx={{marginTop: '50px !important', justifyContetn: 'space-between'}} className={classes.container}>
-       
-          <Typography className={classes.title}>Post Comment</Typography>
-          <Comments postId={postId} />
-
+          <Comments  postId={postId} />
         </Container>
         {renderMenu}
         <Form
