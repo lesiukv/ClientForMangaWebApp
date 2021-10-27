@@ -81,6 +81,7 @@ const Header = () => {
       <MenuItem
         onClick={handleCategoryMenuOpen}
         aria-controls="primary-search-account-menu"
+        className={classes.categories}
       >
         Categories
       </MenuItem>
@@ -113,7 +114,7 @@ const Header = () => {
               inputProps={{ "aria-label": "search" }}
             />
           </div>
-          <div className={classes.desktopMenu}>
+          <div className={classes.categories}>
             <Button color="inherit" className={classes.button}>
               <Link to="/topic/artists">Artist</Link>
             </Button>

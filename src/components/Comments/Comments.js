@@ -17,7 +17,6 @@ const Comments = ({ postId }) => {
   const [updatedComment, setUpdatedComment] = useState(null);
   const dispatch = useDispatch();
   const classes = useStyles();
-  let updatedCommentId;
 
   useEffect(() => {
     if (updatedComment) {

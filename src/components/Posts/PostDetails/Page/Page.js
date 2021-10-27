@@ -11,7 +11,7 @@ const Page = ({ post }) => {
   const { pageId } = useParams();
   const classes = useStyles();
   const history = useHistory();
-
+  const numberOfPages = post.pages.length;
   const goToPostDetails = () => {
     history.push(`/post/${post._id}`);
   };
@@ -22,19 +22,23 @@ const Page = ({ post }) => {
         <CloseIcon className={classes.buttonControl} />
       </IconButton>
       <div className={classes.pagination}>
-        <Link to={`${parseInt(pageId) - 1}`}>
-          <IconButton className={classes.buttonControl}>
-            <ArrowBack className={classes.buttonControl} />
-          </IconButton>
-        </Link>
+        {pageId > 0 && (
+          <Link to={`${parseInt(pageId) - 1}`}>
+            <IconButton className={classes.buttonControl}>
+              <ArrowBack className={classes.buttonControl} />
+            </IconButton>
+          </Link>
+        )}
         <Button className={classes.buttonControl}>
-          {parseInt(pageId) + 1} of {post.pages.length}
+          {parseInt(pageId) + 1} of {numberOfPages}
         </Button>
-        <Link to={`${parseInt(pageId) + 1}`}>
-          <IconButton className={classes.buttonControl}>
-            <ArrowForward className={classes.buttonControl} />
-          </IconButton>
-        </Link>
+        {numberOfPages > parseInt(pageId) + 1 && (
+          <Link to={`${parseInt(pageId) + 1}`}>
+            <IconButton className={classes.buttonControl}>
+              <ArrowForward className={classes.buttonControl} />
+            </IconButton>
+          </Link>
+        )}
       </div>
       <IconButton className={classes.buttonControl}>
         <Settings className={classes.buttonControl} />

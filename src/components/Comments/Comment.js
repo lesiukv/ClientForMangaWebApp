@@ -22,7 +22,10 @@ const Comment = ({ postId, comment, setUpdatedComment }) => {
 
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(false);
-  const handleDelete = () => dispatch(deleteComment(postId, comment._id));
+  const handleDelete = () => {
+    dispatch(deleteComment(postId, comment._id))
+    handleMenuClose();
+  };
   const handleUpdate = () => setUpdatedComment(comment);
 
   // const stringToColor = (string) => {

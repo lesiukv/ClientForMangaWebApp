@@ -41,7 +41,7 @@ export default makeStyles((theme) => ({
   },
   subDetails: {
     display: "flex",
-    flexWrap: "nowrap",
+    flexWrap: "wrap",
     margin: "10px 0",
     color: "#d9d9d9 !important",
     alignItems: "baseline",
@@ -50,6 +50,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "#4b4b4b",
     borderRadius: "6px",
     padding: "4px",
+    margin: "2px"
   },
   moreIcon: {
     color: "#d9d9d9",

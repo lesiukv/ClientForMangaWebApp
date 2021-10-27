@@ -11,7 +11,7 @@ import {
   Backdrop,
   LinearProgress,
   Box,
-  IconButton
+  IconButton,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
@@ -106,7 +106,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onClick={handleFormClose}
               className={classes.closeButton}
             >
-              <CloseIcon color="secondary"/>
+              <CloseIcon color="secondary" />
             </IconButton>
             <Typography variant="h6" className={classes.formElement}>
               {formFor} Manga

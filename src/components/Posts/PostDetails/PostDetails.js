@@ -97,7 +97,7 @@ const PostDetails = () => {
               alt={details?.pages[0]?.name}
               src={`http://localhost:5000/uploads/${details?.pages[0]?.dest}`}
             />
-            <Grid className={classes.details} item xs={12} sm={3} md={5}>
+            <Grid className={classes.details} item xs={12} sm={5} md={7}>
               <Typography className={classes.title} variant="h4">
                 {details.title}
               </Typography>

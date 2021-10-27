@@ -19,7 +19,7 @@ export const deleteComment = (postId, commentId) =>
 export const updateComment = (postId, commentId, updatedComment) =>
   axios.patch(`${url}/comments/${postId}/${commentId}`, updatedComment);
 
-export const uploadPages = (pages, setProgress) => {
+export const uploadPages = (pages, onUploadProgress) => {
   axios({
     method: "POST",
     url: `${url}/uploads`,
@@ -27,8 +27,6 @@ export const uploadPages = (pages, setProgress) => {
     header: {
       "Content-Type": "multipart/form-data",
     },
-    onUploadProgress: (data) => {
-      setProgress(Math.round((100 * data.loaded) / data.total));
-    },
+    onUploadProgress, 
   });
 };
