@@ -19,6 +19,7 @@ export default makeStyles((theme) => ({
   fileInput: {
     width: "97%",
     margin: "10px 0",
+    cursor: "pointer !important",
   },
   buttonSubmit: {
     marginBottom: 10,
@@ -39,5 +40,5 @@ export default makeStyles((theme) => ({
   },
   closeButton: {
     marginRight: "auto"
-  }
+  },
 }));

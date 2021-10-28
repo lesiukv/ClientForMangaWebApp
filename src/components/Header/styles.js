@@ -26,7 +26,7 @@ export default makeStyles((theme) => ({
   },
   inputRoot: {
     color: "inherit",
-    width: "auto"
+    width: "inherit"
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
