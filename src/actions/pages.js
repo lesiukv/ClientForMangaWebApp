@@ -1,14 +1,27 @@
 import * as actionTypes from "./actionTypes";
 import * as api from "../api";
 
-export const uploadPages = (pages, onUploadProgress) => async (dispatch) => {
+export const uploadPage = (page, onUploadProgress) => {
   try {
     const formData = new FormData();
-    pages.forEach((page) => {
-      formData.append("page", page, page.dest);
-    });
-    await api.uploadPages(formData, onUploadProgress);
-    dispatch({ type: actionTypes.UPLOAD_PAGES });
+    formData.append("page", page, page.dest);
+
+    console.log(formData);
+
+    return api.http.post("/uploads", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      },
+      onUploadProgress
+    })
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPages = (postId) => {
+  try {
+    return api.getPages(postId);
   } catch (error) {
     console.log(error);
   }

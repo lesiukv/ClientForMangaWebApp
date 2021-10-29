@@ -4,6 +4,7 @@ export const GET_POST_DETAILS = "GET_POST_DETAILS";
 export const UPDATE_POST = "UPDATE_POST";
 export const DELETE_POST = "DELETE_POST";
 
+export const GET_PAGES = "GET_PAGES";
 export const UPLOAD_PAGES = "UPLOAD_PAGES";
 
 export const GET_TOPIC = "GET_TOPIC";

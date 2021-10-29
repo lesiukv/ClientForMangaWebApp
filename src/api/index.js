@@ -19,6 +19,7 @@ export const deleteComment = (postId, commentId) =>
 export const updateComment = (postId, commentId, updatedComment) =>
   axios.patch(`${url}/comments/${postId}/${commentId}`, updatedComment);
 
+export const getPages = (postId) => axios.get(`${url}/uploads/${postId}`)
 export const uploadPages = (pages, onUploadProgress) => {
   axios({
     method: "POST",
@@ -30,3 +31,10 @@ export const uploadPages = (pages, onUploadProgress) => {
     onUploadProgress, 
   });
 };
+
+export const http = axios.create({ 
+  baseURL: url,
+  headers: {
+    "Content-type": "application/json"
+  }
+})
