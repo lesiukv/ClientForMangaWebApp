@@ -41,4 +41,9 @@ export default makeStyles((theme) => ({
   closeButton: {
     marginRight: "auto"
   },
+  uploading: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+    justifyContent: 'space-between',
+  }
 }));

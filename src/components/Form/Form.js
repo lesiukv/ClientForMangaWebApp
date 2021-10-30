@@ -9,18 +9,20 @@ import {
   Modal,
   Fade,
   Backdrop,
-  LinearProgress,
   Box,
   IconButton,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
-import { uploadPage, getPages } from "../../actions/pages.js";
+import { uploadPage } from "../../actions/pages.js";
 import { useDropzone } from "react-dropzone";
 
 const Form = ({ formFor, open, setOpen, id, post }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const [selectedFiles, setSelectedFiles] = useState(null);
+  const [progressInfos, setProgressInfos] = useState({ val: [] });
+  const progressInfosRef = useRef(null);
 
   const [postData, setPostData] = useState({
     title: "",
@@ -33,6 +35,10 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     characters: [],
     pages: [],
   });
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
 
   const clear = () => {
     setPostData({
@@ -48,21 +54,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     });
   };
 
-  const [selectedFiles, setSelectedFiles] = useState(undefined);
-  const [progressInfos, setProgressInfos] = useState({ val: [] });
-  const [message, setMessage] = useState([]);
-  const [fileInfos, setFileInfos] = useState([]);
-
-  const progressInfosRef = useRef(null);
-
   const handleFormClose = () => setOpen(false);
-
-  useEffect(() => {
-    if (post) setPostData(post);
-    getPages(id)?.then((response) => {
-      setFileInfos(response.data);
-    });
-  }, [post, id, progressInfos]);
 
   const onDrop = useCallback(
     (acceptedFiles) => {
@@ -77,6 +69,8 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     [postData]
   );
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+
   const upload = async (idx, file) => {
     let _progressInfos = [...progressInfosRef.current.val];
     try {
@@ -86,18 +80,10 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
         );
         setProgressInfos({ val: _progressInfos });
       });
-      setMessage((prevMessage) => [
-        ...prevMessage,
-        "Uploaded the file successfully: " + file.name,
-      ]);
     } catch (e) {
       _progressInfos[idx].percentage = 0;
       setProgressInfos({ val: _progressInfos });
-
-      setMessage((prevMessage_1) => [
-        ...prevMessage_1,
-        "Could not upload the file: " + file.name,
-      ]);
+      console.log(e);
     }
   };
 
@@ -115,17 +101,8 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
 
     const uploadPromises = files.map((file, i) => upload(i, file));
 
-    Promise.all(uploadPromises)
-      .then(() => dispatch(createPost(postData)))
-      .then((data) => getPages(data._id))
-      .then((files) => {
-        setFileInfos(files.data);
-      });
-
-    setMessage([]);
+    Promise.all(uploadPromises).then(() => dispatch(createPost(postData)));
   };
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -302,19 +279,15 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
             >
               Clear
             </Button>
-            <Button onClick={uploadFiles}>Test</Button>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{ width: "100%", margin: '15px 0' }}>
               {progressInfos &&
                 progressInfos.val.length > 0 &&
-                progressInfos.val.map((progressInfo, index) => {
-                  console.log(progressInfo);
-                  return (
-                    <>
-                    <Typography>{progressInfo.percentage}%</Typography>
-                    <Typography>{progressInfo.fileName}</Typography>
-                    </>
-                  );
-                })}
+                progressInfos.val.map((progressInfo, index) => (
+                  <div className={classes.uploading} key={index}>
+                    <Typography variant='body2'>{progressInfo.fileName}</Typography>
+                    <Typography variant='body2'>{progressInfo.percentage}%</Typography>
+                  </div>
+                ))}
             </Box>
           </form>
         </Paper>

@@ -20,21 +20,14 @@ export const updateComment = (postId, commentId, updatedComment) =>
   axios.patch(`${url}/comments/${postId}/${commentId}`, updatedComment);
 
 export const getPages = (postId) => axios.get(`${url}/uploads/${postId}`)
-export const uploadPages = (pages, onUploadProgress) => {
+export const uploadPage = (pages, onUploadProgress) => {
   axios({
     method: "POST",
     url: `${url}/uploads`,
     data: pages,
-    header: {
+    headers: {
       "Content-Type": "multipart/form-data",
     },
     onUploadProgress, 
   });
 };
-
-export const http = axios.create({ 
-  baseURL: url,
-  headers: {
-    "Content-type": "application/json"
-  }
-})
