@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
@@ -12,17 +12,23 @@ import MenuItem from "@material-ui/core/MenuItem";
 import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
+import RegisterForm from "../Form/RegisterForm";
 
 const Header = () => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(false);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(false);
+  const [anchorEl, setAnchorEl] = useState(false);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
+  const [openRegisterForm, setOpenRegisterForm] = useState(false);
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleCategoryMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleOpenRegisterForm = () => {
+    setOpenRegisterForm(true);
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -136,7 +142,11 @@ const Header = () => {
             <Button color="inherit" className={classes.button}>
               Sign in
             </Button>
-            <Button color="secondary" className={classes.button}>
+            <Button
+              onClick={() => handleOpenRegisterForm()}
+              color="secondary"
+              className={classes.button}
+            >
               Register
             </Button>
           </div>
@@ -153,6 +163,7 @@ const Header = () => {
           </div>
         </ToolBar>
       </AppBar>
+      <RegisterForm open={openRegisterForm} setOpen={setOpenRegisterForm} />
       {renderMobileMenu}
       {renderCategoryMenu}
     </>
