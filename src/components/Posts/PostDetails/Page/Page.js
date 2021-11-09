@@ -22,23 +22,25 @@ const Page = ({ post }) => {
         <CloseIcon className={classes.buttonControl} />
       </IconButton>
       <div className={classes.pagination}>
-        {pageId > 0 && (
+        <IconButton
+          disabled={pageId > 0 ? false : true}
+          className={classes.buttonControl}
+        >
           <Link to={`${parseInt(pageId) - 1}`}>
-            <IconButton className={classes.buttonControl}>
-              <ArrowBack className={classes.buttonControl} />
-            </IconButton>
+            <ArrowBack className={classes.buttonControl} />{" "}
           </Link>
-        )}
+        </IconButton>
         <Button className={classes.buttonControl}>
           {parseInt(pageId) + 1} of {numberOfPages}
         </Button>
-        {numberOfPages > parseInt(pageId) + 1 && (
+        <IconButton
+          disabled={numberOfPages > parseInt(pageId) + 1 ? false : true}
+          className={classes.buttonControl}
+        >
           <Link to={`${parseInt(pageId) + 1}`}>
-            <IconButton className={classes.buttonControl}>
-              <ArrowForward className={classes.buttonControl} />
-            </IconButton>
+            <ArrowForward className={classes.buttonControl} />{" "}
           </Link>
-        )}
+        </IconButton>
       </div>
       <IconButton className={classes.buttonControl}>
         <Settings className={classes.buttonControl} />
