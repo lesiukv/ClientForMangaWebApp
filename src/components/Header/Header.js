@@ -13,15 +13,19 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import RegisterForm from "../Form/RegisterForm";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutUser } from "../../actions/auth";
 
 const Header = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
   const [openRegisterForm, setOpenRegisterForm] = useState(false);
-
+  const [openLoginForm, setOpenLoginForm] = useState(false);
+  const dispatch = useDispatch();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const { isAuthenticated } = useSelector((state) => state?.auth);
 
   const handleCategoryMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -29,6 +33,14 @@ const Header = () => {
 
   const handleOpenRegisterForm = () => {
     setOpenRegisterForm(true);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  }
+
+  const handleOpenLoginForm = () => {
+    setOpenLoginForm(true);
   };
 
   const handleMobileMenuOpen = (event) => {
@@ -95,8 +107,8 @@ const Header = () => {
         <FavoriteIcon color="secondary" />
         Favorite
       </MenuItem>
-      <MenuItem>Sign in</MenuItem>
-      <MenuItem>Register</MenuItem>
+      <MenuItem onClick={() => handleOpenLoginForm()}>Sign in</MenuItem>
+      <MenuItem onClick={() => handleOpenRegisterForm()}>Register</MenuItem>
     </Menu>
   );
 
@@ -139,7 +151,11 @@ const Header = () => {
               <FavoriteIcon color="secondary" />
               &nbsp;Favorite
             </Button>
-            <Button color="inherit" className={classes.button}>
+            <Button
+              onClick={() => handleOpenLoginForm()}
+              color="inherit"
+              className={classes.button}
+            >
               Sign in
             </Button>
             <Button
@@ -149,6 +165,15 @@ const Header = () => {
             >
               Register
             </Button>
+            {isAuthenticated && (
+              <Button
+                onClick={() => handleLogout()}
+                color="secondary"
+                className={classes.button}
+              >
+                Logout
+              </Button>
+            )}
           </div>
           <div className={classes.mobileMenu}>
             <IconButton
@@ -163,7 +188,16 @@ const Header = () => {
           </div>
         </ToolBar>
       </AppBar>
-      <RegisterForm open={openRegisterForm} setOpen={setOpenRegisterForm} />
+      <RegisterForm
+        open={openRegisterForm}
+        setOpen={setOpenRegisterForm}
+        purpose={true}
+      />
+      <RegisterForm
+        open={openLoginForm}
+        setOpen={setOpenLoginForm}
+        purpose={false}
+      />
       {renderMobileMenu}
       {renderCategoryMenu}
     </>

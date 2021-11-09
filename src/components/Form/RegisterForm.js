@@ -14,7 +14,7 @@ import {
 import { loginUser, registerUser } from "../../actions/auth";
 import { useDispatch } from "react-redux";
 
-const RegisterForm = ({ open, setOpen }) => {
+const RegisterForm = ({ open, setOpen, purpose }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [userData, setUserData] = useState({
@@ -35,8 +35,7 @@ const RegisterForm = ({ open, setOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    dispatch(registerUser(userData));
+    purpose ? dispatch(registerUser(userData)) : dispatch(loginUser(userData));
   };
 
   return (
@@ -67,7 +66,7 @@ const RegisterForm = ({ open, setOpen }) => {
               <CloseIcon color="secondary" />
             </IconButton>
             <Typography variant="h6" className={classes.formElement}>
-              Register new user
+              {purpose ? "Register new user" : "Login"}
             </Typography>
             <TextField
               value={userData.username}
