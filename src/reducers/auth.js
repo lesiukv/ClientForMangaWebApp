@@ -22,7 +22,8 @@ const auth = (
         ...auth,
         isAuthenticated: true,
         errMess: "",
-        token: action.payload,
+        token: action.token,
+        user: action.user,
       };
     case actionTypes.LOGIN_FAILURE:
       return {
@@ -39,7 +40,8 @@ const auth = (
         token: "",
         user: null,
       };
-    case actionTypes.REGISTRATION_SUCCESS: return { ...auth, isAuthenticated: false}
+    case actionTypes.REGISTRATION_SUCCESS:
+      return { ...auth, isAuthenticated: false };
     default:
       return auth;
   }

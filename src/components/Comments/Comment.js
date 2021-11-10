@@ -84,7 +84,7 @@ const Comment = ({ postId, comment, setUpdatedComment }) => {
           {/* <Avatar {...stringAvatar(comment.author)} /> */}
           <div>
             <div className={classes.head}>
-              <Typography className={classes.text}>{comment.author}</Typography>
+              <Typography className={classes.text}>{comment.author?.username}</Typography>
               &nbsp;
               <Typography variant="body2" className={classes.text}>
                 {moment(comment.createdAt).startOf("day").fromNow()}

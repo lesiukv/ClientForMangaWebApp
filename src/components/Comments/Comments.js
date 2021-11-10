@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, TextField } from "@material-ui/core";
+import { Box, Button, TextField, Typography } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles.js";
 import {
@@ -10,8 +10,9 @@ import {
 import Comment from "./Comment";
 
 const Comments = ({ postId }) => {
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [postComment, setPostComment] = useState({
-    author: "",
+    author: user.userId,
     comment: "",
   });
   const [updatedComment, setUpdatedComment] = useState(null);
@@ -27,16 +28,15 @@ const Comments = ({ postId }) => {
 
   const comments = useSelector((state) => state.comments);
 
+
   const clear = () => {
     setPostComment({
-      author: "",
       comment: "",
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (updatedComment) {
       dispatch(updateComment(postId, updatedComment._id, postComment));
     } else {
@@ -48,67 +48,72 @@ const Comments = ({ postId }) => {
 
   return (
     <div className={classes.comments}>
-      <form
-        className={classes.form}
-        autoComplete="off"
-        id="form"
-        noValidate
-        onSubmit={handleSubmit}
-      >
-        <TextField
-          className={classes.formElement}
-          InputProps={{
-            classes: { input: classes.input },
-          }}
-          name="author"
-          label="Author"
-          variant="outlined"
-          value={postComment.author}
-          fullWidth
-          onChange={(e) => {
-            setPostComment({ ...postComment, author: e.target.value });
-          }}
-          color="secondary"
-        />
-        <TextField
-          className={classes.formElement}
-          InputProps={{
-            classes: { input: classes.input },
-          }}
-          name="comment"
-          label="Comment"
-          variant="outlined"
-          value={postComment.comment}
-          fullWidth
-          onChange={(e) => {
-            setPostComment({ ...postComment, comment: e.target.value });
-          }}
-          color="secondary"
-          size="medium"
-        />
-        <div>
-          <Button
+      {isAuthenticated ? (
+        <form
+          className={classes.form}
+          autoComplete="off"
+          id="form"
+          noValidate
+          onSubmit={handleSubmit}
+        >
+          {/* <TextField
             className={classes.formElement}
-            variant="contained"
-            color="primary"
+            InputProps={{
+              classes: { input: classes.input },
+            }}
+            name="author"
+            label="Author"
+            variant="outlined"
+            value={postComment.author}
             fullWidth
-            size="large"
-            type="submit"
-          >
-            Submit
-          </Button>
-          <Button
-            className={classes.formElement}
-            variant="contained"
+            onChange={(e) => {
+              setPostComment({ ...postComment, author: e.target.value });
+            }}
             color="secondary"
-            size="small"
-            onClick={clear}
+          /> */}
+          <TextField
+            className={classes.formElement}
+            InputProps={{
+              classes: { input: classes.input },
+            }}
+            name="comment"
+            label="Comment"
+            variant="outlined"
+            value={postComment.comment}
             fullWidth
-          >
-            Clear
-          </Button>
-        </div>
-      </form>
+            onChange={(e) => {
+              setPostComment({ ...postComment, comment: e.target.value });
+            }}
+            color="secondary"
+            size="medium"
+          />
+          <div>
+            <Button
+              className={classes.formElement}
+              variant="contained"
+              color="primary"
+              fullWidth
+              size="large"
+              type="submit"
+            >
+              Submit
+            </Button>
+            <Button
+              className={classes.formElement}
+              variant="contained"
+              color="secondary"
+              size="small"
+              onClick={clear}
+              fullWidth
+            >
+              Clear
+            </Button>
+          </div>
+        </form>
+      ) : (
+        <Typography>You must login or register user</Typography>
+      )}
+
       <Box>
         {comments.map((comment, index) => (
           <Comment

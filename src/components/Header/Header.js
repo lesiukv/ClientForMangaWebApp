@@ -37,7 +37,7 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-  }
+  };
 
   const handleOpenLoginForm = () => {
     setOpenLoginForm(true);
@@ -147,32 +147,38 @@ const Header = () => {
             </Button>
           </div>
           <div className={classes.desktopMenu}>
-            <Button color="inherit" className={classes.button}>
-              <FavoriteIcon color="secondary" />
-              &nbsp;Favorite
-            </Button>
-            <Button
-              onClick={() => handleOpenLoginForm()}
-              color="inherit"
-              className={classes.button}
-            >
-              Sign in
-            </Button>
-            <Button
-              onClick={() => handleOpenRegisterForm()}
-              color="secondary"
-              className={classes.button}
-            >
-              Register
-            </Button>
+            {!isAuthenticated && (
+              <>
+                <Button
+                  onClick={() => handleOpenLoginForm()}
+                  color="inherit"
+                  className={classes.button}
+                >
+                  Sign in
+                </Button>
+                <Button
+                  onClick={() => handleOpenRegisterForm()}
+                  color="secondary"
+                  className={classes.button}
+                >
+                  Register
+                </Button>
+              </>
+            )}
             {isAuthenticated && (
-              <Button
-                onClick={() => handleLogout()}
-                color="secondary"
-                className={classes.button}
-              >
-                Logout
-              </Button>
+              <>
+                <Button color="inherit" className={classes.button}>
+                  <FavoriteIcon color="secondary" />
+                  &nbsp;Favorite
+                </Button>
+                <Button
+                  onClick={() => handleLogout()}
+                  color="secondary"
+                  className={classes.button}
+                >
+                  Logout
+                </Button>
+              </>
             )}
           </div>
           <div className={classes.mobileMenu}>

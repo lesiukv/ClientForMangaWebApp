@@ -6,9 +6,17 @@ export const loginUser = (creds) => async (dispatch) => {
     const { data } = await api.loginUser(creds);
     if (data.success) {
       localStorage.setItem("token", data.token);
-      localStorage.setItem("creds", JSON.stringify(creds));
+      localStorage.setItem(
+        "creds",
+        JSON.stringify({ username: data.username, userId: data.userId })
+      );
     }
-    dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: data.token });
+    dispatch({
+      type: actionTypes.LOGIN_SUCCESS,
+      token: data.token,
+      username: data.username,
+      userId: data.userId,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -17,7 +25,7 @@ export const loginUser = (creds) => async (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
   try {
     localStorage.removeItem("token");
-    localStorage.removeItem("creds");
+
     dispatch({ type: actionTypes.LOGOUT_SUCCESS });
   } catch (error) {
     console.log(error);
@@ -25,11 +33,10 @@ export const logoutUser = () => async (dispatch) => {
 };
 
 export const registerUser = (creds) => async (dispatch) => {
-    try {
-        await api.registerUser(creds);
-        console.log('wtf')
-        dispatch({ type: actionTypes.REGISTRATION_SUCCESS })
-    } catch (error) {
-        console.log(error);
-    }
-}
+  try {
+    await api.registerUser(creds);
+    dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
+  } catch (error) {
+    console.log(error);
+  }
+};
