@@ -25,7 +25,7 @@ export const loginUser = (creds) => async (dispatch) => {
 export const logoutUser = () => async (dispatch) => {
   try {
     localStorage.removeItem("token");
-
+    localStorage.removeItem("creds");
     dispatch({ type: actionTypes.LOGOUT_SUCCESS });
   } catch (error) {
     console.log(error);

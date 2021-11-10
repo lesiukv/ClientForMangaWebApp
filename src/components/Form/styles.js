@@ -30,13 +30,10 @@ export default makeStyles((theme) => ({
   },
   modal: {
     display: "flex",
-    alignItems: "center",
+    alignItems: "start",
     justifyContent: "center",
     backgroundColor: "#1f1f1f",
-    [theme.breakpoints.down('xs')]: {
-      overflowY:'scroll',
-      alignItems: "start",
-    }
+    overflowY:'scroll',
   },
   closeButton: {
     marginRight: "auto"

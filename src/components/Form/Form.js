@@ -87,20 +87,16 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     }
   };
 
-  const uploadFiles = () => {
+  const uploadFiles = async () => {
     const files = Array.from(selectedFiles);
-
     let _progressInfos = files.map((file) => ({
       percentage: 0,
       fileName: file.name,
     }));
-
     progressInfosRef.current = {
       val: _progressInfos,
     };
-
     const uploadPromises = files.map((file, i) => upload(i, file));
-
     Promise.all(uploadPromises).then(() => dispatch(createPost(postData)));
   };
 
@@ -155,7 +151,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="parodie"
@@ -168,7 +163,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="tags"
@@ -181,7 +175,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="artists"
@@ -197,7 +190,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="group"
@@ -210,7 +202,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="language"
@@ -223,7 +214,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="category"
@@ -236,7 +226,6 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-
             <TextField
               className={classes.formElement}
               name="characters"

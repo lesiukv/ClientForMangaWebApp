@@ -26,37 +26,31 @@ const Header = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const { isAuthenticated } = useSelector((state) => state?.auth);
+  const menuId = "primary-search-account-menu";
+  const mobileMenuId = "primary-search-account-menu-mobile";
 
   const handleCategoryMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleOpenRegisterForm = () => {
     setOpenRegisterForm(true);
   };
-
   const handleLogout = () => {
     dispatch(logoutUser());
   };
-
   const handleOpenLoginForm = () => {
     setOpenLoginForm(true);
   };
-
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-
   const handleMenuClose = () => {
     setAnchorEl(false);
     handleMobileMenuClose();
   };
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(false);
   };
-
-  const menuId = "primary-search-account-menu";
 
   const renderCategoryMenu = (
     <Menu
@@ -83,8 +77,6 @@ const Header = () => {
       </MenuItem>
     </Menu>
   );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
 
   const renderMobileMenu = (
     <Menu

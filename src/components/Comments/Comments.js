@@ -12,7 +12,7 @@ import Comment from "./Comment";
 const Comments = ({ postId }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [postComment, setPostComment] = useState({
-    author: user.userId,
+    author: user?.userId,
     comment: "",
   });
   const [updatedComment, setUpdatedComment] = useState(null);
@@ -28,22 +28,21 @@ const Comments = ({ postId }) => {
 
   const comments = useSelector((state) => state.comments);
 
-
   const clear = () => {
     setPostComment({
       comment: "",
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (updatedComment) {
-      dispatch(updateComment(postId, updatedComment._id, postComment));
+      dispatch(updateComment(updatedComment._id, postComment));
     } else {
       dispatch(createComment(postId, postComment));
     }
     setUpdatedComment(null);
     clear();
+    dispatch(getComments(postId));
   };
 
   return (
@@ -56,21 +55,6 @@ const Comments = ({ postId }) => {
           noValidate
           onSubmit={handleSubmit}
         >
-          {/* <TextField
-            className={classes.formElement}
-            InputProps={{
-              classes: { input: classes.input },
-            }}
-            name="author"
-            label="Author"
-            variant="outlined"
-            value={postComment.author}
-            fullWidth
-            onChange={(e) => {
-              setPostComment({ ...postComment, author: e.target.value });
-            }}
-            color="secondary"
-          /> */}
           <TextField
             className={classes.formElement}
             InputProps={{
@@ -113,7 +97,6 @@ const Comments = ({ postId }) => {
       ) : (
         <Typography>You must login or register user</Typography>
       )}
-
       <Box>
         {comments.map((comment, index) => (
           <Comment

@@ -25,17 +25,17 @@ const RegisterForm = ({ open, setOpen, purpose }) => {
   const handleFormClose = () => {
     setOpen(false);
   };
-
   const clear = () => {
     setUserData({
       username: "",
       password: "",
     });
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     purpose ? dispatch(registerUser(userData)) : dispatch(loginUser(userData));
+    clear();
+    setOpen(false);
   };
 
   return (
@@ -92,7 +92,6 @@ const RegisterForm = ({ open, setOpen, purpose }) => {
                 setUserData({ ...userData, password: e.target.value })
               }
             />
-
             <Button
               className={classes.buttonSubmit}
               variant="contained"

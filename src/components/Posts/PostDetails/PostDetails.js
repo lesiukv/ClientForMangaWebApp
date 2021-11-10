@@ -56,7 +56,6 @@ const PostDetails = () => {
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(false);
   const handleFormOpen = () => setOpen(true);
-
   function handleDelete() {
     dispatch(deletePost(postId));
     history.push("/home");
@@ -216,8 +215,11 @@ const PostDetails = () => {
             ))}
           </Grid>
         </Container>
-        <Container sx={{marginTop: '50px !important', justifyContetn: 'space-between'}} className={classes.container}>
-          <Comments  postId={postId} />
+        <Container
+          sx={{ marginTop: "50px !important", justifyContetn: "space-between" }}
+          className={classes.container}
+        >
+          <Comments postId={postId} />
         </Container>
         {renderMenu}
         <Form

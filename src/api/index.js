@@ -2,7 +2,11 @@ import axios from "axios";
 
 const url = "http://localhost:5000";
 
-const token = "Bearer " + localStorage.getItem("token");
+axios.interceptors.request.use((config) => {
+  const token = "Bearer " + localStorage.getItem("token");
+  config.headers.Authorization = token;
+  return config;
+});
 
 export const getTopic = (topic) => axios.get(`${url}/topics/${topic}`);
 
@@ -15,20 +19,11 @@ export const deletePost = (postId) => axios.delete(`${url}/posts/${postId}`);
 
 export const getComments = (postId) => axios.get(`${url}/comments/${postId}`);
 export const createComment = (postId, comment) =>
-  axios({
-    method: "POST",
-    url: `${url}/comments/${postId}`,
-    data: comment,
-    headers: {
-      "Authorization": token,
-      "Content-Type": "application/json",
-    },
-  });
-
-export const deleteComment = (postId, commentId) =>
-  axios.delete(`${url}/comments/${postId}/${commentId}`);
-export const updateComment = (postId, commentId, updatedComment) =>
-  axios.patch(`${url}/comments/${postId}/${commentId}`, updatedComment);
+  axios.post(`${url}/comments/${postId}`, comment);
+export const deleteComment = (commentId) =>
+  axios.delete(`${url}/comments/${commentId}`);
+export const updateComment = (commentId, updatedComment) =>
+  axios.patch(`${url}/comments/${commentId}`, updatedComment);
 
 export const getPages = (postId) => axios.get(`${url}/uploads/${postId}`);
 export const uploadPage = (pages, onUploadProgress) => {

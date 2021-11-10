@@ -4,7 +4,6 @@ export default makeStyles({
   media: {
     backgroundColor: "#4b4b4b",
     backgroundBlendMode: "normal",
-    maxHeight: ""
   },
   card: {
     display: "flex",
@@ -13,7 +12,6 @@ export default makeStyles({
     position: "relative",
     backgroundColor: "#4b4b4b",
     borderRadius: "9px !important",
-
   },
   title: {
     padding: 0,
