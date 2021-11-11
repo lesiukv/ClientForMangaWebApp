@@ -12,7 +12,7 @@ import Comment from "./Comment";
 const Comments = ({ postId }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [postComment, setPostComment] = useState({
-    author: user?.userId,
+    author: user.userId,
     comment: "",
   });
   const [updatedComment, setUpdatedComment] = useState(null);
@@ -102,7 +102,7 @@ const Comments = ({ postId }) => {
           <Comment
             key={index}
             comment={comment}
-            postId={postId}
+            userId={user.userId}
             setUpdatedComment={setUpdatedComment}
           />
         ))}

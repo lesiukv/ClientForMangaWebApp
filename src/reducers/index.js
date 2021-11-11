@@ -5,6 +5,7 @@ import topic from "./topics.js";
 import postdetails from "./postdetails";
 import comments from "./comments";
 import auth from "./auth";
+import profiles from "./profiles";
 
 export default combineReducers({
   posts,
@@ -13,4 +14,5 @@ export default combineReducers({
   postdetails,
   comments,
   auth,
+  profiles,
 });

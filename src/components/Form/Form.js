@@ -59,8 +59,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
   const onDrop = useCallback(
     (acceptedFiles) => {
       acceptedFiles.forEach((page) => {
-        const fileExtension = (page.name.match(/\.+[\S]+$/) || [])[0];
-        page.dest = `page${Date.now()}${fileExtension}`;
+        page.dest = `${Date.now()}${page.name}`;
       });
       setSelectedFiles(acceptedFiles);
       setProgressInfos({ val: [] });

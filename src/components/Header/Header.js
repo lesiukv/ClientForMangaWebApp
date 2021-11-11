@@ -95,12 +95,21 @@ const Header = () => {
       >
         Categories
       </MenuItem>
-      <MenuItem>
-        <FavoriteIcon color="secondary" />
-        Favorite
-      </MenuItem>
-      <MenuItem onClick={() => handleOpenLoginForm()}>Sign in</MenuItem>
-      <MenuItem onClick={() => handleOpenRegisterForm()}>Register</MenuItem>
+      {isAuthenticated && (
+        <div>
+          <MenuItem>
+            <FavoriteIcon color="secondary" />
+            Favorite
+          </MenuItem>
+          <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
+        </div>
+      )}
+      {!isAuthenticated && (
+        <div>
+          <MenuItem onClick={() => handleOpenLoginForm()}>Sign in</MenuItem>
+          <MenuItem onClick={() => handleOpenRegisterForm()}>Register</MenuItem>
+        </div>
+      )}
     </Menu>
   );
 

@@ -13,7 +13,7 @@ import { deleteComment } from "../../actions/comments";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import moment from "moment";
 
-const Comment = ({ comment, setUpdatedComment }) => {
+const Comment = ({ comment, setUpdatedComment, userId }) => {
   const [anchorEl, setAnchorEl] = useState(false);
   const isMenuOpen = Boolean(anchorEl);
   const classes = useStyles();
@@ -23,10 +23,13 @@ const Comment = ({ comment, setUpdatedComment }) => {
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(false);
   const handleDelete = () => {
-    dispatch(deleteComment(comment._id))
+    dispatch(deleteComment(comment._id));
     handleMenuClose();
   };
-  const handleUpdate = () => setUpdatedComment(comment);
+  const handleUpdate = () => {
+    setUpdatedComment(comment);
+    handleMenuClose();
+  };
 
   const renderMenu = (
     <Menu
@@ -56,7 +59,9 @@ const Comment = ({ comment, setUpdatedComment }) => {
           <Avatar />
           <div>
             <div className={classes.head}>
-              <Typography className={classes.text}>{comment.author?.username}</Typography>
+              <Typography className={classes.text}>
+                {comment.author?.username}
+              </Typography>
               &nbsp;
               <Typography variant="body2" className={classes.text}>
                 {moment(comment.createdAt).startOf("day").fromNow()}
@@ -66,15 +71,16 @@ const Comment = ({ comment, setUpdatedComment }) => {
             <Typography className={classes.text}>{comment.comment}</Typography>
           </div>
         </div>
-
-        <IconButton
-          className={classes.text}
-          onClick={handleMenuOpen}
-          aria-controls={menuId}
-          aria-haspopup="true"
-        >
-          <MoreIcon className={classes.iconButton} />
-        </IconButton>
+        {userId === comment.author?._id && (
+          <IconButton
+            className={classes.text}
+            onClick={handleMenuOpen}
+            aria-controls={menuId}
+            aria-haspopup="true"
+          >
+            <MoreIcon className={classes.iconButton} />
+          </IconButton>
+        )}
       </Box>
       {renderMenu}
     </div>
