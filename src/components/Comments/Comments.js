@@ -26,7 +26,7 @@ const Comments = ({ postId }) => {
     dispatch(getComments(postId));
   }, [dispatch, postId, updatedComment]);
 
-  const comments = useSelector((state) => state.comments);
+  const {commentsArr: comments} = useSelector((state) => state.comments);
 
   const clear = () => {
     setPostComment({

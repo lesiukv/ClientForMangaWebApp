@@ -7,32 +7,18 @@ const auth = (
     user: localStorage.getItem("creds")
       ? JSON.parse(localStorage.getItem("creds"))
       : null,
+    error: null,
   },
   action
 ) => {
   switch (action.type) {
-    case actionTypes.LOGIN_REQUEST:
-      return {
-        ...auth,
-        isAuthenticated: false,
-        user: action.creds,
-      };
     case actionTypes.LOGIN_SUCCESS:
       return {
         ...auth,
         isAuthenticated: true,
-        errMess: "",
         token: action.token,
         user: action.user,
       };
-    case actionTypes.LOGIN_FAILURE:
-      return {
-        ...auth,
-        isAuthenticated: false,
-        errMess: action.message,
-      };
-    case actionTypes.LOGOUT_REQUEST:
-      return { ...auth, isAuthenticated: true };
     case actionTypes.LOGOUT_SUCCESS:
       return {
         ...auth,
@@ -42,6 +28,8 @@ const auth = (
       };
     case actionTypes.REGISTRATION_SUCCESS:
       return { ...auth, isAuthenticated: false };
+    case actionTypes.AUTH_FAILURE:
+      return { ...auth, isAuthenticated: false, error: action.error };
     default:
       return auth;
   }

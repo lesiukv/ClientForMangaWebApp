@@ -40,3 +40,5 @@ export const uploadPage = (pages, onUploadProgress) => {
 
 export const loginUser = (creds) => axios.post(`${url}/users/login`, creds);
 export const registerUser = (creds) => axios.post(`${url}/users/signup`, creds);
+
+export const getProfileData = (profileId) => axios.get(`${url}/users/${profileId}`)

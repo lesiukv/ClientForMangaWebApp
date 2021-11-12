@@ -1,6 +1,13 @@
 import * as actionTypes from "./actionTypes";
 import * as api from "../api";
 
+const authFailure = (error) => {
+  return {
+    type: actionTypes.AUTH_FAILURE,
+    error: error,
+  };
+};
+
 export const loginUser = (creds) => async (dispatch) => {
   try {
     const { data } = await api.loginUser(creds);
@@ -14,11 +21,10 @@ export const loginUser = (creds) => async (dispatch) => {
     dispatch({
       type: actionTypes.LOGIN_SUCCESS,
       token: data.token,
-      username: data.username,
-      userId: data.userId,
+      user: { username: data.username, userId: data.userId}
     });
   } catch (error) {
-    console.log(error);
+    dispatch(authFailure(error));
   }
 };
 
@@ -28,7 +34,7 @@ export const logoutUser = () => async (dispatch) => {
     localStorage.removeItem("creds");
     dispatch({ type: actionTypes.LOGOUT_SUCCESS });
   } catch (error) {
-    console.log(error);
+    dispatch(authFailure(error));
   }
 };
 
@@ -37,6 +43,6 @@ export const registerUser = (creds) => async (dispatch) => {
     await api.registerUser(creds);
     dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
   } catch (error) {
-    console.log(error);
+    dispatch(authFailure(error));
   }
 };
