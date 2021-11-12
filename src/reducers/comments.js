@@ -17,13 +17,13 @@ const comments = (
     case actionTypes.DELETE_COMMENT:
       return {
         ...comments,
-        commmentsArr: comments.commentsArr.filter(
+        commentsArr: comments.commentsArr.filter(
           (comment) => comment._id !== action.payload
         ),
         isLoading: false,
       };
     case actionTypes.UPDATE_COMMENT:
-      return {
+      return {  
         ...comments,
         commentsArr: comments.commentsArr.map((comment) =>
           comment._id === action.payload._id ? action.payload : comment

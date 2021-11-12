@@ -8,7 +8,6 @@ const commentsLoading = () => {
 const commmentsError = (error) => {
   return {
     type: actionTypes.COMMENTS_ERROR,
-    isLoading: false,
     error: error,
   };
 };
@@ -20,10 +19,9 @@ export const getComments = (postId) => async (dispatch) => {
     dispatch({
       type: actionTypes.FETCH_COMMENTS,
       payload: data,
-      isLoading: false,
     });
   } catch (error) {
-    dispatch(commmentsError(error))
+    dispatch(commmentsError(error));
   }
 };
 
@@ -35,7 +33,6 @@ export const updateComment =
       dispatch({
         type: actionTypes.UPDATE_COMMENT,
         payload: data,
-        isLoading: false,
       });
     } catch (error) {
       dispatch(commmentsError(error));
@@ -49,7 +46,6 @@ export const deleteComment = (commentId) => async (dispatch) => {
     dispatch({
       type: actionTypes.DELETE_COMMENT,
       payload: commentId,
-      isLoading: false,
     });
   } catch (error) {
     dispatch(commmentsError(error));
@@ -63,7 +59,6 @@ export const createComment = (postId, comment) => async (dispatch) => {
     dispatch({
       type: actionTypes.CREATE_COMMENT,
       payload: data,
-      isLoading: false,
     });
   } catch (error) {
     dispatch(commmentsError(error));

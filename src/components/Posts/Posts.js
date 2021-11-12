@@ -6,7 +6,7 @@ import useStyless from "./styles.js";
 import { Link } from "react-router-dom";
 
 const Posts = () => {
-  const posts = useSelector((state) => state.posts);
+  const { postsArr: posts, isLoading, error } = useSelector((state) => state.posts);
   const classes = useStyless();
 
   return (

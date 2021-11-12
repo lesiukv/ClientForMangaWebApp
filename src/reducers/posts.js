@@ -1,17 +1,40 @@
 import * as actionTypes from "../actions/actionTypes.js";
 
-const posts = (posts = [], action) => {
+const posts = (
+  posts = {
+    postsArr: [],
+    isLoading: true,
+    error: null,
+  },
+  action
+) => {
   switch (action.type) {
+    case actionTypes.POST_LOADING:
+      return { ...posts, isLoading: true };
     case actionTypes.FETCH_POSTS:
-      return action.payload;
+      return { ...posts, postsArr: action.payload, isLoading: false };
     case actionTypes.CREATE_POST:
-      return [...posts, action.payload];
+      return {
+        ...posts,
+        postsArr: [posts.postsArr, action.payload],
+        isLoading: false,
+      };
     case actionTypes.DELETE_POST:
-      return posts.filter((post) => post._id !== action.payload);
+      return {
+        ...posts,
+        postsArr: posts.postsArr.filter((post) => post._id !== action.payload),
+        isLoading: false,
+      };
     case actionTypes.UPDATE_POST:
-      return posts.map((post) =>
-        post._id === action.payload._id ? action.payload : post
-      );
+      return {
+        ...posts,
+        postsArr: posts.postArr.map((post) =>
+          post._id === action.payload._id ? action.payload : post
+        ),
+        isLoading: false,
+      };
+    case actionTypes.POST_FAILURE:
+      return { ...posts, isLoading: false, error: action.error };
     default:
       return posts;
   }

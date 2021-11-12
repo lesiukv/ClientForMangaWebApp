@@ -42,8 +42,11 @@ const PostDetails = () => {
     dispatch(getPostDetails(postId));
   }, [dispatch, postId]);
 
-  const data = useSelector((state) => state.postdetails);
-  const [details, amount] = data;
+  const {
+    postdetailsArr: [details, amount],
+    isLoading,
+    error,
+  } = useSelector((state) => state.postdetails);
 
   if (!details || !amount) {
     return (
