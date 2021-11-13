@@ -8,14 +8,18 @@ import { useParams } from "react-router-dom";
 const Profile = () => {
   const { profileId } = useParams();
   const classes = useStyles();
-  const { user } = useSelector((state) => state.auth);
+  const {
+    user: { username, userId },
+  } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(getProfileData(profileId));
   }, [profileId, dispatch]);
 
-  const profileData = useSelector((state) => state.profile);
+  const { profileData, isLoading, error } = useSelector(
+    (state) => state.profile
+  );
 
   return (
     <>

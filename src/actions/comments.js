@@ -2,7 +2,7 @@ import * as api from "../api";
 import * as actionTypes from "./actionTypes";
 
 const commentsLoading = () => {
-  return { type: actionTypes.COMMENTS_LOADING, isLoading: true };
+  return { type: actionTypes.COMMENTS_LOADING };
 };
 
 const commmentsError = (error) => {
@@ -56,10 +56,11 @@ export const createComment = (postId, comment) => async (dispatch) => {
   dispatch(commentsLoading());
   try {
     const { data } = await api.createComment(postId, comment);
-    dispatch({
+    await dispatch({
       type: actionTypes.CREATE_COMMENT,
       payload: data,
     });
+     dispatch(getComments(postId));
   } catch (error) {
     dispatch(commmentsError(error));
   }

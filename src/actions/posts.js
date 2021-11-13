@@ -2,11 +2,11 @@ import * as api from "../api";
 import * as actionTypes from "./actionTypes.js";
 
 const postError = (error) => {
-  return { type: actionTypes.POST_FAILURE, error: error, isLoading: false };
+  return { type: actionTypes.POST_FAILURE, error: error };
 };
 
 const postLoading = () => {
-  return { type: actionTypes.POST_LOADING, isLoading: true };
+  return { type: actionTypes.POST_LOADING };
 };
 
 const postDetailsError = (error) => {
@@ -18,7 +18,7 @@ const postDetailsError = (error) => {
 };
 
 const postDetailsLoading = () => {
-  return { type: actionTypes.POST_DETAILS_LOADING, isLoading: true };
+  return { type: actionTypes.POST_DETAILS_LOADING };
 };
 
 export const getPosts = () => async (dispatch) => {

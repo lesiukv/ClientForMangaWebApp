@@ -15,7 +15,7 @@ export const loginUser = (creds) => async (dispatch) => {
       localStorage.setItem("token", data.token);
       localStorage.setItem(
         "creds",
-        JSON.stringify({ username: data.username, userId: data.userId })
+        JSON.stringify({ username: data.username, userId: data.userId, admin: data.admin })
       );
     }
     dispatch({

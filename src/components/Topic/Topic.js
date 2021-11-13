@@ -19,7 +19,11 @@ const Topic = () => {
     dispatch(getTopic(topicName));
   }, [dispatch, topicName]);
 
-  const topic = useSelector((state) => state.topic);
+  const {
+    topicArr: topic,
+    error,
+    isLoading,
+  } = useSelector((state) => state.topic);
 
   if (!topic || !topicName)
     return (

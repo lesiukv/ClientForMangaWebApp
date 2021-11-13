@@ -10,9 +10,13 @@ import {
 import Comment from "./Comment";
 
 const Comments = ({ postId }) => {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const {
+    isAuthenticated,
+    user: { userId },
+  } = useSelector((state) => state.auth);
+  
   const [postComment, setPostComment] = useState({
-    author: user.userId,
+    author: userId,
     comment: "",
   });
   const [updatedComment, setUpdatedComment] = useState(null);
@@ -26,10 +30,15 @@ const Comments = ({ postId }) => {
     dispatch(getComments(postId));
   }, [dispatch, postId, updatedComment]);
 
-  const {commentsArr: comments, isLoading, error} = useSelector((state) => state.comments);
+  const {
+    commentsArr: comments,
+    isLoading,
+    error,
+  } = useSelector((state) => state.comments);
 
   const clear = () => {
     setPostComment({
+      author: userId,
       comment: "",
     });
   };
@@ -102,7 +111,7 @@ const Comments = ({ postId }) => {
           <Comment
             key={index}
             comment={comment}
-            userId={user.userId}
+            userId={userId}
             setUpdatedComment={setUpdatedComment}
           />
         ))}
