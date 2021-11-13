@@ -6,7 +6,7 @@ const topicError = (error) => {
 };
 
 const topicLoading = () => {
-  return { type: actionTypes.GET_TOPIC_LOADING };
+  return { type: actionTypes.GET_TOPIC_LOADING, isLoading: true};
 };
 
 export const getTopic = (topic) => async (dispatch) => {

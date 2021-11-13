@@ -3,7 +3,6 @@ import useStyles from "./styles";
 import {
   Container,
   Grid,
-  CircularProgress,
   Typography,
   Menu,
   MenuItem,
@@ -26,6 +25,7 @@ import { getPostDetails } from "../../../actions/posts";
 import moment from "moment";
 import Page from "./Page/Page";
 import Comments from "../../Comments/Comments";
+import Loading from "../../Loading/Loading";
 
 const PostDetails = () => {
   const dispatch = useDispatch();
@@ -48,13 +48,7 @@ const PostDetails = () => {
     error,
   } = useSelector((state) => state.postdetails);
 
-  if (!details || !amount) {
-    return (
-      <Container className={classes.loadingContainer}>
-        <CircularProgress className={classes.loading} />
-      </Container>
-    );
-  }
+  if (isLoading) return <Loading />;
 
   const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
   const handleMenuClose = () => setAnchorEl(false);

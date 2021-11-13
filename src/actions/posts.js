@@ -42,7 +42,6 @@ export const getPostDetails = (id) => async (dispatch) => {
 };
 
 export const createPost = (post) => async (dispatch) => {
-  dispatch(postLoading());
   try {
     const { data } = await api.createPost(post);
     dispatch({ type: actionTypes.CREATE_POST, payload: data });
@@ -53,7 +52,6 @@ export const createPost = (post) => async (dispatch) => {
 };
 
 export const updatePost = (id, post) => async (dispatch) => {
-  dispatch(postLoading());
   try {
     const { data } = await api.updatePost(id, post);
     dispatch({ type: actionTypes.UPDATE_POST, payload: data });
@@ -63,7 +61,6 @@ export const updatePost = (id, post) => async (dispatch) => {
 };
 
 export const deletePost = (id) => async (dispatch) => {
-  dispatch(postLoading());
   try {
     await api.deletePost(id);
     dispatch({ type: actionTypes.DELETE_POST, payload: id });

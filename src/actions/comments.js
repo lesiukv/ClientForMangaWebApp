@@ -40,7 +40,7 @@ export const updateComment =
   };
 
 export const deleteComment = (commentId) => async (dispatch) => {
-  dispatch(commentsLoading());
+
   try {
     await api.deleteComment(commentId);
     dispatch({
@@ -53,7 +53,6 @@ export const deleteComment = (commentId) => async (dispatch) => {
 };
 
 export const createComment = (postId, comment) => async (dispatch) => {
-  dispatch(commentsLoading());
   try {
     const { data } = await api.createComment(postId, comment);
     await dispatch({

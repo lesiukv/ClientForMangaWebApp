@@ -8,15 +8,16 @@ import {
   updateComment,
 } from "../../actions/comments";
 import Comment from "./Comment";
+import Loading from "../Loading/Loading";
 
 const Comments = ({ postId }) => {
   const {
     isAuthenticated,
-    user: { userId },
+    user,
   } = useSelector((state) => state.auth);
-  
+
   const [postComment, setPostComment] = useState({
-    author: userId,
+    author: user?.userId,
     comment: "",
   });
   const [updatedComment, setUpdatedComment] = useState(null);
@@ -38,7 +39,7 @@ const Comments = ({ postId }) => {
 
   const clear = () => {
     setPostComment({
-      author: userId,
+      author: user?.userId,
       comment: "",
     });
   };
@@ -53,6 +54,8 @@ const Comments = ({ postId }) => {
     clear();
     dispatch(getComments(postId));
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <div className={classes.comments}>
@@ -111,7 +114,7 @@ const Comments = ({ postId }) => {
           <Comment
             key={index}
             comment={comment}
-            userId={userId}
+            userId={user?.userId}
             setUpdatedComment={setUpdatedComment}
           />
         ))}

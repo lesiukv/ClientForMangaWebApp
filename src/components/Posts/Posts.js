@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Post from "./Post/Post.js";
 import { useSelector } from "react-redux";
 import { Grid, Container } from "@material-ui/core";
 import useStyless from "./styles.js";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getPosts } from "../../actions/posts.js";
+import Loading from "../Loading/Loading";
 
 const Posts = () => {
-  const { postsArr: posts, isLoading, error } = useSelector((state) => state.posts);
   const classes = useStyless();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch]);
+
+  const {
+    postsArr: posts,
+    isLoading,
+    error,
+  } = useSelector((state) => state.posts);
+
+  if (isLoading) return <Loading />;
 
   return (
     <Container className={classes.container}>

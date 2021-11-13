@@ -9,6 +9,7 @@ import useStyles from "./styles";
 import { useSelector, useDispatch } from "react-redux";
 import { getTopic } from "../../actions/topics";
 import { useParams } from "react-router-dom";
+import Loading from "../Loading/Loading";
 
 const Topic = () => {
   const classes = useStyles();
@@ -35,16 +36,9 @@ const Topic = () => {
   const [topicValues, topicAmount] = topic;
 
   if (
-    !topicValues ||
-    !topicAmount ||
-    !topicValues.hasOwnProperty(topicName) ||
-    !topicAmount.hasOwnProperty(topicName)
+    isLoading 
   )
-    return (
-      <Container className={classes.loadingContainer}>
-        <CircularProgress className={classes.loading} />
-      </Container>
-    );
+    return <Loading />;
 
   return (
     <Container className={classes.container}>
@@ -52,7 +46,7 @@ const Topic = () => {
         {topicName.charAt(0).toUpperCase() + topicName.slice(1)}
       </Typography>
       <Box className={classes.topicContainer}>
-        {topicValues[topicName].map((value, index) => (
+        {topicValues[topicName]?.map((value, index) => (
           <span key={index} className={classes.span}>
             <span>{value}</span>
             &nbsp;

@@ -12,7 +12,7 @@ const topic = (
     case actionTypes.GET_TOPIC:
       return { ...topic, topicArr: action.payload, isLoading: false };
     case actionTypes.GET_TOPIC_LOADING:
-      return { ...topic, isLoading: true };
+      return { ...topic, isLoading: true, topicArr: [] };
     case actionTypes.GET_TOPIC_FAILED:
       return { ...topic, error: action.error, isLoading: false };
     default:
