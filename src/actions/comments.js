@@ -27,7 +27,6 @@ export const getComments = (postId) => async (dispatch) => {
 
 export const updateComment =
   (commentId, updatedComment) => async (dispatch) => {
-    dispatch(commentsLoading());
     try {
       const { data } = await api.updateComment(commentId, updatedComment);
       dispatch({
@@ -40,7 +39,6 @@ export const updateComment =
   };
 
 export const deleteComment = (commentId) => async (dispatch) => {
-
   try {
     await api.deleteComment(commentId);
     dispatch({

@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./components/Header/Header.js";
 import Home from "./components/Home/Home.js";
 import Topic from "./components/Topic/Topic.js";
-import PostDetails from "./components/Posts/PostDetails/PostDetails.js";
+import PostDetails from "./components/PostDetails/PostDetails.js";
 import Profile from "./components/Profile/Profile.js";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";

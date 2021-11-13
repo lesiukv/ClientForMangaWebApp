@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Post from "./Post/Post.js";
+import Post from "./Post.js";
 import { useSelector } from "react-redux";
 import { Grid, Container } from "@material-ui/core";
 import useStyless from "./styles.js";

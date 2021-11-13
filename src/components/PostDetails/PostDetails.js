@@ -11,8 +11,7 @@ import {
 } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost } from "../../../actions/posts";
-import Form from "../../Form/Form.js";
+import Form from "../Form/Form.js";
 import {
   Switch,
   Route,
@@ -21,11 +20,11 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom";
-import { getPostDetails } from "../../../actions/posts";
+import { getPostDetails, deletePost } from "../../actions/posts";
 import moment from "moment";
 import Page from "./Page/Page";
-import Comments from "../../Comments/Comments";
-import Loading from "../../Loading/Loading";
+import Comments from "../Comments/Comments";
+import Loading from "../Loading/Loading";
 
 const PostDetails = () => {
   const dispatch = useDispatch();

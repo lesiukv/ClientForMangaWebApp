@@ -1,4 +1,3 @@
-import { SignalCellularNullOutlined } from "@material-ui/icons";
 import * as actionTypes from "../actions/actionTypes";
 
 const profiles = (
