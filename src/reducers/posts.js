@@ -12,7 +12,7 @@ const posts = (
     case actionTypes.POST_LOADING:
       return { ...posts, isLoading: true };
     case actionTypes.FETCH_POSTS:
-      return { ...posts, postsArr: action.payload, isLoading: false };
+      return { ...posts, postsArr: action.payload, isLoading: false, error: null };
     case actionTypes.CREATE_POST:
       return {
         ...posts,
@@ -24,6 +24,7 @@ const posts = (
         ...posts,
         postsArr: posts.postsArr.filter((post) => post._id !== action.payload),
         isLoading: false,
+        error: null,
       };
     case actionTypes.UPDATE_POST:
       return {
@@ -32,6 +33,7 @@ const posts = (
           post._id === action.payload._id ? action.payload : post
         ),
         isLoading: false,
+        error: null,
       };
     case actionTypes.POST_FAILURE:
       return { ...posts, isLoading: false, error: action.error };

@@ -14,6 +14,7 @@ const postdetails = (
         ...postdetails,
         postdetailsArr: action.payload,
         isLoading: false,
+        error: null,
       };
     case actionTypes.POST_DETAILS_FAILURE:
       return { ...postdetails, error: action.error, isLoading: false };
