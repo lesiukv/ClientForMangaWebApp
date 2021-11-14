@@ -1,12 +1,9 @@
 import * as actionTypes from "../actions/actionTypes";
 
-const errors = (errors = {
-    err: null,
-    isLoading: true,
-}, action) => {
+const errors = (errors = null, action) => {
   switch (action.type) {
     case actionTypes.ERROR_HANDLER:
-      return {...errors, err: action.error, isLoading: false}
+      return action.error;
     default:
       return errors;
   }

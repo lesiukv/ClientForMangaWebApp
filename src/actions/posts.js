@@ -35,12 +35,11 @@ export const getPosts = () => async (dispatch) => {
 export const getPostDetails = (id) => async (dispatch) => {
   dispatch(postDetailsLoading());
   try {
-    const { data } = await api.getPostDetails();
+    const { data } = await api.getPostDetails(id);
     dispatch({ type: actionTypes.GET_POST_DETAILS, payload: data });
   } catch (error) {
     dispatch(handleError(error));
     dispatch(postDetailsError(error));
-
   }
 };
 

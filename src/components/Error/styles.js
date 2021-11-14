@@ -3,7 +3,8 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: "#ed2553",
-    maxWidth: 'auto'
+    maxWidth: 'auto',
+    position: 'relative',
   },
   errorContainer: {
     maxWidth: 'auto',
@@ -13,6 +14,11 @@ const useStyles = makeStyles((theme) => ({
   },
   errorMessage: {
 
+  },
+  errorHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   }
 }));
 

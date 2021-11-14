@@ -25,7 +25,7 @@ import moment from "moment";
 import Page from "./Page/Page";
 import Comments from "../Comments/Comments";
 import Loading from "../Loading/Loading";
-import Error from "../Error/Error";
+
 
 const PostDetails = () => {
   const dispatch = useDispatch();
@@ -81,9 +81,7 @@ const PostDetails = () => {
         <Page post={details} />
       </Route>
       <Route path={match.path}>
-        {error ? (
-          <Error error={error} />
-        ) : (
+        {!error && (
           <>
             <Container className={classes.container}>
               <Grid

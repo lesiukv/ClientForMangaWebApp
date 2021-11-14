@@ -7,10 +7,15 @@ import Profile from "./components/Profile/Profile.js";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./theme.js";
+import Error from "./components/Error/Error";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const error = useSelector((state) => state.errors);
+
   return (
     <ThemeProvider theme={theme}>
+      {error && <Error error={error}/>}
       <Header />
       <Switch>
         <Route path="/topic/:topicName">
