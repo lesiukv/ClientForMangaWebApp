@@ -25,6 +25,7 @@ import moment from "moment";
 import Page from "./Page/Page";
 import Comments from "../Comments/Comments";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 const PostDetails = () => {
   const dispatch = useDispatch();
@@ -80,137 +81,156 @@ const PostDetails = () => {
         <Page post={details} />
       </Route>
       <Route path={match.path}>
-        <Container className={classes.container}>
-          <Grid
-            key={postId}
-            className={classes.detailsContainer}
-            container
-            alignItems="stretch"
-          >
-            <img
-              className={classes.titleImage}
-              alt={details?.pages[0]?.name}
-              src={`http://localhost:5000/uploads/${details?.pages[0]?.dest}`}
-            />
-            <Grid className={classes.details} item xs={12} sm={5} md={7}>
-              <Typography className={classes.title} variant="h4">
-                {details.title}
-              </Typography>
-              <div className={classes.subDetails}>
-                <Typography>Parodie:</Typography>&nbsp;
-                <span className={classes.span}>
-                  <span>{details.parodie}</span>
-                  &nbsp;
-                  <span className={classes.number}>{amount["parodie"]}</span>
-                </span>
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Language:</Typography>&nbsp;
-                <span className={classes.span}>
-                  <span>{details.language}</span>
-                  &nbsp;
-                  <span className={classes.number}>{amount["language"]}</span>
-                </span>
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Group:</Typography>&nbsp;
-                <span className={classes.span}>
-                  <span>{details.group}</span>
-                  &nbsp;
-                  <span className={classes.number}>{amount["group"]}</span>
-                </span>
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Category:</Typography>&nbsp;
-                <span className={classes.span}>
-                  <span>{details.category}</span>
-                  &nbsp;
-                  <span className={classes.number}>{amount["category"]}</span>
-                </span>
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Tags:</Typography>&nbsp;
-                {details.tags.map((tag, index) => (
-                  <div key={index}>
-                    &nbsp;
+        {error ? (
+          <Error error={error} />
+        ) : (
+          <>
+            <Container className={classes.container}>
+              <Grid
+                key={postId}
+                className={classes.detailsContainer}
+                container
+                alignItems="stretch"
+              >
+                <img
+                  className={classes.titleImage}
+                  alt={details?.pages[0]?.name}
+                  src={`http://localhost:5000/uploads/${details?.pages[0]?.dest}`}
+                />
+                <Grid className={classes.details} item xs={12} sm={5} md={7}>
+                  <Typography className={classes.title} variant="h4">
+                    {details.title}
+                  </Typography>
+                  <div className={classes.subDetails}>
+                    <Typography>Parodie:</Typography>&nbsp;
                     <span className={classes.span}>
-                      <span>{tag}</span>
+                      <span>{details.parodie}</span>
                       &nbsp;
                       <span className={classes.number}>
-                        {amount["tags"][index]}
+                        {amount["parodie"]}
                       </span>
                     </span>
                   </div>
-                ))}
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Artists:&nbsp;</Typography>
-                {details.artists.map((artist, index) => (
-                  <div key={index}>
-                    &nbsp;
+                  <div className={classes.subDetails}>
+                    <Typography>Language:</Typography>&nbsp;
                     <span className={classes.span}>
-                      <span>{artist}</span>
+                      <span>{details.language}</span>
                       &nbsp;
                       <span className={classes.number}>
-                        {amount["artists"][index]}
+                        {amount["language"]}
                       </span>
                     </span>
                   </div>
-                ))}
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Characters:&nbsp;</Typography>
-                {details.characters.map((character, index) => (
-                  <div key={index}>
-                    &nbsp;
+                  <div className={classes.subDetails}>
+                    <Typography>Group:</Typography>&nbsp;
                     <span className={classes.span}>
-                      <span>{character}</span>
+                      <span>{details.group}</span>
+                      &nbsp;
+                      <span className={classes.number}>{amount["group"]}</span>
+                    </span>
+                  </div>
+                  <div className={classes.subDetails}>
+                    <Typography>Category:</Typography>&nbsp;
+                    <span className={classes.span}>
+                      <span>{details.category}</span>
                       &nbsp;
                       <span className={classes.number}>
-                        {amount["characters"][index]}
+                        {amount["category"]}
                       </span>
                     </span>
                   </div>
+                  <div className={classes.subDetails}>
+                    <Typography>Tags:</Typography>&nbsp;
+                    {details.tags.map((tag, index) => (
+                      <div key={index}>
+                        &nbsp;
+                        <span className={classes.span}>
+                          <span>{tag}</span>
+                          &nbsp;
+                          <span className={classes.number}>
+                            {amount["tags"][index]}
+                          </span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={classes.subDetails}>
+                    <Typography>Artists:&nbsp;</Typography>
+                    {details.artists.map((artist, index) => (
+                      <div key={index}>
+                        &nbsp;
+                        <span className={classes.span}>
+                          <span>{artist}</span>
+                          &nbsp;
+                          <span className={classes.number}>
+                            {amount["artists"][index]}
+                          </span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={classes.subDetails}>
+                    <Typography>Characters:&nbsp;</Typography>
+                    {details.characters.map((character, index) => (
+                      <div key={index}>
+                        &nbsp;
+                        <span className={classes.span}>
+                          <span>{character}</span>
+                          &nbsp;
+                          <span className={classes.number}>
+                            {amount["characters"][index]}
+                          </span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={classes.subDetails}>
+                    <Typography>Pages:</Typography>&nbsp;
+                    <span className={classes.span}>{details.pages.length}</span>
+                  </div>
+                  <div className={classes.subDetails}>
+                    <Typography>Uploaded:</Typography>&nbsp;
+                    {moment(details.createdAt).startOf("day").fromNow()}
+                  </div>
+                </Grid>
+                <IconButton
+                  className={classes.iconButton}
+                  onClick={handleMenuOpen}
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                >
+                  <MoreIcon className={classes.moreIcon} />
+                </IconButton>
+              </Grid>
+            </Container>
+            <Container className={classes.container}>
+              <Grid
+                container
+                alignItems="stretch"
+                className={classes.pagesContainer}
+              >
+                {details.pages.map((page, index) => (
+                  <Box
+                    className={classes.pageBox}
+                    item
+                    xs={12}
+                    sm={4}
+                    key={index}
+                  >
+                    <Link to={`${match.url}/${index}`}>
+                      <img
+                        className={classes.page}
+                        alt={page.name}
+                        src={`http://localhost:5000/uploads/${page.dest}`}
+                      />
+                    </Link>
+                  </Box>
                 ))}
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Pages:</Typography>&nbsp;
-                <span className={classes.span}>{details.pages.length}</span>
-              </div>
-              <div className={classes.subDetails}>
-                <Typography>Uploaded:</Typography>&nbsp;
-                {moment(details.createdAt).startOf("day").fromNow()}
-              </div>
-            </Grid>
-            <IconButton
-              className={classes.iconButton}
-              onClick={handleMenuOpen}
-              aria-controls={menuId}
-              aria-haspopup="true"
-            >
-              <MoreIcon className={classes.moreIcon} />
-            </IconButton>
-          </Grid>
-        </Container>
-        <Container className={classes.container}>
-          <Grid
-            container
-            alignItems="stretch"
-            className={classes.pagesContainer}
-          >
-            {details.pages.map((page, index) => (
-              <Box className={classes.pageBox} item xs={12} sm={4} key={index}>
-                <Link to={`${match.url}/${index}`}>
-                  <img
-                    className={classes.page}
-                    alt={page.name}
-                    src={`http://localhost:5000/uploads/${page.dest}`}
-                  />
-                </Link>
-              </Box>
-            ))}
-          </Grid>
-        </Container>
+              </Grid>
+            </Container>{" "}
+          </>
+        )}
+
         <Container
           sx={{ marginTop: "50px !important", justifyContetn: "space-between" }}
           className={classes.container}

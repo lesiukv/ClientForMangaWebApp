@@ -1,5 +1,6 @@
 import * as api from "../api";
 import * as actionTypes from "./actionTypes.js";
+import { handleError } from "./errors";
 
 const postError = (error) => {
   return { type: actionTypes.POST_FAILURE, error: error };
@@ -34,10 +35,12 @@ export const getPosts = () => async (dispatch) => {
 export const getPostDetails = (id) => async (dispatch) => {
   dispatch(postDetailsLoading());
   try {
-    const { data } = await api.getPostDetails(id);
+    const { data } = await api.getPostDetails();
     dispatch({ type: actionTypes.GET_POST_DETAILS, payload: data });
   } catch (error) {
+    dispatch(handleError(error));
     dispatch(postDetailsError(error));
+
   }
 };
 
