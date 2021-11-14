@@ -4,6 +4,8 @@ import { Container, Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { getProfileData } from "../../actions/profiles";
 import { useParams } from "react-router-dom";
+import Loading from "../Loading/Loading"
+import Error from "../Error/Error"
 
 const Profile = () => {
   const { profileId } = useParams();
@@ -21,11 +23,14 @@ const Profile = () => {
     (state) => state.profile
   );
 
+  if (isLoading) return <Loading/>
+
   return (
     <>
       <Container></Container>
       <Container></Container>
       <Container></Container>
+      {error && (<Error error={error}/>)}
     </>
   );
 };

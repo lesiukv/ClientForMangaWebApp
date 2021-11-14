@@ -22,7 +22,7 @@ export const getComments = (postId) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
     dispatch(commmentsError(error));
   }
 };
@@ -36,7 +36,7 @@ export const updateComment =
         payload: data,
       });
     } catch (error) {
-      dispatch(handleError(error));
+      // dispatch(handleError(error));
       dispatch(commmentsError(error));
     }
   };
@@ -49,7 +49,7 @@ export const deleteComment = (commentId) => async (dispatch) => {
       payload: commentId,
     });
   } catch (error) {
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
     dispatch(commmentsError(error));
   }
 };
@@ -63,7 +63,7 @@ export const createComment = (postId, comment) => async (dispatch) => {
     });
      dispatch(getComments(postId));
   } catch (error) {
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
     dispatch(commmentsError(error));
   }
 };

@@ -26,7 +26,7 @@ export const loginUser = (creds) => async (dispatch) => {
     });
   } catch (error) {
     dispatch(authFailure(error));
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
   }
 };
 
@@ -37,7 +37,7 @@ export const logoutUser = () => async (dispatch) => {
     dispatch({ type: actionTypes.LOGOUT_SUCCESS });
   } catch (error) {
     dispatch(authFailure(error));
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
   }
 };
 
@@ -47,6 +47,6 @@ export const registerUser = (creds) => async (dispatch) => {
     dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
   } catch (error) {
     dispatch(authFailure(error));
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
   }
 };

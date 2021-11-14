@@ -9,12 +9,10 @@ import {
 } from "../../actions/comments";
 import Comment from "./Comment";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 const Comments = ({ postId }) => {
-  const {
-    isAuthenticated,
-    user,
-  } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   const [postComment, setPostComment] = useState({
     author: user?.userId,
@@ -58,68 +56,71 @@ const Comments = ({ postId }) => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className={classes.comments}>
-      {isAuthenticated ? (
-        <form
-          className={classes.form}
-          autoComplete="off"
-          id="form"
-          noValidate
-          onSubmit={handleSubmit}
-        >
-          <TextField
-            className={classes.formElement}
-            InputProps={{
-              classes: { input: classes.input },
-            }}
-            name="comment"
-            label="Comment"
-            variant="outlined"
-            value={postComment.comment}
-            fullWidth
-            onChange={(e) => {
-              setPostComment({ ...postComment, comment: e.target.value });
-            }}
-            color="secondary"
-            size="medium"
-          />
-          <div>
-            <Button
+    <>
+      <div className={classes.comments}>
+        {isAuthenticated ? (
+          <form
+            className={classes.form}
+            autoComplete="off"
+            id="form"
+            noValidate
+            onSubmit={handleSubmit}
+          >
+            <TextField
               className={classes.formElement}
-              variant="contained"
-              color="primary"
+              InputProps={{
+                classes: { input: classes.input },
+              }}
+              name="comment"
+              label="Comment"
+              variant="outlined"
+              value={postComment.comment}
               fullWidth
-              size="large"
-              type="submit"
-            >
-              Submit
-            </Button>
-            <Button
-              className={classes.formElement}
-              variant="contained"
+              onChange={(e) => {
+                setPostComment({ ...postComment, comment: e.target.value });
+              }}
               color="secondary"
-              size="small"
-              onClick={clear}
-              fullWidth
-            >
-              Clear
-            </Button>
-          </div>
-        </form>
-      ) : (
-        <Typography>You must login or register user</Typography>
-      )}
-      <Box>
-        {comments.map((comment, index) => (
-          <Comment
-            key={index}
-            comment={comment}
-            userId={user?.userId}
-            setUpdatedComment={setUpdatedComment}
-          />
-        ))}
-      </Box>
-    </div>
+              size="medium"
+            />
+            <div>
+              <Button
+                className={classes.formElement}
+                variant="contained"
+                color="primary"
+                fullWidth
+                size="large"
+                type="submit"
+              >
+                Submit
+              </Button>
+              <Button
+                className={classes.formElement}
+                variant="contained"
+                color="secondary"
+                size="small"
+                onClick={clear}
+                fullWidth
+              >
+                Clear
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <Typography>You must login or register user</Typography>
+        )}
+        <Box>
+          {comments.map((comment, index) => (
+            <Comment
+              key={index}
+              comment={comment}
+              userId={user?.userId}
+              setUpdatedComment={setUpdatedComment}
+            />
+          ))}
+        </Box>
+      </div>
+      {error && <Error error={error} />}
+    </>
   );
 };
 

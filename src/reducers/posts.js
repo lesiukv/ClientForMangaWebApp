@@ -12,12 +12,18 @@ const posts = (
     case actionTypes.POST_LOADING:
       return { ...posts, isLoading: true };
     case actionTypes.FETCH_POSTS:
-      return { ...posts, postsArr: action.payload, isLoading: false, error: null };
+      return {
+        ...posts,
+        postsArr: action.payload,
+        isLoading: false,
+        error: null,
+      };
     case actionTypes.CREATE_POST:
       return {
         ...posts,
         postsArr: [posts.postsArr, action.payload],
         isLoading: false,
+        error: null,
       };
     case actionTypes.DELETE_POST:
       return {

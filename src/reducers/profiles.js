@@ -10,11 +10,16 @@ const profiles = (
 ) => {
   switch (action.type) {
     case actionTypes.GET_PROFILE_DATA:
-      return { ...profile, isLoading: false, profileData: action.payload };
+      return {
+        ...profile,
+        isLoading: false,
+        profileData: action.payload,
+        error: null,
+      };
     case actionTypes.GET_PROFILE_DATA_FAILED:
       return { ...profile, isLoading: false, error: action.error };
     case actionTypes.GET_PROFILE_DATA_LOADING:
-      return { ...profile, isLoading: true };
+      return { ...profile, isLoading: true, error: null };
     default:
       return profile;
   }

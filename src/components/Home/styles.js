@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
     border: "2px solid #ed2553 !important",
     height: "60px !important",
     borderRadius: "9px !important",
-    margin: "20px 0",
+    marginTop: "20px",
     backgroundColor: "#1f1f1f",
     padding: "0px !mportant",
   },

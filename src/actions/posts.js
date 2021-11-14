@@ -38,7 +38,7 @@ export const getPostDetails = (id) => async (dispatch) => {
     const { data } = await api.getPostDetails(id);
     dispatch({ type: actionTypes.GET_POST_DETAILS, payload: data });
   } catch (error) {
-    dispatch(handleError(error));
+    // dispatch(handleError(error));
     dispatch(postDetailsError(error));
   }
 };

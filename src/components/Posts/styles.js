@@ -5,6 +5,7 @@ export default makeStyles({
     padding: "15px !important",
     backgroundColor: "#1f1f1f",
     borderRadius: "9px !important",
+    marginTop: "20px"
   },
   media: {
     backgroundColor: "#4b4b4b",

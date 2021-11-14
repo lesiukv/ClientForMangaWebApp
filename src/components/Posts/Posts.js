@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getPosts } from "../../actions/posts.js";
 import Loading from "../Loading/Loading";
+import Error from "../Error/Error";
 
 const Posts = () => {
   const classes = useStyless();
@@ -21,10 +22,12 @@ const Posts = () => {
     isLoading,
     error,
   } = useSelector((state) => state.posts);
+  
 
   if (isLoading) return <Loading />;
 
   return (
+    <>
     <Container className={classes.container}>
       <Grid container alignItems="stretch" spacing={1}>
         {posts
@@ -39,6 +42,8 @@ const Posts = () => {
           ))}
       </Grid>
     </Container>
+    {error && (<Error error={error}/>)}
+    </>
   );
 };
 
