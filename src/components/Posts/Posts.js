@@ -8,13 +8,17 @@ import { useDispatch } from "react-redux";
 import { getPosts } from "../../actions/posts.js";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
+import { getFavorites } from "../../actions/favorites.js";
 
-const Posts = () => {
+const Posts = ({ favorites }) => {
   const classes = useStyless();
   const dispatch = useDispatch();
 
+
   useEffect(() => {
-    dispatch(getPosts());
+    if (favorites) {
+      dispatch(getFavorites());
+    } else dispatch(getPosts());
   }, [dispatch]);
 
   const {
