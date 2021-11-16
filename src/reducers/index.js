@@ -6,7 +6,6 @@ import postdetails from "./postdetails";
 import comments from "./comments";
 import auth from "./auth";
 import profiles from "./profiles";
-import errors from "./errors";
 
 export default combineReducers({
   posts,
@@ -16,5 +15,4 @@ export default combineReducers({
   comments,
   auth,
   profiles,
-  errors,
 });

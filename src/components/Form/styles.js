@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(2),
     backgroundColor: "#d9d9d9",
+    margin: "auto"
   },
   form: {
     display: "flex",
@@ -30,9 +31,9 @@ export default makeStyles((theme) => ({
   },
   modal: {
     display: "flex",
-    alignItems: "start",
+
     justifyContent: "center",
-    backgroundColor: "#1f1f1f",
+
     overflowY:'scroll',
   },
   closeButton: {

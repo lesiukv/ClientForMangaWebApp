@@ -1,6 +1,5 @@
 import * as api from "../api";
 import * as actionTypes from "./actionTypes.js";
-import { handleError } from "./errors";
 
 const postError = (error) => {
   return { type: actionTypes.POST_FAILURE, error: error };

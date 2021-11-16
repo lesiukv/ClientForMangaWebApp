@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionTypes";
 import * as api from "../api";
-import { handleError } from "./errors";
 
 const authFailure = (error) => {
   return {
@@ -16,17 +15,20 @@ export const loginUser = (creds) => async (dispatch) => {
       localStorage.setItem("token", data.token);
       localStorage.setItem(
         "creds",
-        JSON.stringify({ username: data.username, userId: data.userId, admin: data.admin })
+        JSON.stringify({
+          username: data.username,
+          userId: data.userId,
+          admin: data.admin,
+        })
       );
     }
     dispatch({
       type: actionTypes.LOGIN_SUCCESS,
       token: data.token,
-      user: { username: data.username, userId: data.userId}
+      user: { username: data.username, userId: data.userId },
     });
   } catch (error) {
     dispatch(authFailure(error));
-    // dispatch(handleError(error));
   }
 };
 
@@ -37,7 +39,6 @@ export const logoutUser = () => async (dispatch) => {
     dispatch({ type: actionTypes.LOGOUT_SUCCESS });
   } catch (error) {
     dispatch(authFailure(error));
-    // dispatch(handleError(error));
   }
 };
 
@@ -47,6 +48,5 @@ export const registerUser = (creds) => async (dispatch) => {
     dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
   } catch (error) {
     dispatch(authFailure(error));
-    // dispatch(handleError(error));
   }
 };

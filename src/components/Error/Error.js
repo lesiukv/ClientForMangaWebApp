@@ -8,16 +8,12 @@ import {
   Container,
 } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-// import { useDispatch } from "react-redux";
-// import { removeError } from "../../actions/errors";
 
 const Error = ({ error }) => {
-  // const dispatch = useDispatch();
   const classes = useStyles();
   const [open, setOpen] = useState(true);
   const handleClose = () => {
     setOpen(false);
-    // dispatch(removeError());
   };
 
   useEffect(() => {

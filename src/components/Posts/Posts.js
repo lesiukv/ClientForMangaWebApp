@@ -14,39 +14,37 @@ const Posts = ({ favorites }) => {
   const classes = useStyless();
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     if (favorites) {
       dispatch(getFavorites());
     } else dispatch(getPosts());
-  }, [dispatch]);
+  }, [dispatch, favorites]);
 
   const {
     postsArr: posts,
     isLoading,
     error,
-  } = useSelector((state) => state.posts);
-  
+  } = useSelector((state) => (favorites ? state.favorites : state.posts));
 
   if (isLoading) return <Loading />;
 
   return (
     <>
-    <Container className={classes.container}>
-      <Grid container alignItems="stretch" spacing={1}>
-        {posts
-          .slice(0)
-          .reverse()
-          .map((post) => (
-            <Grid key={post._id} item xs={12} sm={6} md={3}>
-              <Link to={`post/${post._id}`}>
-                <Post post={post} />
-              </Link>
-            </Grid>
-          ))}
-      </Grid>
-    </Container>
-    {error && (<Error error={error}/>)}
+      <Container className={classes.container}>
+        <Grid container alignItems="stretch" spacing={1}>
+          {posts
+            .slice(0)
+            .reverse()
+            .map((post) => (
+              <Grid key={post._id} item xs={12} sm={6} md={3}>
+                <Link to={`post/${post._id}`}>
+                  <Post post={post} />
+                </Link>
+              </Grid>
+            ))}
+        </Grid>
+      </Container>
+      {error && <Error error={error} />}
     </>
   );
 };

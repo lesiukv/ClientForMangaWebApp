@@ -9,11 +9,29 @@ const favoritesLoading = () => {
   return { type: actionTypes.FAVORITES_LOADING };
 };
 
-const getFavorites = () => async (dispatch) => {
+export const getFavorites = () => async (dispatch) => {
   dispatch(favoritesLoading());
   try {
     const { data } = await api.getFavorites();
     dispatch({ type: actionTypes.GET_FAVORITES, payload: data });
+  } catch (error) {
+    dispatch(favoritesError(error));
+  }
+};
+
+export const addFavorite = (postId) => async (dispatch) => {
+  try {
+    await api.addFavorite(postId);
+    dispatch(getFavorites);
+  } catch (error) {
+    dispatch(favoritesError(error));
+  }
+};
+
+export const removeFavorite = (postId) => async (dispatch) => {
+  try {
+    await api.removeFavorite(postId);
+    dispatch(getFavorites);
   } catch (error) {
     dispatch(favoritesError(error));
   }

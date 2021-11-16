@@ -1,6 +1,5 @@
 import * as api from "../api";
 import * as actionTypes from "./actionTypes";
-import { handleError } from "./errors";
 
 const commentsLoading = () => {
   return { type: actionTypes.COMMENTS_LOADING };
@@ -22,7 +21,6 @@ export const getComments = (postId) => async (dispatch) => {
       payload: data,
     });
   } catch (error) {
-    // dispatch(handleError(error));
     dispatch(commmentsError(error));
   }
 };
@@ -36,7 +34,6 @@ export const updateComment =
         payload: data,
       });
     } catch (error) {
-      // dispatch(handleError(error));
       dispatch(commmentsError(error));
     }
   };
@@ -49,7 +46,6 @@ export const deleteComment = (commentId) => async (dispatch) => {
       payload: commentId,
     });
   } catch (error) {
-    // dispatch(handleError(error));
     dispatch(commmentsError(error));
   }
 };
@@ -61,9 +57,8 @@ export const createComment = (postId, comment) => async (dispatch) => {
       type: actionTypes.CREATE_COMMENT,
       payload: data,
     });
-     dispatch(getComments(postId));
+    dispatch(getComments(postId));
   } catch (error) {
-    // dispatch(handleError(error));
     dispatch(commmentsError(error));
   }
 };
