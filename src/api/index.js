@@ -44,7 +44,7 @@ export const registerUser = (creds) => axios.post(`${url}/users/signup`, creds);
 export const getProfileData = (profileId) =>
   axios.get(`${url}/users/${profileId}`);
 
-export const getFavorites = () => axios.get(`${url}/favorites/`);
-export const addFavorite = (postId) => axios.post(`${url}/favorites/${postId}`);
+export const getFavorites = () => axios.get(`${url}/favorite/`);
+export const addFavorite = (postId) => axios.post(`${url}/favorite/${postId}`);
 export const removeFavorite = (postId) =>
-  axios.delete(`${url}/favorites/${postId}`);
+  axios.delete(`${url}/favorite/${postId}`);

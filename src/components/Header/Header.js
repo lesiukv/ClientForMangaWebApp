@@ -98,8 +98,11 @@ const Header = () => {
       {isAuthenticated && (
         <div>
           <MenuItem>
-            <FavoriteIcon color="secondary" />
-            Favorite
+            <Link to="/favorites">
+              {" "}
+              <FavoriteIcon color="secondary" />
+              Favorite
+            </Link>
           </MenuItem>
           <MenuItem onClick={() => handleLogout()}>Logout</MenuItem>
         </div>

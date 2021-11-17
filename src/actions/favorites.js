@@ -14,6 +14,7 @@ export const getFavorites = () => async (dispatch) => {
   try {
     const { data } = await api.getFavorites();
     dispatch({ type: actionTypes.GET_FAVORITES, payload: data });
+    console.log(data);
   } catch (error) {
     dispatch(favoritesError(error));
   }
