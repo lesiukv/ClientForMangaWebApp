@@ -172,8 +172,10 @@ const Header = () => {
             {isAuthenticated && (
               <>
                 <Button color="inherit" className={classes.button}>
-                  <FavoriteIcon color="secondary" />
-                  &nbsp;Favorite
+                  <Link to="/favorites">
+                    <FavoriteIcon color="secondary" />
+                    &nbsp;Favorite
+                  </Link>
                 </Button>
                 <Button
                   onClick={() => handleLogout()}

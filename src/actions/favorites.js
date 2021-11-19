@@ -12,9 +12,10 @@ const favoritesLoading = () => {
 export const getFavorites = () => async (dispatch) => {
   dispatch(favoritesLoading());
   try {
-    const { data } = await api.getFavorites();
-    dispatch({ type: actionTypes.GET_FAVORITES, payload: data });
-    console.log(data);
+    const {
+      data: { posts },
+    } = await api.getFavorites();
+    dispatch({ type: actionTypes.GET_FAVORITES, payload: posts });
   } catch (error) {
     dispatch(favoritesError(error));
   }

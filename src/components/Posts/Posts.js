@@ -17,14 +17,20 @@ const Posts = ({ favorites }) => {
   useEffect(() => {
     if (favorites) {
       dispatch(getFavorites());
-    } else dispatch(getPosts());
+    } else {
+      dispatch(getPosts());
+    }
   }, [dispatch, favorites]);
+
+
 
   const {
     postsArr: posts,
     isLoading,
     error,
   } = useSelector((state) => (favorites ? state.favorites : state.posts));
+
+  console.log(posts);
 
   if (isLoading) return <Loading />;
 
@@ -33,7 +39,7 @@ const Posts = ({ favorites }) => {
       <Container className={classes.container}>
         <Grid container alignItems="stretch" spacing={1}>
           {posts
-            .slice(0)
+            ?.slice(0)
             .reverse()
             .map((post) => (
               <Grid key={post._id} item xs={12} sm={6} md={3}>

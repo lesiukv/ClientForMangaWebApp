@@ -10,9 +10,9 @@ const favorites = (
 ) => {
   switch (action.type) {
     case actionTypes.FAVORITES_LOADING:
-      return { loading: true, error: null };
+      return { isLoading: true, error: null };
     case actionTypes.GET_FAVORITES:
-      return { loading: false, error: null, postsArr: action.payload };
+      return { isLoading: false, error: null, postsArr: action.payload };
     case actionTypes.FAVORITES_ERROR:
       return { isloading: false, error: action.error };
     case actionTypes.ADD_TO_FAVORITES:
