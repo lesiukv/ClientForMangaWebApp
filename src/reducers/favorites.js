@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 
 const favorites = (
   favorites = {
-    postsArr: [],
+    favorites: [],
     isLoading: true,
     error: null,
   },
@@ -12,7 +12,7 @@ const favorites = (
     case actionTypes.FAVORITES_LOADING:
       return { isLoading: true, error: null };
     case actionTypes.GET_FAVORITES:
-      return { isLoading: false, error: null, postsArr: action.payload };
+      return { isLoading: false, error: null, favorites: action.payload };
     case actionTypes.FAVORITES_ERROR:
       return { isloading: false, error: action.error };
     case actionTypes.ADD_TO_FAVORITES:

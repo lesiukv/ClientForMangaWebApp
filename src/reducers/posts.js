@@ -2,7 +2,7 @@ import * as actionTypes from "../actions/actionTypes.js";
 
 const posts = (
   posts = {
-    postsArr: [],
+    posts: [],
     isLoading: true,
     error: null,
   },
@@ -14,28 +14,28 @@ const posts = (
     case actionTypes.FETCH_POSTS:
       return {
         ...posts,
-        postsArr: action.payload,
+        posts: action.payload,
         isLoading: false,
         error: null,
       };
     case actionTypes.CREATE_POST:
       return {
         ...posts,
-        postsArr: [posts.postsArr, action.payload],
+        posts: [posts.posts, action.payload],
         isLoading: false,
         error: null,
       };
     case actionTypes.DELETE_POST:
       return {
         ...posts,
-        postsArr: posts.postsArr.filter((post) => post._id !== action.payload),
+        posts: posts.posts.filter((post) => post._id !== action.payload),
         isLoading: false,
         error: null,
       };
     case actionTypes.UPDATE_POST:
       return {
         ...posts,
-        postsArr: posts.postArr.map((post) =>
+        posts: posts.postArr.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
         isLoading: false,

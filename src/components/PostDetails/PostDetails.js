@@ -27,7 +27,7 @@ import Comments from "../Comments/Comments";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 
-const PostDetails = () => {
+const PostDetails = ({ isAuthenticated, user }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(false);
@@ -47,7 +47,6 @@ const PostDetails = () => {
     isLoading,
     error,
   } = useSelector((state) => state.postdetails);
-  const { isAuthenticated } = useSelector((state) => state.auth);
 
   if (isLoading) return <Loading />;
 
@@ -244,7 +243,11 @@ const PostDetails = () => {
             }}
             className={classes.container}
           >
-            <Comments postId={postId} />
+            <Comments
+              user={user}
+              isAuthenticated={isAuthenticated}
+              postId={postId}
+            />
           </Container>
           {renderMenu}
           <Form

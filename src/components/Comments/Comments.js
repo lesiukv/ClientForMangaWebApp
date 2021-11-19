@@ -11,8 +11,7 @@ import Comment from "./Comment";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 
-const Comments = ({ postId }) => {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
+const Comments = ({ postId, isAuthenticated, user }) => {
 
   const [postComment, setPostComment] = useState({
     author: user?.userId,

@@ -4,13 +4,10 @@ import { Container, Button } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Form from "../Form/Form.js";
 import Posts from "../Posts/Posts.js";
-import { useSelector } from "react-redux";
 
-const Home = () => {
+const Home = ({ isAuthenticated, posts, isLoading }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-
-  const { isAuthenticated } = useSelector((state) => state.auth);
   const formId = "form-menu";
   const handleFormOpen = () => setOpen(true);
 
@@ -30,8 +27,7 @@ const Home = () => {
           />
         </Button>
       )}
-
-      <Posts />
+      <Posts posts={posts} isLoading={isLoading} />
       <Form formFor="Post" open={open} setOpen={setOpen} />
     </Container>
   );
