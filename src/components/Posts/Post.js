@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { Card, CardContent, Typography, IconButton, Slide } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  IconButton,
+  Slide,
+} from "@material-ui/core";
 import useStyles from "./styles";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,16 +17,24 @@ const Post = ({ post }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [onHover, setOnHover] = useState(false);
-
-  const handleAddFavorite = (postId) => dispatch(addFavorite(postId));
-  const handleRemoveFavorite = (postId) => dispatch(removeFavorite(postId));
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const { favorites, isLoading } = useSelector((state) => state.favorites);
   const { isAuthenticated } = useSelector((state) => state.auth);
 
-  if (isLoading) return <Loading />;
+  useEffect(() => {
+    if (isLoading) return <Loading />;
+    setIsFavorite(favorites.some((favorite) => favorite._id === post._id));
+  }, [favorites, isLoading, post._id]);
 
-  const isFavorite = favorites.some((favorite) => favorite._id === post._id);
+  const handleAddFavorite = (postId) => {
+    dispatch(addFavorite(postId));
+    setIsFavorite(true);
+  };
+  const handleRemoveFavorite = (postId) => {
+    dispatch(removeFavorite(postId));
+    setIsFavorite(false);
+  };
 
   return (
     <Card
@@ -38,7 +52,11 @@ const Post = ({ post }) => {
                 : handleAddFavorite(post._id)
             }
           >
-            <FavoriteIcon fontSize="large" className={classes.favoriteIcon} color={isFavorite ? "secondary" : ""} />
+            <FavoriteIcon
+              fontSize="large"
+              className={classes.favoriteIcon}
+              color={isFavorite ? "secondary" : ""}
+            />
           </IconButton>
         </Slide>
       )}
