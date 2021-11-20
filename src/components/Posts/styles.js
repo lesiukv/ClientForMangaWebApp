@@ -5,11 +5,13 @@ export default makeStyles({
     padding: "15px !important",
     backgroundColor: "#1f1f1f",
     borderRadius: "9px !important",
-    marginTop: "20px"
+    marginTop: "20px",
   },
   media: {
     backgroundColor: "#4b4b4b",
     backgroundBlendMode: "normal",
+    maxHeight: "500px",
+    objectPosition: "50% 50%",
   },
   card: {
     display: "flex",
@@ -24,6 +26,7 @@ export default makeStyles({
     color: "#d9d9d9",
   },
   favoritesButton: {
-    
-  }
+    position: "absolute",
+    right: 0,
+  },
 });

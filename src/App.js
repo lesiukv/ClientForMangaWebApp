@@ -19,8 +19,8 @@ const App = () => {
   const { isAuthenticated, user } = useSelector((state) => state?.auth);
 
   useEffect(() => {
-    dispatch(getFavorites());
-    if (isAuthenticated) dispatch(getPosts());
+    dispatch(getPosts());
+    if (isAuthenticated) dispatch(getFavorites());
   }, [dispatch, isAuthenticated]);
 
   const {
@@ -56,7 +56,7 @@ const App = () => {
         </Route>
         <Redirect exact from="/" to="/home" />
       </Switch>
-      {error || (errorFavs && <Error error={error || errorFavs} />)}
+      {(error || errorFavs) && <Error error={error || errorFavs} />}
     </ThemeProvider>
   );
 };
