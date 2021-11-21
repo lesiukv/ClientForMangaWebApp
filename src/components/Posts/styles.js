@@ -19,14 +19,14 @@ export default makeStyles({
     alignItems: "center",
     position: "relative",
     backgroundColor: "#4b4b4b",
-    borderRadius: "9px !important",
-  },
-  title: {
-    padding: 0,
-    color: "#d9d9d9",
+    borderRadius: "9px !important", 
   },
   favoritesButton: {
     position: "absolute",
     right: 0,
+  },
+  cardTitle: {
+    padding: "10px !important",
+    color: "#d9d9d9",
   },
 });

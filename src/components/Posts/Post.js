@@ -67,8 +67,8 @@ const Post = ({ post }) => {
           src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}
         />
         </Link>
-        <CardContent>
-          <Typography className={classes.title}>{post.title}</Typography>
+        <CardContent classes={{ root: classes.cardTitle }}>
+          <Typography>{post.title}</Typography>
         </CardContent>
     </Card>
   );

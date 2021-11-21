@@ -84,6 +84,7 @@ const RegisterForm = ({ open, setOpen, purpose }) => {
               value={userData.password}
               className={classes.formElement}
               name="password"
+              type="password"
               label="Password"
               variant="outlined"
               color="secondary"
