@@ -24,7 +24,8 @@ export const getFavorites = () => async (dispatch) => {
 export const addFavorite = (postId) => async (dispatch) => {
   try {
     await api.addFavorite(postId);
-    dispatch(getFavorites);
+
+    dispatch(getFavorites());
   } catch (error) {
     dispatch(favoritesError(error));
   }
@@ -33,7 +34,6 @@ export const addFavorite = (postId) => async (dispatch) => {
 export const removeFavorite = (postId) => async (dispatch) => {
   try {
     await api.removeFavorite(postId);
-    dispatch(getFavorites);
   } catch (error) {
     dispatch(favoritesError(error));
   }

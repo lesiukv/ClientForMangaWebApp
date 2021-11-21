@@ -98,7 +98,7 @@ const Header = ({ isAuthenticated }) => {
       {isAuthenticated && (
         <div>
           <MenuItem>
-            <Link to="/favorites">
+            <Link className={classes.link} to="/favorites">
               {" "}
               <FavoriteIcon color="secondary" />
               Favorite
@@ -172,7 +172,7 @@ const Header = ({ isAuthenticated }) => {
             {isAuthenticated && (
               <>
                 <Button color="inherit" className={classes.button}>
-                  <Link to="/favorites">
+                  <Link className={classes.link} to="/favorites">
                     <FavoriteIcon color="secondary" />
                     &nbsp;Favorite
                   </Link>

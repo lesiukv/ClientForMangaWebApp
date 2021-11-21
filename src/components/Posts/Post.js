@@ -42,7 +42,7 @@ const Post = ({ post }) => {
       onMouseEnter={() => setOnHover(true)}
       onMouseLeave={() => setOnHover(false)}
     >
-      {isAuthenticated && onHover && (
+      {isAuthenticated && (
         <Slide direction="down" in={onHover} mountOnEnter unmountOnExit>
           <IconButton
             className={classes.favoritesButton}
@@ -60,16 +60,16 @@ const Post = ({ post }) => {
           </IconButton>
         </Slide>
       )}
-      <Link to={`post/${post._id}`}>
+      <Link className={classes.link} to={`post/${post._id}`}>
         <img
           className={classes.media}
           alt="title"
           src={`http://localhost:5000/uploads/${post?.pages[0]?.dest}`}
         />
+        </Link>
         <CardContent>
           <Typography className={classes.title}>{post.title}</Typography>
         </CardContent>
-      </Link>
     </Card>
   );
 };

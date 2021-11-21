@@ -53,6 +53,7 @@ export default makeStyles((theme) => ({
     [theme.breakpoints.up("lg")]: {
       display: "flex",
     },
+
   },
   categories: {
     display: "none",
@@ -60,4 +61,8 @@ export default makeStyles((theme) => ({
       display: "flex",
     },
   },
+  link: {
+    display: "flex",
+    alignItems: "center",
+  }
 }));
