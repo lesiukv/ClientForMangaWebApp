@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import useStyles from "./styles";
 import { Container, Typography } from "@material-ui/core";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getProfileData } from "../../actions/profiles";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading/Loading"
 import Error from "../Error/Error"
 
-const Profile = () => {
+const Profile = ({ dispatch }) => {
   const { profileId } = useParams();
   const classes = useStyles();
   const {
     user: { username, userId },
   } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProfileData(profileId));

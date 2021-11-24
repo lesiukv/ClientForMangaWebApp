@@ -13,16 +13,14 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { Link } from "react-router-dom";
 import RegisterForm from "../Form/RegisterForm";
-import { useDispatch } from "react-redux";
 import { logoutUser } from "../../actions/auth";
 
-const Header = ({ isAuthenticated }) => {
+const Header = ({ isAuthenticated, dispatch }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(false);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(false);
   const [openRegisterForm, setOpenRegisterForm] = useState(false);
   const [openLoginForm, setOpenLoginForm] = useState(false);
-  const dispatch = useDispatch();
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 

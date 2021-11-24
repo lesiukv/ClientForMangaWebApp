@@ -10,7 +10,7 @@ import {
   Box,
 } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Form from "../Form/Form.js";
 import {
   Switch,
@@ -27,8 +27,7 @@ import Comments from "../Comments/Comments";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
 
-const PostDetails = ({ isAuthenticated, user }) => {
-  const dispatch = useDispatch();
+const PostDetails = ({ isAuthenticated, user, dispatch }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(false);
   const [open, setOpen] = useState(false);

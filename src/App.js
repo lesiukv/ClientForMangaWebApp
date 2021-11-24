@@ -12,15 +12,19 @@ import theme from "./theme.js";
 import { useSelector, useDispatch } from "react-redux";
 import { getFavorites } from "./actions/favorites.js";
 import { getPosts } from "./actions/posts.js";
+import { logoutUser } from "./actions/auth.js";
 
 const App = () => {
   const dispatch = useDispatch();
 
-  const { isAuthenticated, user } = useSelector((state) => state?.auth);
+  const { isAuthenticated, user, isTokenExpired } = useSelector(
+    (state) => state?.auth
+  );
 
   useEffect(() => {
     dispatch(getPosts());
     if (isAuthenticated) dispatch(getFavorites());
+    if (isTokenExpired) dispatch(logoutUser());
   }, [dispatch, isAuthenticated]);
 
   const {
@@ -33,7 +37,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header isAuthenticated={isAuthenticated} />
+      <Header dispatch={dispatch} isAuthenticated={isAuthenticated} />
       <Switch>
         <Route path="/topic/:topicName">
           <Topic />
@@ -49,10 +53,14 @@ const App = () => {
           <Posts posts={favorites} isLoading={isLoadingFavs} />
         </Route>
         <Route path="/post/:postId">
-          <PostDetails isAuthenticated={isAuthenticated} user={user} />
+          <PostDetails
+            dispatch={dispatch}
+            isAuthenticated={isAuthenticated}
+            user={user}
+          />
         </Route>
         <Route path="/profile/:profileId">
-          <Profile />
+          <Profile dispatch={dispatch} />
         </Route>
         <Redirect exact from="/" to="/home" />
       </Switch>

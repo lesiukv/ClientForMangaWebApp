@@ -1,4 +1,13 @@
 import * as actionTypes from "../actions/actionTypes";
+import jwt_decode from "jwt-decode";
+
+const isTokenExpired = (token) => {
+  if (token) {
+    const { exp } = jwt_decode(token);
+    const currentDate = new Date();
+    return !(exp * 1000 < currentDate.getTime());
+  } else return false;
+};
 
 const auth = (
   auth = {
@@ -8,6 +17,7 @@ const auth = (
       ? JSON.parse(localStorage.getItem("creds"))
       : null,
     error: null,
+    isTokenExpired: isTokenExpired(localStorage.getItem("token")),
   },
   action
 ) => {
