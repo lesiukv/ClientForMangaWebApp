@@ -17,15 +17,19 @@ import { logoutUser } from "./actions/auth.js";
 const App = () => {
   const dispatch = useDispatch();
 
+
   const { isAuthenticated, user, isTokenExpired } = useSelector(
     (state) => state?.auth
   );
 
+  console.log(isTokenExpired)
+
+
   useEffect(() => {
     dispatch(getPosts());
-    if (isAuthenticated) dispatch(getFavorites());
     if (isTokenExpired) dispatch(logoutUser());
-  }, [dispatch, isAuthenticated]);
+    if (isAuthenticated) dispatch(getFavorites());
+  }, [dispatch, isAuthenticated, isTokenExpired]);
 
   const {
     favorites,
