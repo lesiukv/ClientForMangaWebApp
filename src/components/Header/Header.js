@@ -27,6 +27,9 @@ const Header = ({ isAuthenticated, dispatch }) => {
   const menuId = "primary-search-account-menu";
   const mobileMenuId = "primary-search-account-menu-mobile";
 
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(false);
+  };
   const handleCategoryMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,9 +48,6 @@ const Header = ({ isAuthenticated, dispatch }) => {
   const handleMenuClose = () => {
     setAnchorEl(false);
     handleMobileMenuClose();
-  };
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(false);
   };
 
   const renderCategoryMenu = (
@@ -95,7 +95,7 @@ const Header = ({ isAuthenticated, dispatch }) => {
       </MenuItem>
       {isAuthenticated && (
         <div>
-          <MenuItem>
+          <MenuItem onClick={() => handleMobileMenuClose()}>
             <Link className={classes.link} to="/favorites">
               {" "}
               <FavoriteIcon color="secondary" />

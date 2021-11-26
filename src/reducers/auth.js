@@ -5,10 +5,9 @@ const isTokenExpired = (token) => {
   if (token) {
     const { exp } = jwt_decode(token);
     const currentDate = new Date();
-    console.log(exp);
-    console.log("CurrentDate", currentDate.getTime());
     return exp * 1000 < currentDate.getTime();
-  } else return false;
+  }
+  return false;
 };
 
 const auth = (

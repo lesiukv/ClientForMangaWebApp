@@ -216,7 +216,6 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                   {details.pages.map((page, index) => (
                     <Box
                       className={classes.pageBox}
-                      item
                       xs={12}
                       sm={4}
                       key={index}
