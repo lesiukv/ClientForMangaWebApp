@@ -11,6 +11,7 @@ import { getTopic } from "../../actions/topics";
 import { useParams } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
+import { Tag } from "../Subcomponents";
 
 const Topic = () => {
   const classes = useStyles();
@@ -27,13 +28,6 @@ const Topic = () => {
     isLoading,
   } = useSelector((state) => state.topic);
 
-  if (!topic || !topicName)
-    return (
-      <Container className={classes.loadingContainer}>
-        <CircularProgress className={classes.loading} />
-      </Container>
-    );
-
   const [topicValues, topicAmount] = topic;
 
   if (isLoading) return <Loading />;
@@ -46,13 +40,9 @@ const Topic = () => {
         </Typography>
         <Box className={classes.topicContainer}>
           {topicValues[topicName]?.map((value, index) => (
-            <span key={index} className={classes.span}>
-              <span>{value}</span>
-              &nbsp;
-              <span className={classes.number}>
-                {topicAmount[topicName][index]}
-              </span>
-            </span>
+            <div key={index} className={classes.tag}>
+              <Tag value={value} number={topicAmount[topicName][index]} />
+            </div>
           ))}
         </Box>
       </Container>

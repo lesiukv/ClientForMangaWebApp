@@ -26,6 +26,7 @@ import Page from "./Page/Page";
 import Comments from "../Comments/Comments";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
+import { Tag } from "../Subcomponents";
 
 const PostDetails = ({ isAuthenticated, user, dispatch }) => {
   const classes = useStyles();
@@ -100,95 +101,60 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                       {details.title}
                     </Typography>
                     <div className={classes.subDetails}>
-                      <Typography>Parodie:</Typography>&nbsp;
-                      <span className={classes.span}>
-                        <span>{details.parodie}</span>
-                        &nbsp;
-                        <span className={classes.number}>
-                          {amount["parodie"]}
-                        </span>
-                      </span>
+                      <Typography>Parodie:</Typography>
+                      <Tag value={details.parodie} number={amount["parodie"]} />
                     </div>
                     <div className={classes.subDetails}>
-                      <Typography>Language:</Typography>&nbsp;
-                      <span className={classes.span}>
-                        <span>{details.language}</span>
-                        &nbsp;
-                        <span className={classes.number}>
-                          {amount["language"]}
-                        </span>
-                      </span>
+                      <Typography>Language:</Typography>
+                      <Tag
+                        value={details.language}
+                        number={amount["language"]}
+                      />
                     </div>
                     <div className={classes.subDetails}>
-                      <Typography>Group:</Typography>&nbsp;
-                      <span className={classes.span}>
-                        <span>{details.group}</span>
-                        &nbsp;
-                        <span className={classes.number}>
-                          {amount["group"]}
-                        </span>
-                      </span>
+                      <Typography>Group:</Typography>
+                      <Tag value={details.group} number={amount["group"]} />
                     </div>
                     <div className={classes.subDetails}>
-                      <Typography>Category:</Typography>&nbsp;
-                      <span className={classes.span}>
-                        <span>{details.category}</span>
-                        &nbsp;
-                        <span className={classes.number}>
-                          {amount["category"]}
-                        </span>
-                      </span>
+                      <Typography>Category:</Typography>
+                      <Tag
+                        value={details.category}
+                        number={amount["category"]}
+                      />
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Tags:</Typography>&nbsp;
                       {details.tags.map((tag, index) => (
-                        <div key={index}>
-                          &nbsp;
-                          <span className={classes.span}>
-                            <span>{tag}</span>
-                            &nbsp;
-                            <span className={classes.number}>
-                              {amount["tags"][index]}
-                            </span>
-                          </span>
-                        </div>
+                        <Tag
+                          key={index}
+                          value={tag}
+                          number={amount["tags"][index]}
+                        />
                       ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Artists:&nbsp;</Typography>
                       {details.artists.map((artist, index) => (
-                        <div key={index}>
-                          &nbsp;
-                          <span className={classes.span}>
-                            <span>{artist}</span>
-                            &nbsp;
-                            <span className={classes.number}>
-                              {amount["artists"][index]}
-                            </span>
-                          </span>
-                        </div>
+                        <Tag
+                          key={index}
+                          value={artist}
+                          number={amount["artists"][index]}
+                        />
                       ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Characters:&nbsp;</Typography>
                       {details.characters.map((character, index) => (
-                        <div key={index}>
-                          &nbsp;
-                          <span className={classes.span}>
-                            <span>{character}</span>
-                            &nbsp;
-                            <span className={classes.number}>
-                              {amount["characters"][index]}
-                            </span>
-                          </span>
-                        </div>
+                        <Tag
+                          key={index}
+                          value={character}
+                          number={amount["characters"][index]}
+                        />
                       ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Pages:</Typography>&nbsp;
-                      <span className={classes.span}>
-                        {details.pages.length}
-                      </span>
+                      <Tag value={details.pages.length} />
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Uploaded:</Typography>&nbsp;
@@ -214,12 +180,7 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                   className={classes.pagesContainer}
                 >
                   {details.pages.map((page, index) => (
-                    <Box
-                      className={classes.pageBox}
-                      xs={12}
-                      sm={4}
-                      key={index}
-                    >
+                    <Box className={classes.pageBox} xs={12} sm={4} key={index}>
                       <Link to={`${match.url}/${index}`}>
                         <img
                           className={classes.page}
@@ -233,7 +194,6 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
               </Container>{" "}
             </>
           )}
-
           <Container
             sx={{
               marginTop: "50px !important",
