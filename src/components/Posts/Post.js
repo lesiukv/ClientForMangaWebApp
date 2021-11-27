@@ -55,7 +55,7 @@ const Post = ({ post }) => {
             <FavoriteIcon
               fontSize="large"
               className={classes.favoriteIcon}
-              color={isFavorite ? "secondary" : ""}
+              color={isFavorite ? "secondary" : "primary"}
             />
           </IconButton>
         </Slide>
