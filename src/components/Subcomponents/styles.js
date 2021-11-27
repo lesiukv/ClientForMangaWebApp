@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
   },
   tagText: {
     color: "#d9d9d9",
+  },
+  tag: {
+    margin: '6px 2px 6px 2px',
+    flexWrap: 'nowrap'
   }
 }));
 

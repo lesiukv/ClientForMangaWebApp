@@ -18,7 +18,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const { isAuthenticated, user, isTokenExpired } = useSelector(
-    (state) => state?.auth
+    (state) => state.auth
   );
 
   useEffect(() => {

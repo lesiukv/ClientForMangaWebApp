@@ -43,5 +43,11 @@ export default makeStyles((theme) => ({
     display: 'flex',
     flexWrap: 'nowrap',
     justifyContent: 'space-between',
+  },
+  tags: {
+    margin: theme.spacing(1),
+    display: "flex",
+    flexWrap: "wrap",
+    width: "100%"
   }
 }));

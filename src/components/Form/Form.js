@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 import { uploadPage } from "../../actions/pages.js";
 import { useDropzone } from "react-dropzone";
+import { Tag } from "../Subcomponents";
 
 const Form = ({ formFor, open, setOpen, id, post }) => {
   const classes = useStyles();
@@ -48,12 +49,17 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     characters: [],
   });
 
+  const clearInputField = (property) => {
+    setPostData({ ...postData, [property]: "" });
+  };
+
   const handleEnter = (e, property) => {
-    if (e.key === "ArrowDown") {
+    if (e.key === " ") {
       setPostDataDisplay({
         ...postDataDisplay,
         [property]: [...postDataDisplay[property], e.target.value],
       });
+      clearInputField(property);
     }
   };
 
@@ -116,7 +122,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     progressInfosRef.current = {
       val: _progressInfos,
     };
-    const uploadPromises = files.map((file, i) => upload(i, file));
+    const uploadPromises = await files.map((file, i) => upload(i, file));
     Promise.all(uploadPromises).then(() => dispatch(createPost(postData)));
   };
 
@@ -159,10 +165,11 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
             <Typography variant="h6" className={classes.formElement}>
               {formFor} Manga
             </Typography>
-            {postDataDisplay?.title.map((value, index) => (
-              <p key={index}>{value}</p>
-            ))}
-
+            <div className={classes.tags}>
+              {postDataDisplay?.title.map((value, index) => (
+                <Tag value={value} key={index} />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="title"
@@ -176,6 +183,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
+            
             <TextField
               className={classes.formElement}
               name="parodie"
@@ -185,6 +193,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({ ...postData, parodie: e.target.value })
               }
+              onKeyDown={(e) => handleEnter(e, "parodie")}
               fullWidth
               color="secondary"
             />
@@ -195,8 +204,9 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               variant="outlined"
               value={postData.tags}
               onChange={(e) =>
-                setPostData({ ...postData, tags: e.target.value.split(",") })
+                setPostData({ ...postData, tags: e.target.value })
               }
+              onKeyDown={(e) => handleEnter(e, "tags")}
               fullWidth
               color="secondary"
             />
@@ -209,9 +219,10 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({
                   ...postData,
-                  artists: e.target.value.split(","),
+                  artists: e.target.value,
                 })
               }
+              onKeyDown={(e) => handleEnter(e, "title")}
               fullWidth
               color="secondary"
             />
@@ -260,7 +271,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({
                   ...postData,
-                  characters: e.target.value.split(","),
+                  characters: e.target.value,
                 })
               }
               fullWidth
@@ -294,18 +305,16 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               Clear
             </Button>
             <Box sx={{ width: "100%", margin: "15px 0" }}>
-              {progressInfos &&
-                progressInfos.val.length > 0 &&
-                progressInfos.val.map((progressInfo, index) => (
-                  <div className={classes.uploading} key={index}>
-                    <Typography variant="body2">
-                      {progressInfo.fileName}
-                    </Typography>
-                    <Typography variant="body2">
-                      {progressInfo.percentage}%
-                    </Typography>
-                  </div>
-                ))}
+              {progressInfos?.val?.map((progressInfo, index) => (
+                <div className={classes.uploading} key={index}>
+                  <Typography variant="body2">
+                    {progressInfo.fileName}
+                  </Typography>
+                  <Typography variant="body2">
+                    {progressInfo.percentage}%
+                  </Typography>
+                </div>
+              ))}
             </Box>
           </form>
         </Paper>

@@ -11,7 +11,6 @@ export default makeStyles({
     marginTop: "20px",
     padding: "20px",
   },
-
   topicContainer: {
     display: "flex",
     flexWrap: "wrap"
