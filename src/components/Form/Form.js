@@ -23,22 +23,9 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
   const dispatch = useDispatch();
   const [selectedFiles, setSelectedFiles] = useState(null);
   const [progressInfos, setProgressInfos] = useState({ val: [] });
-
   const progressInfosRef = useRef(null);
 
-  const [postData, setPostData] = useState({
-    title: "",
-    parodie: "",
-    tags: [],
-    artists: [],
-    group: "",
-    language: "",
-    category: "",
-    characters: [],
-    pages: [],
-  });
-
-  const [postDataDisplay, setPostDataDisplay] = useState({
+  const detailsObject = {
     title: [],
     parodie: [],
     tags: [],
@@ -47,37 +34,37 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     language: [],
     category: [],
     characters: [],
-  });
+    pages: [],
+  };
+  const [postData, setPostData] = useState(detailsObject);
+  const [postDataSend, setPostDataSend] = useState(detailsObject);
 
   const clearInputField = (property) => {
     setPostData({ ...postData, [property]: "" });
   };
-
   const removeTag = (property, value) => {
-    setPostDataDisplay({
-      ...postDataDisplay,
-      [property]: [
-        ...postDataDisplay[property].filter((element) => element !== value),
-      ],
+    setPostDataSend({
+      ...postDataSend,
+      [property]: postDataSend[property].filter((element) => element !== value),
     });
   };
-
   const handleEnter = (e, property) => {
     if (
+      e.target.value &&
       e.key === " " &&
-      e.target.value != null &&
-      postDataDisplay[property].indexOf(e.target.value) === -1
+      !e.shiftKey &&
+      postDataSend[property].indexOf(e.target.value) === -1
     ) {
-      setPostDataDisplay({
-        ...postDataDisplay,
-        [property]: [...postDataDisplay[property], e.target.value],
+      setPostDataSend({
+        ...postDataSend,
+        [property]: [...postDataSend[property], e.target.value],
       });
       clearInputField(property);
     }
   };
 
   useEffect(() => {
-    if (post) setPostData(post);
+    if (post) setPostDataSend(post);
   }, [post]);
 
   const clear = () => {
@@ -103,7 +90,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
       });
       setSelectedFiles(acceptedFiles);
       setProgressInfos({ val: [] });
-      setPostData({ ...postData, pages: acceptedFiles });
+      setPostDataSend({ ...postDataSend, pages: acceptedFiles });
     },
     [postData]
   );
@@ -126,7 +113,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     }
   };
 
-  const uploadFiles = async () => {
+  const uploadPost = async () => {
     const files = Array.from(selectedFiles);
     let _progressInfos = files.map((file) => ({
       percentage: 0,
@@ -136,15 +123,15 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
       val: _progressInfos,
     };
     const uploadPromises = await files.map((file, i) => upload(i, file));
-    Promise.all(uploadPromises).then(() => dispatch(createPost(postData)));
+    Promise.all(uploadPromises).then(() => dispatch(createPost(postDataSend)));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (id) {
-      dispatch(updatePost(id, postData));
+      dispatch(updatePost(id, postDataSend));
     } else {
-      uploadFiles();
+      uploadPost();
     }
     clear();
   };
@@ -179,7 +166,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               {formFor} Manga
             </Typography>
             <div className={classes.tags}>
-              {postDataDisplay?.title.map((value, index) => (
+              {postDataSend?.title.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -202,7 +189,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.parodie.map((value, index) => (
+              {postDataSend?.parodie.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -225,7 +212,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.tags.map((value, index) => (
+              {postDataSend?.tags.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -248,7 +235,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.artists.map((value, index) => (
+              {postDataSend?.artists.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -274,7 +261,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.group.map((value, index) => (
+              {postDataSend?.group.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -297,7 +284,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.language.map((value, index) => (
+              {postDataSend?.language.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -320,7 +307,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.category.map((value, index) => (
+              {postDataSend?.category.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -343,7 +330,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               color="secondary"
             />
             <div className={classes.tags}>
-              {postDataDisplay?.characters.map((value, index) => (
+              {postDataSend?.characters.map((value, index) => (
                 <Tag
                   value={value}
                   key={index}
@@ -397,7 +384,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               Clear
             </Button>
             <Box sx={{ width: "100%", margin: "15px 0" }}>
-              {progressInfos?.val?.map((progressInfo, index) => (
+              {progressInfos?.val.map((progressInfo, index) => (
                 <div className={classes.uploading} key={index}>
                   <Typography variant="body2">
                     {progressInfo.fileName}

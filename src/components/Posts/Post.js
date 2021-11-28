@@ -60,7 +60,7 @@ const Post = ({ post }) => {
           </IconButton>
         </Slide>
       )}
-      <Link className={classes.link} to={`post/${post._id}`}>
+      <Link className={classes.link} to={`post/${post?._id}`}>
         <img
           className={classes.media}
           alt="title"

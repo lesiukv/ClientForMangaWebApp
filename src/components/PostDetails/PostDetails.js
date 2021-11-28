@@ -97,30 +97,55 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                     src={`http://localhost:5000/uploads/${details?.pages[0]?.dest}`}
                   />
                   <Grid className={classes.details} item xs={12} sm={5} md={7}>
-                    <Typography className={classes.title} variant="h4">
-                      {details.title}
-                    </Typography>
+                    {details.title?.map((title, index) => {
+                      <Typography
+                        key={index}
+                        className={classes.title}
+                        variant="h4"
+                      >
+                        {title}
+                      </Typography>;
+                    })}
+
                     <div className={classes.subDetails}>
                       <Typography>Parodie:</Typography>
-                      <Tag value={details.parodie} number={amount["parodie"]} />
+                      {details.parodie.map((parodie, index) => (
+                        <Tag
+                          key={index}
+                          value={parodie}
+                          number={amount["parodie"][index]}
+                        />
+                      ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Language:</Typography>
-                      <Tag
-                        value={details.language}
-                        number={amount["language"]}
-                      />
+                      {details.language?.map((language, index) => (
+                        <Tag
+                          key={index}
+                          value={language}
+                          number={amount["language"][index]}
+                        />
+                      ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Group:</Typography>
-                      <Tag value={details.group} number={amount["group"]} />
+                      {details.group?.map((group, index) => (
+                        <Tag
+                          key={index}
+                          value={group}
+                          number={amount["group"][index]}
+                        />
+                      ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Category:</Typography>
-                      <Tag
-                        value={details.category}
-                        number={amount["category"]}
-                      />
+                      {details.category?.map((category, index) => (
+                        <Tag
+                          key={index}
+                          value={category}
+                          number={amount["category"][index]}
+                        />
+                      ))}
                     </div>
                     <div className={classes.subDetails}>
                       <Typography>Tags:</Typography>&nbsp;
