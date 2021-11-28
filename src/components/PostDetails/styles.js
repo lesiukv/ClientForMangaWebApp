@@ -46,16 +46,6 @@ export default makeStyles((theme) => ({
     color: "#d9d9d9 !important",
     alignItems: "baseline",
   },
-  moreIcon: {
-    color: "#d9d9d9",
-    padding: "20px 0",
-  },
-  iconButton: {
-    padding: "0px 10px",
-  },
-  delete: {
-    color: "#ed2553",
-  },
   page: {
     maxWidth: '100%',
     borderRadius: '6px'

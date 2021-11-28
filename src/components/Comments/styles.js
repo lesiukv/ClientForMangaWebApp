@@ -8,9 +8,6 @@ export default makeStyles((theme) => ({
     color: "#d9d9d9",
     marginLeft: "15px",
   },
-  delete: {
-    color: "#ed2553",
-  },
   comment: {
     display: "flex",
     justifyContent: "space-between",

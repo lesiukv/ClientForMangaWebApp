@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
-import {
-  Container,
-  Grid,
-  Typography,
-  Menu,
-  MenuItem,
-  IconButton,
-  Box,
-} from "@material-ui/core";
-import MoreIcon from "@material-ui/icons/MoreVert";
+import { Container, Grid, Typography, Box } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Form from "../Form/Form.js";
 import {
@@ -20,23 +11,20 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom";
-import { getPostDetails, deletePost } from "../../actions/posts";
+import { getPostDetails } from "../../actions/posts";
 import moment from "moment";
 import Page from "./Page/Page";
 import Comments from "../Comments/Comments";
 import Loading from "../Loading/Loading";
 import Error from "../Error/Error";
-import { Tag } from "../Subcomponents";
+import { Tag, ActionsButton } from "../Subcomponents";
 
 const PostDetails = ({ isAuthenticated, user, dispatch }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = useState(false);
   const [open, setOpen] = useState(false);
-  const isMenuOpen = Boolean(anchorEl);
   const { postId } = useParams();
   const history = useHistory();
   let match = useRouteMatch();
-  const menuId = "menu-post-manipulation";
 
   useEffect(() => {
     dispatch(getPostDetails(postId));
@@ -48,32 +36,9 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
     error,
   } = useSelector((state) => state.postdetails);
 
-  if (isLoading) return <Loading />;
-
-  const handleMenuOpen = (e) => setAnchorEl(e.currentTarget);
-  const handleMenuClose = () => setAnchorEl(false);
   const handleFormOpen = () => setOpen(true);
-  function handleDelete() {
-    dispatch(deletePost(postId));
-    history.push("/home");
-  }
 
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-      id={menuId}
-      anchorOrigin={{ vertical: "top", horizontal: "left" }}
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      keepMounted
-    >
-      <MenuItem onClick={handleFormOpen}>Update</MenuItem>
-      <MenuItem className={classes.delete} onClick={handleDelete}>
-        Delete
-      </MenuItem>
-    </Menu>
-  );
+  if (isLoading) return <Loading />;
 
   return (
     <>
@@ -97,16 +62,15 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                     src={`http://localhost:5000/uploads/${details?.pages[0]?.dest}`}
                   />
                   <Grid className={classes.details} item xs={12} sm={5} md={7}>
-                    {details.title?.map((title, index) => {
+                    {details.title?.map((title, index) => (
                       <Typography
                         key={index}
                         className={classes.title}
                         variant="h4"
                       >
                         {title}
-                      </Typography>;
-                    })}
-
+                      </Typography>
+                    ))}
                     <div className={classes.subDetails}>
                       <Typography>Parodie:</Typography>
                       {details.parodie.map((parodie, index) => (
@@ -187,14 +151,12 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                     </div>
                   </Grid>
                   {isAuthenticated && (
-                    <IconButton
-                      className={classes.iconButton}
-                      onClick={handleMenuOpen}
-                      aria-controls={menuId}
-                      aria-haspopup="true"
-                    >
-                      <MoreIcon className={classes.moreIcon} />
-                    </IconButton>
+                    <ActionsButton
+                      postId={postId}
+                      dispatch={dispatch}
+                      updateElement={handleFormOpen}
+                      history={history}
+                    />
                   )}
                 </Grid>
               </Container>
@@ -232,7 +194,6 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
               postId={postId}
             />
           </Container>
-          {renderMenu}
           <Form
             formFor="Update"
             id={postId}
