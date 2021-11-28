@@ -53,8 +53,21 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     setPostData({ ...postData, [property]: "" });
   };
 
+  const removeTag = (property, value) => {
+    setPostDataDisplay({
+      ...postDataDisplay,
+      [property]: [
+        ...postDataDisplay[property].filter((element) => element !== value),
+      ],
+    });
+  };
+
   const handleEnter = (e, property) => {
-    if (e.key === " ") {
+    if (
+      e.key === " " &&
+      e.target.value != null &&
+      postDataDisplay[property].indexOf(e.target.value) === -1
+    ) {
       setPostDataDisplay({
         ...postDataDisplay,
         [property]: [...postDataDisplay[property], e.target.value],
@@ -167,7 +180,12 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
             </Typography>
             <div className={classes.tags}>
               {postDataDisplay?.title.map((value, index) => (
-                <Tag value={value} key={index} />
+                <Tag
+                  value={value}
+                  key={index}
+                  property="title"
+                  removeTag={removeTag}
+                />
               ))}
             </div>
             <TextField
@@ -183,7 +201,16 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
-            
+            <div className={classes.tags}>
+              {postDataDisplay?.parodie.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="parodie"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="parodie"
@@ -197,6 +224,16 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
+            <div className={classes.tags}>
+              {postDataDisplay?.tags.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="tags"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="tags"
@@ -210,6 +247,16 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               fullWidth
               color="secondary"
             />
+            <div className={classes.tags}>
+              {postDataDisplay?.artists.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="artists"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="artists"
@@ -222,10 +269,20 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
                   artists: e.target.value,
                 })
               }
-              onKeyDown={(e) => handleEnter(e, "title")}
+              onKeyDown={(e) => handleEnter(e, "artists")}
               fullWidth
               color="secondary"
             />
+            <div className={classes.tags}>
+              {postDataDisplay?.group.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="group"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="group"
@@ -235,9 +292,20 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({ ...postData, group: e.target.value })
               }
+              onKeyDown={(e) => handleEnter(e, "group")}
               fullWidth
               color="secondary"
             />
+            <div className={classes.tags}>
+              {postDataDisplay?.language.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="language"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="language"
@@ -247,9 +315,20 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({ ...postData, language: e.target.value })
               }
+              onKeyDown={(e) => handleEnter(e, "language")}
               fullWidth
               color="secondary"
             />
+            <div className={classes.tags}>
+              {postDataDisplay?.category.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="category"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="category"
@@ -259,9 +338,20 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
               onChange={(e) =>
                 setPostData({ ...postData, category: e.target.value })
               }
+              onKeyDown={(e) => handleEnter(e, "category")}
               fullWidth
               color="secondary"
             />
+            <div className={classes.tags}>
+              {postDataDisplay?.characters.map((value, index) => (
+                <Tag
+                  value={value}
+                  key={index}
+                  property="characters"
+                  removeTag={removeTag}
+                />
+              ))}
+            </div>
             <TextField
               className={classes.formElement}
               name="characters"
@@ -274,9 +364,11 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
                   characters: e.target.value,
                 })
               }
+              onKeyDown={(e) => handleEnter(e, "characters")}
               fullWidth
               color="secondary"
             />
+
             <div {...getRootProps()} className={classes.fileInput}>
               <input {...getInputProps()} />
               {isDragActive ? (

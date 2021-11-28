@@ -13,9 +13,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#d9d9d9",
   },
   tag: {
-    margin: '6px 2px 6px 2px',
+    margin: '5px 2px 5px 2px',
     flexWrap: 'nowrap'
-  }
+  },
+
 }));
 
 export default useStyles;
