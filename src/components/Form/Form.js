@@ -100,17 +100,17 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const upload = async (idx, file) => {
+  const upload = (file, index) => {
     let _progressInfos = [...progressInfosRef.current.val];
     try {
-      await uploadPage(file, (event) => {
-        _progressInfos[idx].percentage = Math.round(
+      uploadPage(file, (event) => {
+        _progressInfos[index].percentage = Math.round(
           (100 * event.loaded) / event.total
         );
         setProgressInfos({ val: _progressInfos });
       });
     } catch (e) {
-      _progressInfos[idx].percentage = 0;
+      _progressInfos[index].percentage = 0;
       setProgressInfos({ val: _progressInfos });
       console.log(e);
     }
@@ -125,7 +125,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
     progressInfosRef.current = {
       val: _progressInfos,
     };
-    const uploadPromises = await files.map((file, i) => upload(i, file));
+    const uploadPromises = await files.map((file, index) => upload(file, index));
     Promise.all(uploadPromises).then(() => dispatch(createPost(postDataSend)));
   };
 
