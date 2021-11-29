@@ -11,12 +11,15 @@ import {
   Backdrop,
   Box,
   IconButton,
+  ToolTip,
+  Tooltip,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts.js";
 import { uploadPage } from "../../actions/pages.js";
 import { useDropzone } from "react-dropzone";
 import { Tag } from "../Subcomponents";
+import ErrorIcon from "@material-ui/icons/Error";
 
 const Form = ({ formFor, open, setOpen, id, post }) => {
   const classes = useStyles();
@@ -92,7 +95,7 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
       setProgressInfos({ val: [] });
       setPostDataSend({ ...postDataSend, pages: acceptedFiles });
     },
-    [postData]
+    [postDataSend]
   );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
@@ -162,9 +165,24 @@ const Form = ({ formFor, open, setOpen, id, post }) => {
             >
               <CloseIcon color="secondary" />
             </IconButton>
-            <Typography variant="h6" className={classes.formElement}>
-              {formFor} Manga
-            </Typography>
+            <div className={classes.formHeader}>
+              <Typography variant="h6" className={classes.formElement}>
+                {formFor} Manga
+              </Typography>
+              <Tooltip
+                placement="bottom-end"
+                arrow
+                title={
+                  <p>
+                    To use space button press{" "}
+                    <kbd className={classes.kbd}>Shift</kbd> +{" "}
+                    <kbd className={classes.kbd}>Space</kbd>
+                  </p>
+                }
+              >
+                <ErrorIcon color="secondary" />
+              </Tooltip>
+            </div>
             <div className={classes.tags}>
               {postDataSend?.title.map((value, index) => (
                 <Tag

@@ -14,11 +14,11 @@ export default makeStyles((theme) => ({
     borderRadius: "9px",
     maxWidth: "30%",
     margin: "20px",
-    [theme.breakpoints.down('xs')]: {
-      maxWidth: '100%',
-      margin: "20px 0px"
+    [theme.breakpoints.down("xs")]: {
+      maxWidth: "100%",
+      margin: "20px 0px",
     },
-    alignSelf: "center"
+    alignSelf: "center",
   },
   loading: {
     color: "#d9d9d9",
@@ -34,7 +34,7 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     flexWrap: "wrap",
     alignItems: "start",
-    margin: "20px 0px"
+    margin: "20px 0px",
   },
   details: {
     margin: "20px 0 !important",
@@ -47,26 +47,26 @@ export default makeStyles((theme) => ({
     alignItems: "baseline",
   },
   page: {
-    maxWidth: '100%',
-    borderRadius: '6px'
+    maxWidth: "100%",
+    borderRadius: "6px",
   },
   pagesContainer: {
     display: "flex",
-    justifyContent: "space-evenly", 
+    justifyContent: "space-evenly",
     flexWrap: "wrap",
     alignItems: "center",
-    padding: '20px',
-    [theme.breakpoints.down('xs')]: {
-      padding: '5px'
+    padding: "20px",
+    [theme.breakpoints.down("xs")]: {
+      padding: "5px",
     },
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
   pageBox: {
-    display: 'flex',
-    alignItems: 'center',
-    width: '19%',
-    [theme.breakpoints.down('sm')]: {
-      width: '49%',
+    display: "flex",
+    alignItems: "center",
+    width: "19%",
+    [theme.breakpoints.down("sm")]: {
+      width: "49%",
     },
   },
-}))
+}));
