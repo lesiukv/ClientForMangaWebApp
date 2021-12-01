@@ -38,9 +38,9 @@ const Topic = () => {
           {topicName.charAt(0).toUpperCase() + topicName.slice(1)}
         </Typography>
         <Box className={classes.topicContainer}>
-          {topicValues[topicName]?.map((value, index) => (
+          {topicValues.map((value, index) => (
             <div key={index} className={classes.tag}>
-              <Tag value={value} number={topicAmount[topicName][index]} />
+              <Tag value={value} number={topicAmount[index]} />
             </div>
           ))}
         </Box>
