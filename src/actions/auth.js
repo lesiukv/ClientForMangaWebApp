@@ -44,8 +44,10 @@ export const logoutUser = () => async (dispatch) => {
 
 export const registerUser = (creds) => async (dispatch) => {
   try {
-    await api.registerUser(creds);
-    dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
+    const { success } = await api.registerUser(creds);
+    if (success) {
+      dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
+    } else throw new Error();
   } catch (error) {
     dispatch(authFailure(error));
   }
