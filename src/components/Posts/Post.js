@@ -24,7 +24,7 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     if (isLoading) return <Loading />;
-    setIsFavorite(favorites.some((favorite) => favorite._id === post._id));
+    setIsFavorite(favorites?.some((favorite) => favorite._id === post._id));
   }, [favorites, isLoading, post._id]);
 
   const handleAddFavorite = (postId) => {
