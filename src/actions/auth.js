@@ -21,12 +21,12 @@ export const loginUser = (creds) => async (dispatch) => {
           admin: data.admin,
         })
       );
-    }
-    dispatch({
-      type: actionTypes.LOGIN_SUCCESS,
-      token: data.token,
-      user: { username: data.username, userId: data.userId },
-    });
+      dispatch({
+        type: actionTypes.LOGIN_SUCCESS,
+        token: data.token,
+        user: { username: data.username, userId: data.userId },
+      });
+    } else throw new Error("Wrong password or username");
   } catch (error) {
     dispatch(authFailure(error));
   }
@@ -47,7 +47,7 @@ export const registerUser = (creds) => async (dispatch) => {
     const { success } = await api.registerUser(creds);
     if (success) {
       dispatch({ type: actionTypes.REGISTRATION_SUCCESS });
-    } else throw new Error();
+    } else throw new Error("Cannot register new user");
   } catch (error) {
     dispatch(authFailure(error));
   }

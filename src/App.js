@@ -17,9 +17,12 @@ import { logoutUser } from "./actions/auth.js";
 const App = () => {
   const dispatch = useDispatch();
 
-  const { isAuthenticated, user, isTokenExpired } = useSelector(
-    (state) => state.auth
-  );
+  const {
+    isAuthenticated,
+    user,
+    isTokenExpired,
+    error: authError,
+  } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -64,7 +67,9 @@ const App = () => {
         </Route>
         <Redirect exact from="/" to="/home" />
       </Switch>
-      {(error || errorFavs) && <Error error={error || errorFavs} />}
+      {(error || errorFavs || authError) && (
+        <Error error={error || errorFavs || authError} />
+      )}
     </ThemeProvider>
   );
 };
