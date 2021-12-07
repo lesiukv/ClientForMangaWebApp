@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
-import { Container, Grid, Typography, Box } from "@material-ui/core";
+import { Container, Grid, Typography, Box, Button } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import Form from "../Form/Form.js";
 import {
@@ -22,6 +22,7 @@ import { Tag, ActionsButton } from "../Subcomponents";
 const PostDetails = ({ isAuthenticated, user, dispatch }) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [pagesToLoad, setPagesToLoad] = useState(10);
   const { postId } = useParams();
   const history = useHistory();
   let match = useRouteMatch();
@@ -39,6 +40,29 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
   const handleFormOpen = () => setOpen(true);
 
   if (isLoading) return <Loading />;
+
+  const pagesList = [];
+
+  const renderPagesList = () => {
+    if (pagesToLoad > details.pages.length)
+      setPagesToLoad(details.pages.length);
+    for (let i = 0; i < pagesToLoad; i++) {
+      pagesList.push(
+        <Box className={classes.pageBox} xs={12} sm={4} key={i}>
+          <Link to={`${match.url}/${i}`}>
+            <img
+              className={classes.page}
+              alt={details.pages[i]?.name}
+              src={`http://localhost:5000/uploads/${details.pages[i]?.dest}`}
+            />
+          </Link>
+        </Box>
+      );
+    }
+  };
+
+  const handleLoadMorePages = () =>
+    setPagesToLoad((prevValue) => prevValue + 10);
 
   return (
     <>
@@ -166,17 +190,15 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
                   alignItems="stretch"
                   className={classes.pagesContainer}
                 >
-                  {details.pages.map((page, index) => (
-                    <Box className={classes.pageBox} xs={12} sm={4} key={index}>
-                      <Link to={`${match.url}/${index}`}>
-                        <img
-                          className={classes.page}
-                          alt={page.name}
-                          src={`http://localhost:5000/uploads/${page.dest}`}
-                        />
-                      </Link>
-                    </Box>
-                  ))}
+                  {pagesList}
+                  {pagesToLoad < details.pages.length && (
+                    <Button
+                      color="secondary"
+                      onClick={() => handleLoadMorePages()}
+                    >
+                      Load More Pages
+                    </Button>
+                  )}  
                 </Grid>
               </Container>{" "}
             </>
@@ -204,6 +226,7 @@ const PostDetails = ({ isAuthenticated, user, dispatch }) => {
         </Route>
       </Switch>
       {error && <Error error={error} />}
+      {renderPagesList()}
     </>
   );
 };
